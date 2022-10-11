@@ -24,10 +24,14 @@
         height="600.53015"
         viewBox="0 0 915.11162 600.53015"
       >
-        <polygon class="test3" points="25,25 100,25 100,100 25,100" fill="currentcolor" />
+        <polygon class="zone color1" points="25,25 100,25 100,100 25,100" fill="currentcolor" />
+        <polygon class="zone color2" points="125,25 200,25 200,100 125,100" fill="currentcolor" />
+        <polygon class="zone color3" points="225,25 300,25 300,100 225,100" fill="currentcolor" />
+        <polygon class="zone color4" points="325,25 400,25 400,100 325,100" fill="currentcolor" />
+        <polygon class="zone color5" points="425,25 500,25 500,100 425,100" fill="currentcolor" />
 
         <path
-          class="test2"
+          class="zone color2"
           d="M580.991,335.58005
             a 30.28312,30.28312,0,0,1-3.76211-40.8299
             c -.60975.57174-1.20581,1.16536-1.7764,1.79643
@@ -38,7 +42,7 @@
           fill="currentcolor"
         />
         <path
-          class="test2"
+          class="zone color2"
           d="M536.42322,374.84628l1.84844-4.80595L504.63,398.50633,463.96432,421.427s-20.70254-79.85266-22.1813-81.33142-28.0963-57.67136-39.92633-31.05381,22.92068,42.14446,22.92068,42.14446,1.10906,97.228,36.59913,96.48864,79.483-32.90226,80.22235-35.85977S536.42322,374.84628,536.42322,374.84628Z"
           transform="translate(-142.44419 -149.73493)"
           fill="currentcolor"
@@ -46,11 +50,17 @@
       </svg>
     </div>
     <div class="colorSelectionArea">
-      <div id="box1" class="colorBox test1">A</div>
-      <div id="box2" class="colorBox test2">B</div>
-      <div id="box3" class="colorBox test3">C</div>
-      <div id="box4" class="colorBox test4">D</div>
+      <div id="box1" class="colorBox color1">A</div>
+      <div id="box2" class="colorBox color2">B</div>
+      <div id="box3" class="colorBox color3">C</div>
+      <div id="box4" class="colorBox color4">D</div>
+      <div id="box5" class="colorBox color5">E</div>
     </div>
+    <div id="selectedColorArea">
+      <h1>Current Color</h1>
+      <h2 id="currentColor">None</h2>
+    </div>
+
     <script src="./script.js"></script>
   </body>
 </html>

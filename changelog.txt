@@ -1,0 +1,25 @@
+Coloring Book with SVGs.
+
+Steps
+
+- Load an svg on the page.  
+    - Make sure the svg scales properly.
+
+- Make it so that each portion of the svg path is clickable and returns something.
+
+- Have a spot on the side that allows you to turn all the elements a particular color.
+    - Add a reset button that clears the clors or somethign similar.
+
+- Allow the user to change the color of the paths?
+
+- Add save function that allows you to save your progress.
+    - Can use local storage for saving, temporarily.
+
+- Add load function that allows you to load your progress.
+
+- Have an area over to the side that allows you to load a different SVG into the coloring book.
+
+
+
+
+

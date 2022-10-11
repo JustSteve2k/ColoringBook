@@ -1,0 +1,59 @@
+body {
+  background-color: white;
+}
+
+.titleBlock {
+  text-align: center;
+  border: 1px solid black;
+}
+
+.svgContainer {
+  border: 1px solid black;
+  height: 40rem;
+  width: 80rem;
+  margin: 0 auto;
+}
+
+.example {
+  width: 100%;
+}
+
+.colorSelectionArea {
+  width: 40rem;
+  border: 1px solid black;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+}
+
+.colorBox {
+  width: 10rem;
+  height: 10rem;
+  border: 1px solid black;
+}
+
+.extraBorder {
+  border: 1px solid red;
+}
+
+/*SVG COLORS*/
+
+.test1 {
+  color: #413f9e;
+  background-color: #413f9e;
+}
+
+.test2 {
+  color: #3f9e57;
+  background-color: #3f9e57;
+}
+
+.test3 {
+  color: #ca1c05;
+  background-color: #ca1c05;
+}
+
+.test4 {
+  color: #b9126e;
+  background-color: #b9126e;
+}

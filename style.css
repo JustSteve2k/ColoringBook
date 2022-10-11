@@ -9,9 +9,18 @@ body {
 
 .svgContainer {
   border: 1px solid black;
+  width: 40rem;
   height: 40rem;
-  width: 80rem;
   margin: 0 auto;
+}
+
+#selectedColorArea {
+  border: 1px solid black;
+  text-align: center;
+  padding: 0.5rem;
+  top: 5rem;
+  right: 5rem;
+  position: fixed;
 }
 
 .example {
@@ -19,41 +28,50 @@ body {
 }
 
 .colorSelectionArea {
-  width: 40rem;
+  width: 50%;
   border: 1px solid black;
   margin: 0 auto;
   display: flex;
   flex-direction: row;
+  justify-content: center;
 }
 
 .colorBox {
-  width: 10rem;
-  height: 10rem;
+  width: 6rem;
+  height: 6rem;
   border: 1px solid black;
+  margin: 1rem;
 }
 
 .extraBorder {
   border: 1px solid red;
+  box-shadow: 0px 0px 15px red;
+  transition: 0.25s;
 }
 
 /*SVG COLORS*/
 
-.test1 {
+.color1 {
   color: #413f9e;
   background-color: #413f9e;
 }
 
-.test2 {
+.color2 {
   color: #3f9e57;
   background-color: #3f9e57;
 }
 
-.test3 {
+.color3 {
   color: #ca1c05;
   background-color: #ca1c05;
 }
 
-.test4 {
+.color4 {
   color: #b9126e;
   background-color: #b9126e;
+}
+
+.color5 {
+  color: #12b9ab;
+  background-color: #12b9ab;
 }

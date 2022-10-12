@@ -1,5 +1,6 @@
 body {
-  background-color: white;
+  background-color: rgb(85, 84, 84);
+  color: white;
 }
 
 .titleBlock {
@@ -8,9 +9,9 @@ body {
 }
 
 .svgContainer {
-  border: 1px solid black;
+  /* border: 1px solid black; */
   width: 40rem;
-  height: 40rem;
+  /* height: 40rem; */
   margin: 0 auto;
 }
 
@@ -50,6 +51,11 @@ body {
 }
 
 /*SVG COLORS*/
+
+.color0 {
+  color: #000000;
+  background-color: #000000;
+}
 
 .color1 {
   color: #413f9e;

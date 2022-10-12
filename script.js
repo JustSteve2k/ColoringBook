@@ -1,11 +1,23 @@
 // alert("works!");
 let selectedColor = null;
+let enabledWButtonID = "btnCursor";
+let mode = "cursor";
 
-const zones = document.querySelectorAll(".zone");
+const wButtons = document.querySelectorAll(".wButton");
 
-zones.forEach((element) => {
+wButtons.forEach((element) => {
   element.addEventListener("click", (e) => {
-    PaintItem(e);
+    document.getElementById(enabledWButtonID).classList.toggle("enabled");
+    element.classList.toggle("enabled");
+    enabledWButtonID = e.target.id;
+
+    CleanListeners();
+
+    mode = e.target.id;
+    mode = mode.slice(3).toLowerCase();
+
+    if (mode === "paint") ChangeToPaintMode();
+    if (mode === "delete") ChangeToDeleteMode();
   });
 });
 
@@ -138,11 +150,7 @@ function AddDynamicPolygon(points) {
   polygon.setAttribute("points", pointsString);
   polygon.setAttribute("fill", "currentcolor");
 
-  polygon.addEventListener("click", (e) => {
-    PaintItem(e);
-  });
-
-  // element.addEventListener("click", (e) => {
+  // polygon.addEventListener("click", (e) => {
   //   PaintItem(e);
   // });
 
@@ -236,13 +244,67 @@ function AddTriangle() {
     PaintItem(e);
   });
 
-  // element.addEventListener("click", (e) => {
-  //   PaintItem(e);
-  // });
-
   let drawing = document.getElementById("drawing");
 
   drawing.append(polygon);
 }
 
-// console.log(elements);
+function TempMessage(message) {
+  alert(message);
+}
+
+function ChangeToPaintMode() {
+  console.log(`Changing to ${mode} mode.`);
+
+  const zones = document.querySelectorAll(".zone");
+
+  zones.forEach((element) => {
+    element.addEventListener("click", paintCaller);
+  });
+
+  console.log("Paint Mode Added");
+}
+
+let paintCaller = (e) => PaintItem(e);
+let deleteCaller = (e) => alert("this is to be deleted at some Point.");
+
+function ChangeToDeleteMode() {
+  console.log(`Changing to ${mode} mode.`);
+
+  const zones = document.querySelectorAll(".zone");
+
+  zones.forEach((element) => {
+    element.addEventListener("click", deleteCaller);
+  });
+  console.log("Delete Mode Added");
+}
+
+function CleanListeners() {
+  const zones = document.querySelectorAll(".zone");
+
+  if (mode === "cursor") {
+    zones.forEach((element) => {
+      element.removeEventListener("click", () => {});
+    });
+    console.log("Cursor mode removed");
+    return;
+  }
+
+  if (mode === "paint") {
+    zones.forEach((element) => {
+      element.removeEventListener("click", paintCaller);
+    });
+    console.log("Paint mode removed");
+    return;
+  }
+
+  if (mode === "delete") {
+    zones.forEach((element) => {
+      element.removeEventListener("click", deleteCaller);
+    });
+    console.log("Delete mode removed");
+    return;
+  }
+}
+
+let test = (e) => PaintItem(e);

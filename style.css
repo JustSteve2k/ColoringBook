@@ -15,6 +15,7 @@ body {
   margin: 0 auto;
 }
 
+/*For color palette buttons */
 #selectedColorArea {
   border: 1px solid black;
   text-align: center;
@@ -22,10 +23,6 @@ body {
   top: 5rem;
   right: 5rem;
   position: fixed;
-}
-
-.example {
-  width: 100%;
 }
 
 .colorSelectionArea {
@@ -48,6 +45,39 @@ body {
   border: 1px solid red;
   box-shadow: 0px 0px 15px red;
   transition: 0.25s;
+}
+
+/*WORK BUTTONS SECTION*/
+.workButtons {
+  border: 1px solid black;
+  width: 10rem;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  left: 2rem;
+  top: 5rem;
+}
+
+/*CREATE BUTTONS SECTION*/
+.createButtons {
+  border: 1px solid black;
+  width: 10rem;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  left: 2rem;
+  top: 15rem;
+}
+
+/*SPECIAL BUTTON HELPER CLASSES*/
+.enabled {
+  background-color: #3a3939;
+  color: white;
+}
+
+.notReady {
+  background-color: #3a3939;
+  color: rgb(124, 28, 28);
 }
 
 /*SVG COLORS*/

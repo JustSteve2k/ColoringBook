@@ -1,16 +1,19 @@
-Coloring Book with SVGs.
+SVG Coloring Book
 
-Steps
+--TO DO--
 
-- Load an svg on the page.  
-    - Make sure the svg scales properly.
+DONE - Make it so that each portion of the svg path is clickable and returns something.
 
-- Make it so that each portion of the svg path is clickable and returns something.
+DONE - add something that adds random polygon to the page?
+    DONE - Params incluce random amount of points.
 
 - Have a spot on the side that allows you to turn all the elements a particular color.
     - Add a reset button that clears the clors or somethign similar.
 
-- Allow the user to change the color of the paths?
+- Allow the user to change the color of the stroke?
+
+- Load an svg on the page.  
+    - Make sure the svg scales properly.
 
 - Add save function that allows you to save your progress.
     - Can use local storage for saving, temporarily.
@@ -19,7 +22,19 @@ Steps
 
 - Have an area over to the side that allows you to load a different SVG into the coloring book.
 
+- Add function to delete selected polygon or path.
 
+- Make functions to create square or circle with provided Params
+
+- Have area that you can provide your own string of svg input // LATER
+
+- Make something that allows you to create a square or circle at a specified point.
+
+- Add Paint button
+    - This adds event listeners on all items that paints.
+
+- Add Delete button
+    - This adds event listeners on all items that deletes.
 
 
 

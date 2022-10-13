@@ -1,15 +1,6 @@
-export function AddNewPolygon() {
-  // alert("add new polygon");
-  let polygon = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
-  polygon.setAttribute("class", "zone color1");
-  polygon.setAttribute("points", "525,25 600,25 600,100 525,100");
-  polygon.setAttribute("fill", "#000000");
-  let drawing = document.getElementById("drawing");
-  drawing.append(polygon);
-}
+import { GetRandomInt } from "./helpers.js";
 
 export function AddDynamicPolygon(points) {
-  // alert("add new polygon");
   let pointsX = [];
   let pointsY = [];
 
@@ -36,17 +27,7 @@ export function AddDynamicPolygon(points) {
     pointsString += " ";
   }
 
-  console.log(`The generated string is - ${pointsString}`);
-
-  let polygon = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
-
-  polygon.setAttribute("class", "zone color0");
-  polygon.setAttribute("points", pointsString);
-  polygon.setAttribute("fill", "currentcolor");
-
-  let drawing = document.getElementById("drawing");
-
-  drawing.append(polygon);
+  CreatePolygon(pointsString);
 }
 
 export function AddSquare() {
@@ -58,8 +39,8 @@ export function AddSquare() {
   let pointsX = [25, 100, 100, 25];
   let pointsY = [25, 25, 100, 100];
 
-  let adjustX = Math.floor(Math.random() * MaxX);
-  let adjustY = Math.floor(Math.random() * MaxY);
+  let adjustX = GetRandomInt(MaxX);
+  let adjustY = GetRandomInt(MaxY);
 
   let pointsString = "";
 
@@ -70,21 +51,7 @@ export function AddSquare() {
     pointsString += " ";
   }
 
-  console.log(`The generated string is - ${pointsString}`);
-
-  let polygon = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
-
-  polygon.setAttribute("class", "zone color0");
-  polygon.setAttribute("points", pointsString);
-  polygon.setAttribute("fill", "currentcolor");
-
-  // polygon.addEventListener("click", (e) => {
-  //   PaintItem(e);
-  // });
-
-  let drawing = document.getElementById("drawing");
-
-  drawing.append(polygon);
+  CreatePolygon(pointsString);
 }
 
 export function AddTriangle() {
@@ -105,7 +72,11 @@ export function AddTriangle() {
     pointsString += (pointsY[x] + adjustY).toString();
     pointsString += " ";
   }
+  CreatePolygon(pointsString);
+}
 
+// Finishes creating a polygon and appends to the dom.  Need to know modesomehow.
+function CreatePolygon(pointsString) {
   console.log(`The generated string is - ${pointsString}`);
 
   let polygon = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
@@ -114,11 +85,26 @@ export function AddTriangle() {
   polygon.setAttribute("points", pointsString);
   polygon.setAttribute("fill", "currentcolor");
 
-  polygon.addEventListener("click", (e) => {
-    PaintItem(e);
-  });
+  // Fix this part to add correct listener via function.
+
+  // polygon.addEventListener("click", (e) => {
+  //   PaintItem(e);
+  // });
 
   let drawing = document.getElementById("drawing");
 
   drawing.append(polygon);
+}
+
+export function GeneratePointsString(pointsX, pointsY) {
+  let pointsString = "";
+
+  for (let x = 0; x < pointsX.length; x++) {
+    pointsString += pointsX[x].toString();
+    pointsString += ",";
+    pointsString += pointsY[x].toString();
+    if (x != pointsX.length - 1) pointsString += " ";
+  }
+
+  return pointsString;
 }

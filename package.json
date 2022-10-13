@@ -1,0 +1,23 @@
+{
+  "name": "coloringbook",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JustSteve2k/ColoringBook.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JustSteve2k/ColoringBook/issues"
+  },
+  "homepage": "https://github.com/JustSteve2k/ColoringBook#readme",
+  "devDependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.18.6",
+    "jest": "^29.1.2"
+  }
+}

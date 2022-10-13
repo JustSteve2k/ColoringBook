@@ -1,5 +1,5 @@
-import { AddNewPolygon, AddDynamicPolygon, AddSquare, AddTriangle } from "./shapes.js";
-import { TempMessage } from "./helpers.js";
+import { AddDynamicPolygon, AddSquare, AddTriangle } from "./shapes.js";
+import { TempMessage, TranslateColor } from "./helpers.js";
 
 let selectedColor = null;
 let enabledWButtonID = "btnCursor";
@@ -46,14 +46,13 @@ elements.forEach((element) => {
 
 const boxes = document.querySelectorAll(".colorBox");
 
-// console.log(boxes);
-
 boxes.forEach((element) => {
   element.addEventListener("click", (e) => {
     selectColor(e.target.id);
   });
 });
 
+// Paint item function.  Lets you paint selected svg.
 function PaintItem(e) {
   if (selectedColor === null) {
     alert("You need to pick a color first.");
@@ -104,27 +103,6 @@ function UpdateCurrentColor(selection) {
   }
 
   document.getElementById("currentColor").innerText = color;
-}
-
-function TranslateColor(selection) {
-  let color = "";
-
-  switch (selection) {
-    case "box0":
-      return "color0";
-    case "box1":
-      return "color1";
-    case "box2":
-      return "color2";
-    case "box3":
-      return "color3";
-    case "box4":
-      return "color4";
-    case "box5":
-      return "color5";
-    case "box6":
-      return "color6";
-  }
 }
 
 let paintCaller = (e) => PaintItem(e);
@@ -210,9 +188,6 @@ function Startup() {
   });
 
   // Sets up create buttons
-  document.getElementById("btnAddNewPolygonBasic").addEventListener("click", () => {
-    AddNewPolygon();
-  });
   document.getElementById("btnAddDynPolygon3").addEventListener("click", () => {
     AddDynamicPolygon(3);
   });

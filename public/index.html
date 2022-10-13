@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coloring Book</title>
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <h1 class="titleBlock">SVG Coloring Book</h1>
+    <div id="svgContainer" class="svgContainer">
+      <!-- <img class="example" src="./SVGs/Arch Image.svg" alt="" /> -->
+      <!-- <svg>
+        <use href="./SVGs/Arch Image.svg"></use>
+      </svg> -->
+      <!-- <svg src="./SVGs/Arch Image.svg" alt="Arch Image"></svg> -->
+
+      <svg id="drawing" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="900" height="600" viewBox="0 0 900 600">
+        <polygon id="svgBackground" class="zone color5" points="0,0 0,600 640,600 640,0" fill="currentcolor" />
+        <polygon class="zone color1" points="0,0 100,25 100,100 25,100" fill="currentColor" />
+        <polygon class="zone color2" points="125,25 200,25 200,100 125,100" fill="currentcolor" />
+        <polygon class="zone color3" points="225,25 300,25 300,100 225,100" fill="currentcolor" />
+        <polygon class="zone color4" points="325,25 400,25 400,100 325,100" fill="currentcolor" />
+        <polygon class="zone color5" points="425,25 500,25 500,100 425,100" fill="currentcolor" />
+      </svg>
+    </div>
+    <div class="colorSelectionArea">
+      <div id="box0" class="colorBox color0">A</div>
+      <div id="box1" class="colorBox color1">B</div>
+      <div id="box2" class="colorBox color2">C</div>
+      <div id="box3" class="colorBox color3">D</div>
+      <div id="box4" class="colorBox color4">E</div>
+      <div id="box5" class="colorBox color5">F</div>
+      <div id="box6" class="colorBox color6">F</div>
+    </div>
+    <div id="leftButtonsBackground">
+      <div id="selectedColorArea">
+        <h1>Current Color</h1>
+        <h2 id="currentColor">None</h2>
+      </div>
+
+      <div id="workButtons" class="workButtons">
+        <button id="btnCursor" class="wButton enabled">Cursor</button>
+        <button id="btnPaint" class="wButton">Paint</button>
+        <button id="btnDelete" class="wButton">Delete</button>
+        <button id="btnReset" class="wButton">Reset</button>
+      </div>
+      <div id="createButtons" class="createButtons">
+        <button id="btnAddDynPolygon3">Add 3 Point Polygon</button>
+        <button id="btnAddDynPolygon4">Add 4 Point Polygon</button>
+        <button id="btnAddDynPolygon5">Add 5 Point Polygon</button>
+        <button id="btnAddSquare">Make Square</button>
+        <button id="btnAddNewTriangle">Make Triangle</button>
+      </div>
+    </div>
+
+    <script type="module" src="./js/script.js"></script>
+  </body>
+</html>

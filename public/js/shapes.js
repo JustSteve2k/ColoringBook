@@ -16,8 +16,6 @@ export function AddDynamicPolygon(points) {
 }
 
 export function AddSquare() {
-  // alert("add new polygon");
-
   let MaxX = 540;
   let MaxY = 500;
 
@@ -27,14 +25,10 @@ export function AddSquare() {
   let adjustX = GetRandomInt(MaxX);
   let adjustY = GetRandomInt(MaxY);
 
-  let pointsString = "";
+  pointsX = AdjustPointsOnPointsArray(pointsX, adjustX);
+  pointsY = AdjustPointsOnPointsArray(pointsY, adjustY);
 
-  for (let x = 0; x < 4; x++) {
-    pointsString += (pointsX[x] + adjustX).toString();
-    pointsString += ",";
-    pointsString += (pointsY[x] + adjustY).toString();
-    pointsString += " ";
-  }
+  let pointsString = GeneratePointsStringFromArray(pointsX, pointsY);
 
   CreatePolygon(pointsString);
 }
@@ -48,6 +42,9 @@ export function AddTriangle() {
 
   let adjustX = GetRandomInt(MaxX);
   let adjustY = GetRandomInt(MaxY);
+
+  pointsX = AdjustPointsOnPointsArray(pointsX, adjustX);
+  pointsY = AdjustPointsOnPointsArray(pointsY, adjustY);
 
   let pointsString = GeneratePointsStringFromArray(pointsX, pointsY);
 
@@ -84,6 +81,7 @@ export function GeneratePointsArray(length, max, adjust = 1) {
   return points;
 }
 
+// Generates a string to create the polygon from two arrays of numbers.
 export function GeneratePointsStringFromArray(pointsX, pointsY) {
   let pointsString = "";
 
@@ -92,6 +90,15 @@ export function GeneratePointsStringFromArray(pointsX, pointsY) {
     pointsString += ",";
     pointsString += pointsY[x].toString();
     if (x != pointsX.length - 1) pointsString += " ";
+  }
+
+  return pointsString;
+}
+
+// Adjusts each point on a points array by a set amount, default is 0.
+export function AdjustPointsOnPointsArray(pointsString, adjustment = 0) {
+  for (let x = 0; x < pointsString.length; x++) {
+    pointsString[x] += adjustment;
   }
 
   return pointsString;

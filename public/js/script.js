@@ -1,5 +1,5 @@
 import { AddDynamicPolygon, AddSquare, AddTriangle } from "./shapes.js";
-import { TempMessage, TranslateColor } from "./helpers.js";
+import { GetMode, TempMessage, TranslateColor } from "./helpers.js";
 
 let selectedColor = null;
 let enabledWButtonID = "btnCursor";
@@ -10,6 +10,22 @@ let cursorCaller = (e) => {
   console.log(e.target.points[0]);
   console.log(e.target.getAttribute("fill"));
   console.log(e.target.getAttribute("points"));
+  e.target.setAttribute("stroke", "black");
+  e.target.setAttribute("stroke-width", "6");
+};
+let cursorRemover = (e) => {
+  e.target.removeAttribute("stroke");
+  e.target.removeAttribute("stroke-width");
+};
+
+let paintCaller = (e) => PaintItem(e);
+let deleteCaller = (e) => {
+  let isLocked = e.target.getAttribute("locked");
+
+  if (isLocked != "true") e.target.remove();
+  else {
+    alert("that thing islocked. you cant delete that.");
+  }
 };
 
 const wButtons = document.querySelectorAll(".wButton");
@@ -105,9 +121,6 @@ function UpdateCurrentColor(selection) {
   document.getElementById("currentColor").innerText = color;
 }
 
-let paintCaller = (e) => PaintItem(e);
-let deleteCaller = (e) => alert("this is to be deleted at some Point.");
-
 // Changes event listeners on the svgs to cursor mode.
 function ChangeToCursorMode() {
   console.log(`Changing to ${mode} mode.`);
@@ -116,6 +129,9 @@ function ChangeToCursorMode() {
 
   zones.forEach((element) => {
     element.addEventListener("click", cursorCaller);
+  });
+  zones.forEach((element) => {
+    element.addEventListener("blur", cursorRemover);
   });
 
   console.log("Cursor Mode Added");
@@ -154,7 +170,10 @@ function CleanListeners() {
     zones.forEach((element) => {
       element.removeEventListener("click", cursorCaller);
     });
-    console.log("Cursor mode removed");
+    zones.forEach((element) => {
+      element.removeEventListener("blur", cursorRemover);
+    });
+    console.log("Cursor modes removed");
     return;
   }
 
@@ -179,12 +198,12 @@ function CleanListeners() {
 
 function Startup() {
   // Sets up work buttons ( to be called action buttons later.)
-  document.getElementById("btnCursor").addEventListener("click", () => {
-    TempMessage("Cursor button in testing.");
-  });
 
   document.getElementById("btnReset").addEventListener("click", () => {
     TempMessage("Rest Button Coming Soon.");
+  });
+  document.getElementById("btnGetMode").addEventListener("click", () => {
+    GetMode();
   });
 
   // Sets up create buttons

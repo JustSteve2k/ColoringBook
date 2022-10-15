@@ -1,3 +1,4 @@
+/* istanbul ignore next */
 export function TempMessage(message) {
   alert(message);
 }
@@ -18,6 +19,8 @@ export function TranslateColor(selection) {
       return "color5";
     case "box6":
       return "color6";
+    default:
+      return "color0";
   }
 }
 
@@ -27,4 +30,18 @@ export function Sum(a, b) {
 
 export function GetRandomInt(maxNumber = 1) {
   return Math.floor(Math.random() * maxNumber);
+}
+
+// Finds current mode by seeing which wButton is enabled.
+export function GetMode() {
+  let elements = document.querySelectorAll(".wButton");
+  let find = "";
+
+  elements.forEach((element) => {
+    if (element.classList.contains("enabled")) find = element.id;
+  });
+
+  find = find.slice(3).toLowerCase();
+
+  return find;
 }

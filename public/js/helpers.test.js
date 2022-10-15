@@ -15,6 +15,10 @@ test("translate color", () => {
   expect(TranslateColor("box1")).toBe("color1");
 });
 
+test("default color test", () => {
+  expect(TranslateColor("box9")).toBe("color0");
+});
+
 test("get a random number", () => {
   expect(GetRandomInt(50)).toBeLessThan(50);
 });
@@ -26,9 +30,5 @@ test("get random int with max of 1", () => {
 test("get random int with max of 1, no argument supplied", () => {
   expect(GetRandomInt()).toBeLessThan(1);
 });
-
-// test.skip("test message", () => {
-//   expect(TempMessage("message").toBe(undefined));
-// });
 
 test.todo("something that checks other stuff.");

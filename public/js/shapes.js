@@ -1,4 +1,4 @@
-import { GetRandomInt } from "./helpers.js";
+import { GetCurrentMode, GetRandomInt } from "./helpers.js";
 
 export function AddDynamicPolygon(points) {
   let MaxX = 650;
@@ -62,6 +62,8 @@ function CreatePolygon(pointsString) {
   polygon.setAttribute("fill", "currentcolor");
 
   // Fix this part to add correct listener via function.
+
+  let mode = GetCurrentMode();
 
   // polygon.addEventListener("click", (e) => {
   //   PaintItem(e);

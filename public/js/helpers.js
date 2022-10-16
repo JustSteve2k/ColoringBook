@@ -33,7 +33,7 @@ export function GetRandomInt(maxNumber = 1) {
 }
 
 // Finds current mode by seeing which wButton is enabled.
-export function GetMode() {
+export function GetCurrentMode() {
   let elements = document.querySelectorAll(".wButton");
   let find = "";
 
@@ -44,4 +44,17 @@ export function GetMode() {
   find = find.slice(3).toLowerCase();
 
   return find;
+}
+
+export function GetSelectedColor() {
+  let elements = document.querySelectorAll(".colorBox");
+  let find = "";
+
+  elements.forEach((element) => {
+    if (element.classList.contains("extraBorder")) find = element.id;
+  });
+
+  return find;
+
+  // let elements = document.querySelectorAll(".extraBorder");
 }

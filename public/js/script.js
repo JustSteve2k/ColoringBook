@@ -1,7 +1,7 @@
 import { AddDynamicPolygon, AddSquare, AddTriangle } from "./shapes.js";
-import { GetMode, TempMessage, TranslateColor } from "./helpers.js";
+import { GetCurrentMode, GetSelectedColor, TempMessage } from "./helpers.js";
+import { selectColor, PaintItem } from "./actions.js";
 
-let selectedColor = null;
 let enabledWButtonID = "btnCursor";
 let mode = "cursor";
 
@@ -67,59 +67,6 @@ boxes.forEach((element) => {
     selectColor(e.target.id);
   });
 });
-
-// Paint item function.  Lets you paint selected svg.
-function PaintItem(e) {
-  if (selectedColor === null) {
-    alert("You need to pick a color first.");
-    return;
-  }
-
-  let currentItemColor = e.target.classList[1];
-  e.target.classList.toggle(currentItemColor);
-  e.target.classList.toggle(TranslateColor(selectedColor));
-}
-
-function selectColor(selection) {
-  console.log(`${selection} was selected!`);
-
-  if (selectedColor != null) document.getElementById(selectedColor).classList.toggle("extraBorder");
-
-  document.getElementById(selection).classList.toggle("extraBorder");
-  selectedColor = selection;
-  UpdateCurrentColor(selection);
-}
-
-// Update the currentColor in the upper right.
-function UpdateCurrentColor(selection) {
-  let color = "";
-
-  switch (selection) {
-    case "box0":
-      color = "Blackish";
-      break;
-    case "box1":
-      color = "Purplish";
-      break;
-    case "box2":
-      color = "Greenish";
-      break;
-    case "box3":
-      color = "Redish";
-      break;
-    case "box4":
-      color = "Fuschiaish";
-      break;
-    case "box5":
-      color = "Tealish";
-      break;
-    case "box6":
-      color = "Whiteish";
-      break;
-  }
-
-  document.getElementById("currentColor").innerText = color;
-}
 
 // Changes event listeners on the svgs to cursor mode.
 function ChangeToCursorMode() {
@@ -202,9 +149,6 @@ function Startup() {
   document.getElementById("btnReset").addEventListener("click", () => {
     TempMessage("Rest Button Coming Soon.");
   });
-  document.getElementById("btnGetMode").addEventListener("click", () => {
-    GetMode();
-  });
 
   // Sets up create buttons
   document.getElementById("btnAddDynPolygon3").addEventListener("click", () => {
@@ -222,6 +166,17 @@ function Startup() {
   });
   document.getElementById("btnAddNewTriangle").addEventListener("click", () => {
     AddTriangle();
+  });
+
+  document.getElementById("btnTest1").addEventListener("click", () => {
+    console.log("currently testing GetCurrent Mode");
+    console.log(GetCurrentMode());
+  });
+  document.getElementById("btnTest2").addEventListener("click", () => {
+    console.log(GetSelectedColor());
+  });
+  document.getElementById("btnTest3").addEventListener("click", () => {
+    console.log("not used atm.");
   });
 
   ChangeToCursorMode();

@@ -58,3 +58,26 @@ export function GetSelectedColor() {
 
   // let elements = document.querySelectorAll(".extraBorder");
 }
+
+export function GenerateUniqueID(length = 24) {
+  let idArray = [];
+  let uniqueID = "";
+  let character = "";
+  let num = 0;
+
+  for (let x = 0; x < length; x++) {
+    num = GetRandomInt(36);
+
+    console.log(`seed number selected is ${num}`);
+    if (num < 10) idArray.push(num);
+    else if (num >= 10) {
+      character = String.fromCharCode(87 + num);
+      if (GetRandomInt(2) === 1) character = character.toUpperCase();
+      idArray.push(character);
+    }
+  }
+
+  uniqueID = idArray.join("");
+  console.log(`Finished array with lenght of ${length} is ${uniqueID}`);
+  return uniqueID;
+}

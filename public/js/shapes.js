@@ -1,4 +1,5 @@
-import { GetCurrentMode, GetRandomInt } from "./helpers.js";
+import { PaintItem } from "./actions.js";
+import { GenerateUniqueID, GetCurrentMode, GetRandomInt } from "./helpers.js";
 
 export function AddDynamicPolygon(points) {
   let MaxX = 650;
@@ -57,21 +58,34 @@ function CreatePolygon(pointsString) {
 
   let polygon = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
 
+  const UID = GenerateUniqueID(24);
+
   polygon.setAttribute("class", "zone color0");
   polygon.setAttribute("points", pointsString);
   polygon.setAttribute("fill", "currentcolor");
+  polygon.setAttribute("id", UID);
 
   // Fix this part to add correct listener via function.
 
   let mode = GetCurrentMode();
 
-  // polygon.addEventListener("click", (e) => {
-  //   PaintItem(e);
-  // });
-
   let drawing = document.getElementById("drawing");
 
   drawing.append(polygon);
+  AttachListener(UID);
+}
+
+// Determines which mode it is and attached said listener. - TBD
+function AttachListener(UID) {
+  let paintCaller = (e) => PaintItem(e);
+  let mode = GetCurrentMode();
+
+  let piece = document.getElementById(UID);
+
+  if (mode === "paint") {
+    console.log(`Paint mode added to id of ${UID}`);
+    // piece.addEventListener("click", paintCaller);
+  }
 }
 
 export function GeneratePointsArray(length, max, adjust = 1) {

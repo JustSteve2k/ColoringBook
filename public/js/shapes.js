@@ -1,4 +1,4 @@
-import { PaintItem } from "./actions.js";
+import { paintCaller } from "./actions.js";
 import { GenerateUniqueID, GetCurrentMode, GetRandomInt } from "./helpers.js";
 
 export function AddDynamicPolygon(points) {
@@ -77,14 +77,13 @@ function CreatePolygon(pointsString) {
 
 // Determines which mode it is and attached said listener. - TBD
 function AttachListener(UID) {
-  let paintCaller = (e) => PaintItem(e);
   let mode = GetCurrentMode();
 
   let piece = document.getElementById(UID);
 
   if (mode === "paint") {
     console.log(`Paint mode added to id of ${UID}`);
-    // piece.addEventListener("click", paintCaller);
+    piece.addEventListener("click", paintCaller);
   }
 }
 

@@ -1,4 +1,4 @@
-import { paintCaller } from "./actions.js";
+import { cursorCaller, cursorRemover, deleteCaller, paintCaller } from "./actions.js";
 import { GenerateUniqueID, GetCurrentMode, GetRandomInt } from "./helpers.js";
 
 export function AddDynamicPolygon(points) {
@@ -84,6 +84,17 @@ function AttachListener(UID) {
   if (mode === "paint") {
     console.log(`Paint mode added to id of ${UID}`);
     piece.addEventListener("click", paintCaller);
+  }
+
+  if (mode === "cursor") {
+    console.log(`Cursor mode added to id of ${UID}`);
+    piece.addEventListener("focus", cursorCaller);
+    piece.addEventListener("blur", cursorRemover);
+  }
+
+  if (mode === "delete") {
+    console.log(`Delete mode added to id of ${UID}`);
+    piece.addEventListener("click", deleteCaller);
   }
 }
 

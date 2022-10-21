@@ -1,4 +1,4 @@
-import { GetSelectedColor, TranslateColor } from "./helpers.js";
+import { GetCurrentMode, GetSelectedColor, TranslateColor } from "./helpers.js";
 
 // Paint item function.  Lets you paint selected svg.
 export function PaintItem(e) {
@@ -55,4 +55,104 @@ function ConvertBoxSelectionToColorish(selection) {
   }
 
   document.getElementById("currentColor").innerText = color;
+}
+
+let paintCaller = (e) => PaintItem(e);
+let cursorCaller = (e) => {
+  console.log(e.target);
+  console.log(e.target.points[0]);
+  console.log(e.target.getAttribute("fill"));
+  console.log(e.target.getAttribute("points"));
+  e.target.setAttribute("stroke", "black");
+  e.target.setAttribute("stroke-width", "6");
+};
+let cursorRemover = (e) => {
+  e.target.removeAttribute("stroke");
+  e.target.removeAttribute("stroke-width");
+};
+let deleteCaller = (e) => {
+  let isLocked = e.target.getAttribute("locked");
+
+  if (isLocked != "true") e.target.remove();
+  else {
+    alert("that thing islocked. you cant delete that.");
+  }
+};
+
+// Changes event listeners on the svgs to paint mode.
+export function ChangeToPaintMode() {
+  let mode = GetCurrentMode();
+
+  console.log(`Changing to ${mode} mode.`);
+
+  const zones = document.querySelectorAll(".zone");
+
+  zones.forEach((element) => {
+    element.addEventListener("click", paintCaller);
+  });
+
+  console.log("Paint Mode Added");
+}
+
+export function ChangeToCursorMode() {
+  let mode = GetCurrentMode();
+
+  console.log(`Changing to ${mode} mode.`);
+
+  const zones = document.querySelectorAll(".zone");
+
+  zones.forEach((element) => {
+    element.addEventListener("click", cursorCaller);
+  });
+  zones.forEach((element) => {
+    element.addEventListener("blur", cursorRemover);
+  });
+
+  console.log("Cursor Mode Added");
+}
+
+// Changes event listeners on the svgs to delete mode.
+export function ChangeToDeleteMode() {
+  let mode = GetCurrentMode();
+
+  console.log(`Changing to ${mode} mode.`);
+
+  const zones = document.querySelectorAll(".zone");
+
+  zones.forEach((element) => {
+    element.addEventListener("click", deleteCaller);
+  });
+  console.log("Delete Mode Added");
+}
+
+// Cleans the listeners on the svgs so i can add a new one.
+export function CleanListeners(mode) {
+  const zones = document.querySelectorAll(".zone");
+
+  if (mode === "cursor") {
+    zones.forEach((element) => {
+      element.removeEventListener("click", cursorCaller);
+    });
+    zones.forEach((element) => {
+      element.removeEventListener("blur", cursorRemover);
+    });
+    console.log("Cursor modes removed");
+    return;
+  }
+
+  if (mode === "paint") {
+    zones.forEach((element) => {
+      element.removeEventListener("click", paintCaller);
+    });
+    console.log("Paint mode removed");
+    return;
+  }
+
+  if (mode === "delete") {
+    zones.forEach((element) => {
+      element.removeEventListener("click", deleteCaller);
+    });
+    console.log("Delete mode removed");
+    return;
+  }
 }

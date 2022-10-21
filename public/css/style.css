@@ -15,6 +15,10 @@ body {
   margin: 0 auto;
 }
 
+.zone:focus {
+  outline: none;
+}
+
 /*For color palette buttons */
 #selectedColorArea {
   border: 1px solid black;
@@ -39,6 +43,13 @@ body {
   height: 4rem;
   border: 1px solid black;
   margin: 1rem;
+  text-align: center;
+  color: white;
+}
+
+.colorBox:hover {
+  opacity: 0.5;
+  transition: 0.25s;
 }
 
 .extraBorder {

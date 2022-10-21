@@ -8,6 +8,10 @@ export function PaintItem(e) {
     alert("You need to pick a color first.");
     return;
   }
+  if (e.target.getAttribute("locked", true)) {
+    alert("Sorry, that target is locked, can't paint that.");
+    return;
+  }
 
   let currentItemColor = e.target.classList[1];
   e.target.classList.toggle(currentItemColor);
@@ -57,8 +61,9 @@ function ConvertBoxSelectionToColorish(selection) {
   document.getElementById("currentColor").innerText = color;
 }
 
-let paintCaller = (e) => PaintItem(e);
-let cursorCaller = (e) => {
+export let paintCaller = (e) => PaintItem(e);
+
+export let cursorCaller = (e) => {
   console.log(e.target);
   console.log(e.target.points[0]);
   console.log(e.target.getAttribute("fill"));
@@ -66,11 +71,13 @@ let cursorCaller = (e) => {
   e.target.setAttribute("stroke", "black");
   e.target.setAttribute("stroke-width", "6");
 };
-let cursorRemover = (e) => {
+
+export let cursorRemover = (e) => {
   e.target.removeAttribute("stroke");
   e.target.removeAttribute("stroke-width");
 };
-let deleteCaller = (e) => {
+
+export let deleteCaller = (e) => {
   let isLocked = e.target.getAttribute("locked");
 
   if (isLocked != "true") e.target.remove();
@@ -102,9 +109,7 @@ export function ChangeToCursorMode() {
   const zones = document.querySelectorAll(".zone");
 
   zones.forEach((element) => {
-    element.addEventListener("click", cursorCaller);
-  });
-  zones.forEach((element) => {
+    element.addEventListener("focus", cursorCaller);
     element.addEventListener("blur", cursorRemover);
   });
 
@@ -131,9 +136,7 @@ export function CleanListeners(mode) {
 
   if (mode === "cursor") {
     zones.forEach((element) => {
-      element.removeEventListener("click", cursorCaller);
-    });
-    zones.forEach((element) => {
+      element.removeEventListener("focus", cursorCaller);
       element.removeEventListener("blur", cursorRemover);
     });
     console.log("Cursor modes removed");

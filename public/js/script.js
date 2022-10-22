@@ -1,5 +1,5 @@
 import { AddDynamicPolygon, AddSquare, AddTriangle } from "./shapes.js";
-import { GenerateUniqueID, GetCurrentMode, GetSelectedColor, TempMessage } from "./helpers.js";
+import { GenerateUniqueID, GetCurrentMode, GetSelectedBox, TempMessage } from "./helpers.js";
 import { selectColor, ChangeToPaintMode, ChangeToCursorMode, ChangeToDeleteMode, CleanListeners } from "./actions.js";
 
 let enabledWButtonID = "btnCursor";
@@ -14,15 +14,6 @@ elements.forEach((element) => {
   element.addEventListener("click", (e) => {
     console.log(e.target);
     console.log(e.currentTarget);
-  });
-});
-
-// Adds select color functionality to the color buttons.
-const boxes = document.querySelectorAll(".colorBox");
-
-boxes.forEach((element) => {
-  element.addEventListener("click", (e) => {
-    selectColor(e.target.id);
   });
 });
 
@@ -56,13 +47,20 @@ function Startup() {
     console.log(GetCurrentMode());
   });
   document.getElementById("btnTest2").addEventListener("click", () => {
-    console.log(GetSelectedColor());
+    console.log(GetSelectedBox());
   });
   document.getElementById("btnTest3").addEventListener("click", () => {
     GenerateUniqueID();
   });
 
-  ChangeToCursorMode();
+  // Adds select color functionality to the color buttons.
+  const boxes = document.querySelectorAll(".colorBox");
+
+  boxes.forEach((element) => {
+    element.addEventListener("click", (e) => {
+      selectColor(e.target.id);
+    });
+  });
 
   // Adds functionality to mode buttons.
   const wButtons = document.querySelectorAll(".wButton");
@@ -83,4 +81,6 @@ function Startup() {
       if (mode === "delete") ChangeToDeleteMode();
     });
   });
+
+  ChangeToCursorMode();
 }

@@ -1,5 +1,5 @@
 import { cursorCaller, cursorRemover, deleteCaller, paintCaller } from "./actions.js";
-import { GenerateUniqueID, GetCurrentMode, GetRandomInt } from "./helpers.js";
+import { GenerateUniqueID, GetCurrentMode, GetRandomInt, GetSelectedBox, TranslateColor } from "./helpers.js";
 
 export function AddDynamicPolygon(points) {
   let MaxX = 650;
@@ -59,8 +59,9 @@ function CreatePolygon(pointsString) {
   let polygon = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
 
   const UID = GenerateUniqueID(24);
+  const color = TranslateColor(GetSelectedBox());
 
-  polygon.setAttribute("class", "zone color0");
+  polygon.setAttribute("class", "zone " + color);
   polygon.setAttribute("points", pointsString);
   polygon.setAttribute("fill", "currentcolor");
   polygon.setAttribute("id", UID);

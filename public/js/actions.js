@@ -1,8 +1,8 @@
-import { GetCurrentMode, GetSelectedColor, TranslateColor } from "./helpers.js";
+import { GetCurrentMode, GetSelectedBox, TranslateColor } from "./helpers.js";
 
 // Paint item function.  Lets you paint selected svg.
 export function PaintItem(e) {
-  let selectedColor = GetSelectedColor();
+  let selectedColor = GetSelectedBox();
 
   if (selectedColor === null) {
     alert("You need to pick a color first.");
@@ -19,7 +19,7 @@ export function PaintItem(e) {
 }
 
 export function selectColor(selection) {
-  let selectedColor = GetSelectedColor();
+  let selectedColor = GetSelectedBox();
 
   console.log(`${selection} was selected!`);
 
@@ -69,7 +69,7 @@ export let cursorCaller = (e) => {
   console.log(e.target.getAttribute("fill"));
   console.log(e.target.getAttribute("points"));
   e.target.setAttribute("stroke", "black");
-  e.target.setAttribute("stroke-width", "6");
+  e.target.setAttribute("stroke-width", "3");
 };
 
 export let cursorRemover = (e) => {
@@ -109,8 +109,10 @@ export function ChangeToCursorMode() {
   const zones = document.querySelectorAll(".zone");
 
   zones.forEach((element) => {
-    element.addEventListener("focus", cursorCaller);
-    element.addEventListener("blur", cursorRemover);
+    if (element.getAttribute("isselectable") !== "true") {
+      element.addEventListener("focus", cursorCaller);
+      element.addEventListener("blur", cursorRemover);
+    }
   });
 
   console.log("Cursor Mode Added");

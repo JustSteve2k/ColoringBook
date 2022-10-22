@@ -46,7 +46,8 @@ export function GetCurrentMode() {
   return find;
 }
 
-export function GetSelectedColor() {
+// Returns what box is selected - ex: box1, box2
+export function GetSelectedBox() {
   let elements = document.querySelectorAll(".colorBox");
   let find = "";
 
@@ -55,8 +56,6 @@ export function GetSelectedColor() {
   });
 
   return find;
-
-  // let elements = document.querySelectorAll(".extraBorder");
 }
 
 export function GenerateUniqueID(length = 24) {
@@ -68,7 +67,6 @@ export function GenerateUniqueID(length = 24) {
   for (let x = 0; x < length; x++) {
     num = GetRandomInt(36);
 
-    console.log(`seed number selected is ${num}`);
     if (num < 10) idArray.push(num);
     else if (num >= 10) {
       character = String.fromCharCode(87 + num);
@@ -78,6 +76,6 @@ export function GenerateUniqueID(length = 24) {
   }
 
   uniqueID = idArray.join("");
-  console.log(`Finished array with lenght of ${length} is ${uniqueID}`);
+  console.log(`Unique ID with length of ${length} is generated as ${uniqueID}`);
   return uniqueID;
 }

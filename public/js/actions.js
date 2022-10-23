@@ -161,3 +161,39 @@ export function CleanListeners(mode) {
     return;
   }
 }
+
+export function ResetBoard() {
+  let zones = document.querySelectorAll(".zone");
+  let count = 0;
+
+  zones.forEach((element) => {
+    if (element.getAttribute("locked") != "true") {
+      element.remove();
+      count++;
+    }
+  });
+
+  setTimeout(() => {
+    count >= 1 ? alert(`${count} items were removed.`) : alert(`Looks like the board is already empty.`);
+  }, 0);
+}
+
+export function GetInfoOfAllPolygonsOnBoard() {
+  let zones = document.querySelectorAll(".zone");
+  let log = [];
+  let count = 0;
+
+  zones.forEach((element) => {
+    let info = {};
+    info.id = element.id;
+    info.points = element.getAttribute("points");
+    info.fill = element.getAttribute("fill");
+    info.locked = element.getAttribute("locked");
+    info.isSelectable = element.getAttribute("isselectable");
+    log.push(info);
+    count++;
+  });
+
+  count == 1 ? console.log("Looks like only the board is there atm.") : console.log(`total of ${count} items catalogued.`);
+  console.log(log);
+}

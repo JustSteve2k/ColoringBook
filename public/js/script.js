@@ -1,6 +1,6 @@
 import { AddDynamicPolygon, AddSquare, AddTriangle } from "./shapes.js";
-import { GenerateUniqueID, GetCurrentMode, GetSelectedBox, TempMessage } from "./helpers.js";
-import { selectColor, ChangeToPaintMode, ChangeToCursorMode, ChangeToDeleteMode, CleanListeners } from "./actions.js";
+import { GenerateUniqueID, TempMessage } from "./helpers.js";
+import { selectColor, ChangeToPaintMode, ChangeToCursorMode, ChangeToDeleteMode, CleanListeners, ResetBoard, GetInfoOfAllPolygonsOnBoard } from "./actions.js";
 
 let enabledWButtonID = "btnCursor";
 let mode = "cursor";
@@ -21,7 +21,7 @@ elements.forEach((element) => {
 function Startup() {
   // Sets up work buttons ( to be called action buttons later.)
   document.getElementById("btnReset").addEventListener("click", () => {
-    TempMessage("Rest Button Coming Soon.");
+    ResetBoard();
   });
 
   // Sets up create buttons
@@ -43,11 +43,10 @@ function Startup() {
   });
 
   document.getElementById("btnTest1").addEventListener("click", () => {
-    console.log("currently testing GetCurrent Mode");
-    console.log(GetCurrentMode());
+    GetInfoOfAllPolygonsOnBoard();
   });
   document.getElementById("btnTest2").addEventListener("click", () => {
-    console.log(GetSelectedBox());
+    TempMessage("Not used at the moment.");
   });
   document.getElementById("btnTest3").addEventListener("click", () => {
     GenerateUniqueID();

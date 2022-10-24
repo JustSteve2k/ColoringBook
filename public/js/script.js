@@ -52,8 +52,8 @@ function Startup() {
   document.getElementById("btnAddNewTriangle").addEventListener("click", () => {
     AddTriangle();
   });
-  document.getElementById("btnLock").addEventListener("click", () => {
-    LockPolygon();
+  document.getElementById("btnLock").addEventListener("click", (e) => {
+    LockPolygon(e);
   });
 
   document.getElementById("btnSave").addEventListener("click", () => {

@@ -64,6 +64,8 @@ function ConvertBoxSelectionToColorish(selection) {
   document.getElementById("currentColor").innerText = color;
 }
 
+let lastAccessedPolygon = null;
+
 export let paintCaller = (e) => PaintItem(e);
 
 export let cursorCaller = (e) => {
@@ -71,20 +73,28 @@ export let cursorCaller = (e) => {
   // console.log(e.target.points[0]);
   // console.log(e.target.getAttribute("fill"));
   // console.log(e.target.getAttribute("points"));
+  e.target.setAttribute("active", "true");
   e.target.setAttribute("stroke", "black");
   e.target.setAttribute("stroke-width", "3");
+
+  if (e.target.nodeName === "polygon") {
+    lastAccessedPolygon = e.target.id;
+  }
 };
 
 export let cursorRemover = (e) => {
   e.target.removeAttribute("stroke");
   e.target.removeAttribute("stroke-width");
+  e.target.removeAttribute("active");
 };
 
 export let deleteCaller = (e) => {
   let isLocked = e.target.getAttribute("locked");
 
-  if (isLocked != "true") e.target.remove();
-  else {
+  if (isLocked != "true") {
+    e.target.remove();
+    lastAccessedPolygon = null;
+  } else {
     alert("that thing islocked. you cant delete that.");
   }
 };
@@ -177,11 +187,22 @@ export function CleanListeners(mode) {
   }
 }
 
-export function LockPolygon(id) {
-  let target = document.getElementById(id).getAttribute("locked");
+// Only can lock stuff in click mode later.
+export function LockPolygon() {
+  // Get last active polygon with query select all looking for active=true attribute.
+  // Set attribute locked or unlocked.
 
-  if (target.getAttribute("locked") === "false") target.setAttribute("locked", "true");
-  else target.setAttribute("locked", "false");
+  let target = document.getElementById(lastAccessedPolygon);
+
+  console.log(target);
+
+  if (target.getAttribute("locked") === "false") {
+    target.setAttribute("locked", "true");
+    console.log(`${lastAccessedPolygon} was locked.`);
+  } else {
+    target.setAttribute("locked", "false");
+    console.log(`${lastAccessedPolygon} was unlocked.`);
+  }
 }
 
 export function ResetBoard(notice = true) {

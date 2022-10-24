@@ -1,6 +1,16 @@
 import { AddDynamicPolygon, AddSquare, AddTriangle } from "./shapes.js";
-import { GenerateUniqueID, TempMessage } from "./helpers.js";
-import { selectColor, ChangeToPaintMode, ChangeToCursorMode, ChangeToDeleteMode, CleanListeners, ResetBoard, GetInfoOfAllPolygonsOnBoard } from "./actions.js";
+import { GenerateUniqueID, GetCurrentMode, TempMessage } from "./helpers.js";
+import {
+  selectColor,
+  ChangeToPaintMode,
+  ChangeToCursorMode,
+  ChangeToDeleteMode,
+  CleanListeners,
+  ResetBoard,
+  GetInfoOfAllPolygonsOnBoard,
+  SaveWork,
+  ReadWork,
+} from "./actions.js";
 
 let enabledWButtonID = "btnCursor";
 let mode = "cursor";
@@ -41,12 +51,20 @@ function Startup() {
   document.getElementById("btnAddNewTriangle").addEventListener("click", () => {
     AddTriangle();
   });
+  document.getElementById("btnSave").addEventListener("click", () => {
+    // TempMessage("This button will save work eventually.");
+    SaveWork();
+  });
+  document.getElementById("btnLoad").addEventListener("click", () => {
+    // TempMessage("This button will load work eventually.");
+    ReadWork();
+  });
 
   document.getElementById("btnTest1").addEventListener("click", () => {
     GetInfoOfAllPolygonsOnBoard();
   });
   document.getElementById("btnTest2").addEventListener("click", () => {
-    TempMessage("Not used at the moment.");
+    GetCurrentMode(true);
   });
   document.getElementById("btnTest3").addEventListener("click", () => {
     GenerateUniqueID();

@@ -1,3 +1,4 @@
+import { CreatePolygon } from "./shapes.js";
 import { GetCurrentMode, GetSelectedBox, TranslateColor } from "./helpers.js";
 
 // Paint item function.  Lets you paint selected svg.
@@ -8,7 +9,9 @@ export function PaintItem(e) {
     alert("You need to pick a color first.");
     return;
   }
-  if (e.target.getAttribute("locked", true)) {
+  if (e.target.getAttribute("locked", "true") === "true") {
+    console.log(e.target.id);
+    console.log(e.target.getAttribute("locked"));
     alert("Sorry, that target is locked, can't paint that.");
     return;
   }
@@ -21,7 +24,7 @@ export function PaintItem(e) {
 export function selectColor(selection) {
   let selectedColor = GetSelectedBox();
 
-  console.log(`${selection} was selected!`);
+  // console.log(`${selection} was selected!`);
 
   if (selectedColor != null) document.getElementById(selectedColor).classList.toggle("extraBorder");
 
@@ -90,7 +93,7 @@ export let deleteCaller = (e) => {
 export function ChangeToPaintMode() {
   let mode = GetCurrentMode();
 
-  console.log(`Changing to ${mode} mode.`);
+  // console.log(`Changing to ${mode} mode.`);
 
   const zones = document.querySelectorAll(".zone");
 
@@ -104,12 +107,12 @@ export function ChangeToPaintMode() {
 export function ChangeToCursorMode() {
   let mode = GetCurrentMode();
 
-  console.log(`Changing to ${mode} mode.`);
+  // console.log(`Changing to ${mode} mode.`);
 
   const zones = document.querySelectorAll(".zone");
 
   zones.forEach((element) => {
-    if (element.getAttribute("isselectable") !== "true") {
+    if (element.getAttribute("selectable") === "true") {
       element.addEventListener("focus", cursorCaller);
       element.addEventListener("blur", cursorRemover);
     }
@@ -122,7 +125,7 @@ export function ChangeToCursorMode() {
 export function ChangeToDeleteMode() {
   let mode = GetCurrentMode();
 
-  console.log(`Changing to ${mode} mode.`);
+  // console.log(`Changing to ${mode} mode.`);
 
   const zones = document.querySelectorAll(".zone");
 
@@ -162,7 +165,7 @@ export function CleanListeners(mode) {
   }
 }
 
-export function ResetBoard() {
+export function ResetBoard(notice = true) {
   let zones = document.querySelectorAll(".zone");
   let count = 0;
 
@@ -173,11 +176,13 @@ export function ResetBoard() {
     }
   });
 
-  setTimeout(() => {
-    count >= 1 ? alert(`${count} items were removed.`) : alert(`Looks like the board is already empty.`);
-  }, 0);
+  if (notice === true)
+    setTimeout(() => {
+      count >= 1 ? alert(`${count} items were removed.`) : alert(`Looks like the board is already empty.`);
+    }, 0);
 }
 
+// Gets info of all polygons on the board.
 export function GetInfoOfAllPolygonsOnBoard() {
   let zones = document.querySelectorAll(".zone");
   let log = [];
@@ -186,14 +191,52 @@ export function GetInfoOfAllPolygonsOnBoard() {
   zones.forEach((element) => {
     let info = {};
     info.id = element.id;
+    info.class = element.getAttribute("class");
     info.points = element.getAttribute("points");
     info.fill = element.getAttribute("fill");
     info.locked = element.getAttribute("locked");
-    info.isSelectable = element.getAttribute("isselectable");
+    if (info.locked === null) info.locked = "false";
+    info.selectable = element.getAttribute("selectable");
+    if (info.selectable === null) info.selectable = "false";
     log.push(info);
     count++;
   });
 
   count == 1 ? console.log("Looks like only the board is there atm.") : console.log(`total of ${count} items catalogued.`);
   console.log(log);
+  return log;
+}
+
+export function SaveWork() {
+  let log = GetInfoOfAllPolygonsOnBoard();
+
+  localStorage.setItem("polygons", JSON.stringify(log));
+  alert("work saved i think.");
+}
+
+export function ReadWork() {
+  let log = [];
+
+  log = JSON.parse(localStorage.getItem("polygons"));
+  console.log(log);
+
+  // Reset board
+  // Foreach in log, create polygon.
+
+  RedrawBoard(log);
+}
+
+function RedrawBoard(log) {
+  ResetBoard(false);
+
+  console.log(log);
+
+  // Doesnt draw the board so it starts at spot 1.
+  for (let x = 1; x < log.length; x++) {
+    CreatePolygon(log[x].points, log[x].id, log[x].class, log[x].fill, log[x].locked, log[x].selectable);
+  }
+
+  // log.forEach((element) => {
+  //   CreatePolygon(element.points, element.id, element.class, element.fill, element.locked, element.selectable);
+  // });
 }

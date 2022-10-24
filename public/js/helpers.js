@@ -33,7 +33,7 @@ export function GetRandomInt(maxNumber = 1) {
 }
 
 // Finds current mode by seeing which wButton is enabled.
-export function GetCurrentMode() {
+export function GetCurrentMode(announce = false) {
   let elements = document.querySelectorAll(".wButton");
   let find = "";
 
@@ -42,6 +42,8 @@ export function GetCurrentMode() {
   });
 
   find = find.slice(3).toLowerCase();
+
+  if (announce) console.log(`The current mode is ${find}`);
 
   return find;
 }
@@ -76,6 +78,6 @@ export function GenerateUniqueID(length = 24) {
   }
 
   uniqueID = idArray.join("");
-  console.log(`Unique ID with length of ${length} is generated as ${uniqueID}`);
+  // console.log(`Unique ID with length of ${length} is generated as ${uniqueID}`);
   return uniqueID;
 }

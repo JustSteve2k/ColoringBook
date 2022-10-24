@@ -8,8 +8,8 @@ export function AddDynamicPolygon(points) {
   let pointsX = GeneratePointsArray(points, MaxX);
   let pointsY = GeneratePointsArray(points, MaxY);
 
-  console.log(pointsX);
-  console.log(pointsY);
+  // console.log(pointsX);
+  // console.log(pointsY);
 
   let pointsString = GeneratePointsStringFromArray(pointsX, pointsY);
 
@@ -53,26 +53,50 @@ export function AddTriangle() {
 }
 
 // Finishes creating a polygon and appends to the dom.  Need to know modesomehow.
-function CreatePolygon(pointsString) {
-  console.log(`The generated string is - ${pointsString}`);
+// id = "", classes = "", pointsString, fill = "", locked = "", selectable = ""
+export function CreatePolygon(pointsString = "", id = "", classes = "", fill = "", locked = "", selectable = "") {
+  // console.log(`The points string for this polygon is - ${pointsString}`);
 
   let polygon = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
 
-  const UID = GenerateUniqueID(24);
-  const color = TranslateColor(GetSelectedBox());
-
-  polygon.setAttribute("class", "zone " + color);
-  polygon.setAttribute("points", pointsString);
-  polygon.setAttribute("fill", "currentcolor");
+  let UID = "";
+  if (id === "") {
+    UID = GenerateUniqueID(24);
+  } else {
+    UID = id;
+  }
   polygon.setAttribute("id", UID);
 
-  // Fix this part to add correct listener via function.
+  if (classes === "") {
+    const color = TranslateColor(GetSelectedBox());
+    polygon.setAttribute("class", "zone " + color);
+  } else {
+    polygon.setAttribute("class", classes);
+  }
 
-  let mode = GetCurrentMode();
+  polygon.setAttribute("points", pointsString);
+
+  if (fill === "") {
+    polygon.setAttribute("fill", "currentcolor");
+  } else {
+    polygon.setAttribute("fill", fill);
+  }
+
+  if (locked === "") {
+    polygon.setAttribute("locked", "false");
+  } else {
+    polygon.setAttribute("locked", locked);
+  }
+
+  if (selectable === "") {
+    polygon.setAttribute("selectable", "true");
+  } else {
+    polygon.setAttribute("selectable", selectable);
+  }
 
   let drawing = document.getElementById("drawing");
-
   drawing.append(polygon);
+
   AttachListener(UID);
 }
 

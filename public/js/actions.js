@@ -68,9 +68,9 @@ export let paintCaller = (e) => PaintItem(e);
 
 export let cursorCaller = (e) => {
   console.log(e.target);
-  console.log(e.target.points[0]);
-  console.log(e.target.getAttribute("fill"));
-  console.log(e.target.getAttribute("points"));
+  // console.log(e.target.points[0]);
+  // console.log(e.target.getAttribute("fill"));
+  // console.log(e.target.getAttribute("points"));
   e.target.setAttribute("stroke", "black");
   e.target.setAttribute("stroke-width", "3");
 };
@@ -139,6 +139,18 @@ export function ChangeToDeleteMode() {
 export function CleanListeners(mode) {
   const zones = document.querySelectorAll(".zone");
 
+  // Slower, so not as effient if you have to go through many items.
+  if (mode === "all") {
+    zones.forEach((element) => {
+      element.removeEventListener("focus", cursorCaller);
+      element.removeEventListener("blur", cursorRemover);
+      element.removeEventListener("click", paintCaller);
+      element.removeEventListener("click", deleteCaller);
+    });
+    console.log("All modes removed");
+    return;
+  }
+
   if (mode === "cursor") {
     zones.forEach((element) => {
       element.removeEventListener("focus", cursorCaller);
@@ -163,6 +175,13 @@ export function CleanListeners(mode) {
     console.log("Delete mode removed");
     return;
   }
+}
+
+export function LockPolygon(id) {
+  let target = document.getElementById(id).getAttribute("locked");
+
+  if (target.getAttribute("locked") === "false") target.setAttribute("locked", "true");
+  else target.setAttribute("locked", "false");
 }
 
 export function ResetBoard(notice = true) {
@@ -219,9 +238,6 @@ export function ReadWork() {
 
   log = JSON.parse(localStorage.getItem("polygons"));
   console.log(log);
-
-  // Reset board
-  // Foreach in log, create polygon.
 
   RedrawBoard(log);
 }

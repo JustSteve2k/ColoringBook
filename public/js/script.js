@@ -10,6 +10,7 @@ import {
   GetInfoOfAllPolygonsOnBoard,
   SaveWork,
   ReadWork,
+  LockPolygon,
 } from "./actions.js";
 
 let enabledWButtonID = "btnCursor";
@@ -51,6 +52,10 @@ function Startup() {
   document.getElementById("btnAddNewTriangle").addEventListener("click", () => {
     AddTriangle();
   });
+  document.getElementById("btnLock").addEventListener("click", () => {
+    LockPolygon();
+  });
+
   document.getElementById("btnSave").addEventListener("click", () => {
     // TempMessage("This button will save work eventually.");
     SaveWork();

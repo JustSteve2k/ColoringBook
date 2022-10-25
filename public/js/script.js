@@ -1,4 +1,4 @@
-import { AddDynamicPolygon, AddSquare, AddTriangle } from "./shapes.js";
+import { AddDynamicPolygon, AddSquare, AddTriangle, AddCircle } from "./shapes.js";
 import { GenerateUniqueID, GetCurrentMode, TempMessage } from "./helpers.js";
 import {
   selectColor,
@@ -52,8 +52,11 @@ function Startup() {
   document.getElementById("btnAddNewTriangle").addEventListener("click", () => {
     AddTriangle();
   });
-  document.getElementById("btnLock").addEventListener("click", (e) => {
-    LockPolygon(e);
+  document.getElementById("btnAddNewCircle").addEventListener("click", () => {
+    AddCircle();
+  });
+  document.getElementById("btnLock").addEventListener("click", () => {
+    LockPolygon();
   });
 
   document.getElementById("btnSave").addEventListener("click", () => {

@@ -52,6 +52,37 @@ export function AddTriangle() {
   CreatePolygon(pointsString);
 }
 
+export function AddCircle() {
+  let MaxX = 540;
+  let MaxY = 500;
+
+  let adjustX = GetRandomInt(MaxX);
+  let adjustY = GetRandomInt(MaxY);
+
+  let cx = 50 + adjustX;
+  let cy = 50 + adjustY;
+  let r = GetRandomInt(50);
+
+  let circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+
+  const UID = GenerateUniqueID(24);
+  const color = TranslateColor(GetSelectedBox());
+
+  circle.setAttribute("cx", cx);
+  circle.setAttribute("cy", cy);
+  circle.setAttribute("r", r);
+  circle.setAttribute("id", UID);
+  circle.setAttribute("class", "zone " + color);
+  circle.setAttribute("fill", "currentcolor");
+  circle.setAttribute("locked", "false");
+  circle.setAttribute("selectable", "true");
+
+  let drawing = document.getElementById("drawing");
+  drawing.append(circle);
+
+  AttachListener(UID);
+}
+
 // Finishes creating a polygon and appends to the dom.  Need to know modesomehow.
 // id = "", classes = "", pointsString, fill = "", locked = "", selectable = ""
 export function CreatePolygon(pointsString = "", id = "", classes = "", fill = "", locked = "", selectable = "") {

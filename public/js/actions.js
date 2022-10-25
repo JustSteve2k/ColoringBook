@@ -77,7 +77,7 @@ export let cursorCaller = (e) => {
   e.target.setAttribute("stroke", "black");
   e.target.setAttribute("stroke-width", "3");
 
-  if (e.target.nodeName === "polygon") {
+  if (e.target.nodeName === "polygon" || e.target.nodeName === "circle") {
     lastAccessedPolygon = e.target.id;
   }
 };

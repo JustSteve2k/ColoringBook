@@ -14,13 +14,13 @@
 
     <div id="svgContainer" class="svgContainer">
       <svg id="drawing" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="900" height="600" viewBox="0 0 900 600">
-        <polygon id="svgBackground" class="zone" points="0,0 0,600 640,600 640,0" fill="#013101" locked="true" isselectable="true" />
-        <polygon class="zone color1" points="25,25, 100,25 100,100 25,100" fill="currentColor" />
-        <polygon class="zone color2" points="125,25 200,25 200,100 125,100" fill="currentcolor" />
-        <polygon class="zone color3" points="225,25 300,25 300,100 225,100" fill="currentcolor" />
-        <polygon class="zone color4" points="325,25 400,25 400,100 325,100" fill="currentcolor" />
-        <polygon class="zone color5" points="425,25 500,25 500,100 425,100" fill="currentcolor" />
-        <polygon class="zone color6" points="525,25 600,25 600,100 525,100" fill="currentcolor" />
+        <polygon id="svgBackground" class="zone" points="0,0 0,600 640,600 640,0" fill="#013101" locked="true" selectable="false" />
+        <polygon id="testBox1" class="zone color1" points="25,25, 100,25 100,100 25,100" fill="currentColor" locked="false" selectable="true" />
+        <polygon id="testBox2" class="zone color2" points="125,25 200,25 200,100 125,100" fill="currentcolor" locked="false" selectable="true" />
+        <polygon id="testBox3" class="zone color3" points="225,25 300,25 300,100 225,100" fill="currentcolor" locked="false" selectable="true" />
+        <polygon id="testBox4" class="zone color4" points="325,25 400,25 400,100 325,100" fill="currentcolor" locked="false" selectable="true" />
+        <polygon id="testBox5" class="zone color5" points="425,25 500,25 500,100 425,100" fill="currentcolor" locked="false" selectable="true" />
+        <polygon id="testBox6" class="zone color6" points="525,25 600,25 600,100 525,100" fill="currentcolor" locked="false" selectable="true" />
       </svg>
     </div>
 
@@ -36,7 +36,7 @@
         <button id="btnCursor" class="wButton enabled">Cursor</button>
         <button id="btnPaint" class="wButton">Paint</button>
         <button id="btnDelete" class="wButton">Delete</button>
-        <button id="btnReset" class="wButton">Reset</button>
+        <button id="btnReset" class="wButton">Reset Board</button>
       </div>
       <div id="createButtons" class="createButtons">
         <button id="btnAddDynPolygon3">Add 3 Point Polygon</button>
@@ -44,10 +44,14 @@
         <button id="btnAddDynPolygon5">Add 5 Point Polygon</button>
         <button id="btnAddSquare">Make Square</button>
         <button id="btnAddNewTriangle">Make Triangle</button>
+        <button id="btnAddNewCircle">Make Circle</button>
+        <button id="btnLock">Lock Item</button>
+        <button id="btnSave">Save Work</button>
+        <button id="btnLoad">Load Work</button>
       </div>
       <div id="testButtons" class="testButtons">
         <button id="btnTest1">TEST BUTTON 1</button>
-        <button id="btnTest2">TEST BUTTON 2</button>
+        <button id="btnTest2">Get Current Mode</button>
         <button id="btnTest3">TEST BUTTON 3</button>
       </div>
     </div>

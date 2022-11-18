@@ -1,11 +1,13 @@
 body {
   background-color: rgb(85, 84, 84);
   color: white;
+  margin: 0;
 }
 
-.titleBlock {
+.titleBar {
   text-align: center;
   border: 1px solid black;
+  background-color: rgb(49, 117, 218);
 }
 
 .svgContainer {
@@ -62,13 +64,32 @@ body {
   transition: 0.25s;
 }
 
-#leftButtonsBackground {
+.container {
+  position: relative;
+  width: 90 vw;
+  height: 90vh;
+  background-color: #3f0f0f;
+}
+
+/*Left bar area */
+
+.leftBar {
   position: absolute;
+  top: 0rem;
   left: 0rem;
-  top: 5rem;
   background-color: #ada9a9;
   height: 90vh;
-  width: 18rem;
+  width: 20%;
+}
+
+/*Right bar area */
+.rightBar {
+  position: absolute;
+  top: 0rem;
+  right: 0rem;
+  background-color: #ada9a9;
+  height: 90vh;
+  width: 20%;
 }
 
 /*WORK BUTTONS SECTION*/

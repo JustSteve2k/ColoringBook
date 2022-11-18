@@ -7,6 +7,66 @@ DONE - Make it so that each portion of the svg path is clickable and returns som
 DONE - add something that adds random polygon to the page?
     DONE - Params incluce random amount of points.
 
+DONE - Add class that shows an enabled button.
+
+DONE - Add Paint button 
+   DONE - This adds event listeners on all items that deletes.   
+
+DONE - Add Delete button
+   DONE  - This adds event listeners on all items that deletes.
+
+- Add Cursor button functionality
+    DONE - THis doesnt do anything but tell you info about the block you clicked on.
+    - Maybe change the stroke of the selected item temporarily.
+
+DONE - Add new black starter color.
+
+DONE - Add new white color.
+
+DONE - Add Create Circle functionality
+
+- Add Create Star functionality
+
+- Add rectangle functionality
+
+DONE - Add lock button to the side.
+
+DONE - Add Lock button
+    DONE - Lock functionality already added by adding attribute locked="true"
+
+- Add readme that describes project and future potential updates.
+
+- Change buttons to icons
+
+- Add an icon to website.
+
+- Change color to a color selection box instead of individual boxes.
+
+DONE - Add unique id to each polygon.
+    - Possibly something like rect01 or tri01.
+
+DONE - Add Reset button functionality
+    DONE - It would delete all items that do not have locked="true" flag on them.
+    - Tell how many items were skipped.
+
+- Function that Randomize colors of all items on the board.
+    - Unless its locked.
+
+
+
+- Generate a string of each item for saveability.
+DONE - Get information of all stuff on the board.
+    DONE - Collect user ID.
+    DONE - Collect points
+
+LATER - Show list of all items on the side so you can delete or change order 
+
+- Figure out how to increase size of svg drawing area dynamically.
+
+- New Created Polygon to start with selected color
+
+- Make functions to create square or circle with provided Params
+
 - Have a spot on the side that allows you to turn all the elements a particular color.
     - Add a reset button that clears the clors or somethign similar.
 
@@ -15,26 +75,20 @@ DONE - add something that adds random polygon to the page?
 - Load an svg on the page.  
     - Make sure the svg scales properly.
 
-- Add save function that allows you to save your progress.
-    - Can use local storage for saving, temporarily.
+DONE - Add save function that allows you to save your progress.
+    DONE - Can use local storage for saving, temporarily.
 
-- Add load function that allows you to load your progress.
+DONE - Add load function that allows you to load your progress.
+    DONE - Needs function that can rebuild board froms saved log.
+        DONE - Need to rerieve log from local storage.
+        DONE - Rebuild function will build a polygon with the provided points.
 
 - Have an area over to the side that allows you to load a different SVG into the coloring book.
-
-- Add function to delete selected polygon or path.
-
-- Make functions to create square or circle with provided Params
 
 - Have area that you can provide your own string of svg input // LATER
 
 - Make something that allows you to create a square or circle at a specified point.
 
-- Add Paint button
-    - This adds event listeners on all items that paints.
-
-- Add Delete button
-    - This adds event listeners on all items that deletes.
 
 
 

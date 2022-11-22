@@ -5,6 +5,7 @@ body {
 }
 
 .titleBar {
+  box-sizing: border-box;
   text-align: center;
   border: 1px solid black;
   background-color: rgb(49, 117, 218);
@@ -14,8 +15,7 @@ body {
 .svgContainer {
   border: 1px solid black;
   width: 40rem;
-  /* height: 40rem; */
-  margin: 0 auto;
+  margin: 1rem auto 0rem;
 }
 
 .zone:focus {
@@ -67,8 +67,8 @@ body {
 
 .container {
   position: relative;
-  width: 90vw;
-  height: 91vh;
+  width: 100%;
+  height: 92vh;
   background-color: #3f0f0f;
 }
 
@@ -76,11 +76,15 @@ body {
 
 .leftBar {
   position: absolute;
-  top: 0rem;
-  left: 0rem;
   background-color: #ada9a9;
   height: 92vh;
-  width: 20%;
+  width: 18%;
+}
+
+.middleArea {
+  display: flex;
+  border: 1px solid black;
+  flex-direction: column;
 }
 
 /*Right bar area */
@@ -90,7 +94,7 @@ body {
   right: 0rem;
   background-color: #ada9a9;
   height: 92vh;
-  width: 20%;
+  width: 18%;
 }
 
 /*WORK BUTTONS SECTION*/

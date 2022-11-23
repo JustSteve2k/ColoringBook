@@ -12,6 +12,7 @@ body {
   height: 8vh;
 }
 
+/*Drawing Area Classes */
 .svgContainer {
   border: 1px solid black;
   width: 40rem;
@@ -39,7 +40,7 @@ body {
 .colorSelectionBar {
   width: 40rem;
   border: 1px solid black;
-  margin: 2rem auto 1rem;
+  margin: 1rem auto;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -47,7 +48,7 @@ body {
 
 .colorBox {
   width: 6rem;
-  height: 4rem;
+  height: 3rem;
   border: 1px solid black;
   margin: 1rem;
   text-align: center;
@@ -114,6 +115,28 @@ body {
   background-color: #12b9ab;
   display: flex;
   margin: 0 auto;
+}
+
+.lowerButtonGroup1 {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  border: 1px solid black;
+  width: 8rem;
+  height: 4rem;
+  margin: auto;
+}
+
+.smButton {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 8px;
+  margin: 0rem;
+}
+
+.smButton:hover {
+  background-color: grey;
+  transition: 0.25s;
 }
 
 /*CREATE BUTTONS SECTION*/

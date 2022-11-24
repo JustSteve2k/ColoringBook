@@ -1,5 +1,5 @@
 import { cursorCaller, cursorRemover, deleteCaller, paintCaller } from "./actions.js";
-import { GenerateUniqueID, GetCurrentMode, GetRandomInt, GetSelectedBox, TranslateColor } from "./helpers.js";
+import { GenerateUniqueID, GetCurrentMode, GetCurrentSelectedColor, GetRandomInt, GetSelectedBox, TranslateColor } from "./helpers.js";
 
 export function AddDynamicPolygon(points) {
   let MaxX = 650;
@@ -66,14 +66,15 @@ export function AddCircle() {
   let circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
 
   const UID = GenerateUniqueID(24);
-  const color = TranslateColor(GetSelectedBox());
+  // const color = TranslateColor(GetSelectedBox());
+  let fill = GetCurrentSelectedColor();
 
   circle.setAttribute("cx", cx);
   circle.setAttribute("cy", cy);
   circle.setAttribute("r", r);
   circle.setAttribute("id", UID);
-  circle.setAttribute("class", "zone " + color);
-  circle.setAttribute("fill", "currentcolor");
+  circle.setAttribute("class", "zone ");
+  circle.setAttribute("fill", fill);
   circle.setAttribute("locked", "false");
   circle.setAttribute("selectable", "true");
 
@@ -85,7 +86,7 @@ export function AddCircle() {
 
 // Finishes creating a polygon and appends to the dom.  Need to know modesomehow.
 // id = "", classes = "", pointsString, fill = "", locked = "", selectable = ""
-export function CreatePolygon(pointsString = "", id = "", classes = "", fill = "", locked = "", selectable = "") {
+export function CreatePolygon(pointsString = "", id = "", classes = "", color = "", locked = "", selectable = "") {
   // console.log(`The points string for this polygon is - ${pointsString}`);
 
   let polygon = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
@@ -98,19 +99,15 @@ export function CreatePolygon(pointsString = "", id = "", classes = "", fill = "
   }
   polygon.setAttribute("id", UID);
 
-  if (classes === "") {
-    const color = TranslateColor(GetSelectedBox());
-    polygon.setAttribute("class", "zone " + color);
-  } else {
-    polygon.setAttribute("class", classes);
-  }
+  polygon.setAttribute("class", "zone");
 
   polygon.setAttribute("points", pointsString);
 
-  if (fill === "") {
-    polygon.setAttribute("fill", "currentcolor");
-  } else {
+  const fill = GetCurrentSelectedColor();
+  if (color === "") {
     polygon.setAttribute("fill", fill);
+  } else {
+    polygon.setAttribute("fill", color);
   }
 
   if (locked === "") {

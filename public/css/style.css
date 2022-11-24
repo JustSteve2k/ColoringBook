@@ -4,19 +4,24 @@ body {
   margin: 0;
 }
 
+button:hover {
+  background-color: red;
+  transition: 0.25s;
+}
+
 .titleBar {
   box-sizing: border-box;
   text-align: center;
   border: 1px solid black;
-  background-color: rgb(49, 117, 218);
-  height: 8vh;
+  background-color: rgb(40, 53, 53);
+  height: 6vh;
 }
 
 /*Drawing Area Classes */
 .svgContainer {
   border: 1px solid black;
   width: 40rem;
-  margin: 1rem auto 0rem;
+  margin: 2rem auto 0rem;
 }
 
 .zone:focus {
@@ -33,7 +38,7 @@ body {
   text-align: center;
   padding: 0.5rem;
   top: 5rem;
-  left: 2rem;
+  left: 4rem;
   position: absolute;
 }
 
@@ -69,17 +74,17 @@ body {
 .container {
   position: relative;
   width: 100%;
-  height: 92vh;
-  background-color: #3f0f0f;
+  height: 94vh;
+  background-color: black;
 }
 
 /*Left bar area */
 
 .leftBar {
   position: absolute;
-  background-color: #ada9a9;
-  height: 92vh;
-  width: 18%;
+  background-color: rgb(61, 74, 74);
+  height: 94vh;
+  width: 15%;
 }
 
 .middleArea {
@@ -93,9 +98,9 @@ body {
   position: absolute;
   top: 0rem;
   right: 0rem;
-  background-color: #ada9a9;
-  height: 92vh;
-  width: 18%;
+  background-color: rgb(61, 74, 74);
+  height: 94vh;
+  width: 15%;
 }
 
 /*WORK BUTTONS SECTION*/
@@ -105,38 +110,44 @@ body {
   display: flex;
   flex-direction: column;
   position: absolute;
-  left: 2rem;
+  left: 4rem;
   top: 15rem;
 }
 
 .lowerToolbar {
   width: 40rem;
-  height: 5rem;
-  background-color: #12b9ab;
+  height: 8rem;
+  background-color: rgb(61, 74, 74);
   display: flex;
-  margin: 0 auto;
+  margin: 2rem auto;
 }
 
 .lowerButtonGroup1 {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  border: 1px solid black;
-  width: 8rem;
-  height: 4rem;
+  /* border: 1px solid black; */
+  width: 10rem;
+  height: 5rem;
+  margin: auto;
+}
+
+.lowerButtonGroup2 {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  /* border: 1px solid black; */
+  width: 10rem;
+  height: 5rem;
   margin: auto;
 }
 
 .smButton {
-  width: 2rem;
-  height: 2rem;
+  width: 2.5rem;
+  height: 2.5rem;
   border-radius: 8px;
   margin: 0rem;
-}
-
-.smButton:hover {
-  background-color: grey;
-  transition: 0.25s;
+  border: 0.5px solid black;
 }
 
 /*CREATE BUTTONS SECTION*/
@@ -146,8 +157,20 @@ body {
   display: flex;
   flex-direction: column;
   position: absolute;
-  left: 2rem;
+  left: 4rem;
   top: 22rem;
+}
+
+.colorSelection {
+  border: 1px solid black;
+  height: 2rem;
+  margin: auto;
+}
+
+.colorPicker {
+  width: 5rem;
+  height: 2rem;
+  border: 1px solid black;
 }
 
 /*TEST BUTTONS SECTION*/
@@ -157,7 +180,7 @@ body {
   display: flex;
   flex-direction: column;
   position: absolute;
-  left: 2rem;
+  left: 4rem;
   top: 36rem;
 }
 
@@ -170,41 +193,4 @@ body {
 .notReady {
   background-color: #3a3939;
   color: rgb(124, 28, 28);
-}
-
-/*SVG COLORS*/
-
-.color0 {
-  color: #000000;
-  background-color: #000000;
-}
-
-.color1 {
-  color: #413f9e;
-  background-color: #413f9e;
-}
-
-.color2 {
-  color: #3f9e57;
-  background-color: #3f9e57;
-}
-
-.color3 {
-  color: #ca1c05;
-  background-color: #ca1c05;
-}
-
-.color4 {
-  color: #b9126e;
-  background-color: #b9126e;
-}
-
-.color5 {
-  color: #12b9ab;
-  background-color: #12b9ab;
-}
-
-.color6 {
-  color: #ffffff;
-  background-color: #ffffff;
 }

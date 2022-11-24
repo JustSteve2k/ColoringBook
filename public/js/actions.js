@@ -1,5 +1,5 @@
 import { CreatePolygon } from "./shapes.js";
-import { GetCurrentMode, GetSelectedBox, TranslateColor } from "./helpers.js";
+import { GetCurrentSelectedColor, GetCurrentMode, GetSelectedBox, TranslateColor } from "./helpers.js";
 
 // Paint item function.  Lets you paint selected svg.
 export function PaintItem(e) {
@@ -16,9 +16,13 @@ export function PaintItem(e) {
     return;
   }
 
-  let currentItemColor = e.target.classList[1];
-  e.target.classList.toggle(currentItemColor);
-  e.target.classList.toggle(TranslateColor(selectedColor));
+  let currentColor = GetCurrentSelectedColor();
+
+  e.target.setAttribute("fill", currentColor);
+
+  // let currentItemColor = e.target.classList[1];
+  // e.target.classList.toggle(currentItemColor);
+  // e.target.classList.toggle(TranslateColor(selectedColor));
 }
 
 export function selectColor(selection) {

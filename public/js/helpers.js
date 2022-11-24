@@ -81,3 +81,10 @@ export function GenerateUniqueID(length = 24) {
   // console.log(`Unique ID with length of ${length} is generated as ${uniqueID}`);
   return uniqueID;
 }
+
+export function GetCurrentSelectedColor() {
+  const currColor = document.querySelector(".colorPicker");
+
+  console.log(`The current color is ${currColor.value}`);
+  return currColor.value;
+}

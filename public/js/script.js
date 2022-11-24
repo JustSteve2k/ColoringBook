@@ -1,5 +1,5 @@
 import { AddDynamicPolygon, AddSquare, AddTriangle, AddCircle } from "./shapes.js";
-import { GenerateUniqueID, GetCurrentMode, TempMessage } from "./helpers.js";
+import { GetCurrentSelectedColor, GetCurrentMode, TempMessage } from "./helpers.js";
 import {
   selectColor,
   ChangeToPaintMode,
@@ -75,7 +75,8 @@ function Startup() {
     GetCurrentMode(true);
   });
   document.getElementById("btnTest3").addEventListener("click", () => {
-    GenerateUniqueID();
+    // GenerateUniqueID();
+    GetCurrentSelectedColor();
   });
 
   // Adds select color functionality to the color buttons.

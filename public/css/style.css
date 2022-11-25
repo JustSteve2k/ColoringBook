@@ -115,7 +115,7 @@ button:hover {
 }
 
 .lowerToolbar {
-  width: 40rem;
+  width: 50rem;
   height: 8rem;
   background-color: rgb(61, 74, 74);
   display: flex;
@@ -127,7 +127,7 @@ button:hover {
   align-items: center;
   flex-wrap: wrap;
   /* border: 1px solid black; */
-  width: 10rem;
+  width: 5rem;
   height: 5rem;
   margin: auto;
 }
@@ -137,7 +137,17 @@ button:hover {
   align-items: center;
   flex-wrap: wrap;
   /* border: 1px solid black; */
-  width: 10rem;
+  width: 12.5rem;
+  height: 5rem;
+  margin: auto;
+}
+
+.testButtonGroup1 {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  /* border: 1px solid black; */
+  width: 5rem;
   height: 5rem;
   margin: auto;
 }

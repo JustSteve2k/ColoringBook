@@ -60,23 +60,26 @@ function Startup() {
   });
 
   document.getElementById("btnSave").addEventListener("click", () => {
-    // TempMessage("This button will save work eventually.");
     SaveWork();
   });
   document.getElementById("btnLoad").addEventListener("click", () => {
-    // TempMessage("This button will load work eventually.");
     ReadWork();
   });
 
   document.getElementById("btnTest1").addEventListener("click", () => {
+    TempMessage("Gets list of all the polygons on the board.");
     GetInfoOfAllPolygonsOnBoard();
   });
   document.getElementById("btnTest2").addEventListener("click", () => {
+    TempMessage("Gets the Current Mode");
     GetCurrentMode(true);
   });
   document.getElementById("btnTest3").addEventListener("click", () => {
-    // GenerateUniqueID();
+    TempMessage("Get Current Selected Color");
     GetCurrentSelectedColor();
+  });
+  document.getElementById("btnTest4").addEventListener("click", () => {
+    TempMessage("Doesn't work yet");
   });
 
   // Adds select color functionality to the color buttons.

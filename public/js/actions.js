@@ -281,3 +281,15 @@ function RedrawBoard(log) {
   //   CreatePolygon(element.points, element.id, element.class, element.fill, element.locked, element.selectable);
   // });
 }
+
+export function ChangeBackgroundSize() {
+  drawing.setAttribute("width", "1200");
+  drawing.setAttribute("viewbox", "0 0 1200 600");
+
+  svgBackground.setAttribute("points", "-50,0 -50,600 1200,600 300,-50");
+
+  // points="0,0 0,600 900,600 900,0"
+  // UL, BL, BR, UR
+
+  // alert("background updated!");
+}

@@ -2,6 +2,7 @@ import { AddDynamicPolygon, AddSquare, AddTriangle, AddCircle } from "./shapes.j
 import { GetCurrentSelectedColor, GetCurrentMode, TempMessage } from "./helpers.js";
 import {
   selectColor,
+  ChangeBackgroundSize,
   ChangeToPaintMode,
   ChangeToCursorMode,
   ChangeToDeleteMode,
@@ -79,7 +80,8 @@ function Startup() {
     GetCurrentSelectedColor();
   });
   document.getElementById("btnTest4").addEventListener("click", () => {
-    TempMessage("Doesn't work yet");
+    // TempMessage("Doesn't work yet");
+    ChangeBackgroundSize();
   });
 
   // Adds select color functionality to the color buttons.

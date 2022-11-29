@@ -19,8 +19,10 @@ button:hover {
 
 /*Drawing Area Classes */
 .svgContainer {
-  border: 1px solid black;
-  width: 40rem;
+  border: 3px solid yellow;
+  display: flex;
+  justify-content: center;
+  /* width: 40rem; */
   margin: 2rem auto 0rem;
 }
 

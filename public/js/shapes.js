@@ -2,8 +2,8 @@ import { cursorCaller, cursorRemover, deleteCaller, paintCaller } from "./action
 import { GenerateUniqueID, GetCurrentMode, GetCurrentSelectedColor, GetRandomInt, GetSelectedBox, TranslateColor } from "./helpers.js";
 
 export function AddDynamicPolygon(points) {
-  let MaxX = 650;
-  let MaxY = 650;
+  let MaxX = 900;
+  let MaxY = 600;
 
   let pointsX = GeneratePointsArray(points, MaxX);
   let pointsY = GeneratePointsArray(points, MaxY);

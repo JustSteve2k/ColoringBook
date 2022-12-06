@@ -13,6 +13,7 @@ import {
   ReadWork,
   LockPolygon,
 } from "./actions.js";
+import { FindAllLocalStorage, SaveTest } from "./savers.js";
 
 let enabledWButtonID = "btnCursor";
 let mode = "cursor";
@@ -76,12 +77,19 @@ function Startup() {
     GetCurrentMode(true);
   });
   document.getElementById("btnTest3").addEventListener("click", () => {
-    TempMessage("Get Current Selected Color");
-    GetCurrentSelectedColor();
+    // TempMessage("Get Current Selected Color");
+    // GetCurrentSelectedColor();
+    SaveTest();
   });
   document.getElementById("btnTest4").addEventListener("click", () => {
     // TempMessage("Doesn't work yet");
-    ChangeBackgroundSize();
+    // ChangeBackgroundSize();
+
+    // let huh = prompt("Does this work?");
+
+    // console.log(huh + " was the input");
+    // SaveTest();
+    FindAllLocalStorage();
   });
 
   // Adds select color functionality to the color buttons.

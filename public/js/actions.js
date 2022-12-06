@@ -253,11 +253,17 @@ export function GetInfoOfAllPolygonsOnBoard() {
 
 export function SaveWork() {
   let log = GetInfoOfAllPolygonsOnBoard();
-  let saveName = prompt("What do you want the save to be called?");
+  let saveName;
+
+  do {
+    saveName = prompt("What do you want the save to be called?");
+  } while (saveName.trim(" ").length === 0);
 
   // localStorage.setItem("polygons", JSON.stringify(log));
   localStorage.setItem("CB - " + saveName, JSON.stringify(log));
-  alert("work saved i think.");
+  alert(`file saved as ${saveName}, i think.`);
+
+  // Note refresh save list here
 }
 
 export function ReadWork() {

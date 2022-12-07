@@ -1,13 +1,5 @@
 import { RedrawBoard } from "./actions.js";
 
-export function SaveTest() {
-  do {
-    let fileName = prompt("What would you like to save your file as?");
-  } while (fileName.trim().length === 0);
-
-  localStorage.setItem("CB - " + fileName, fileName + " - testValue");
-}
-
 export function FindAllLocalStorage() {
   const items = { ...localStorage };
   let list = [];
@@ -41,10 +33,16 @@ export function UpdateSaveList(list) {
 
   list.forEach((element) => {
     let li = document.createElement("li");
+
     li.textContent = element.slice(5);
     li.className = "savedDrawing";
     li.addEventListener("click", LoadFileFromSidebar);
+
+    // button.addEventListener("click", DeleteFileFromSidebar);
+
+    // li.appendChild(button);
     ul.appendChild(li);
+
     console.log(element);
   });
 
@@ -69,4 +67,8 @@ function LoadFileFromSidebar(e) {
   console.log(`This is the data included - ${log} `);
 
   RedrawBoard(log);
+}
+
+function DeleteFileFromSidebar(e) {
+  alert(e.target.innerText);
 }

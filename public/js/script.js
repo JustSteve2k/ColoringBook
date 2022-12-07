@@ -8,12 +8,12 @@ import {
   ChangeToDeleteMode,
   CleanListeners,
   ResetBoard,
-  GetInfoOfAllPolygonsOnBoard,
   SaveWork,
   ReadWork,
   LockPolygon,
 } from "./actions.js";
-import { FindAllLocalStorage, SaveTest } from "./savers.js";
+import { FindAllLocalStorage } from "./savers.js";
+import Developer from "./dev.js";
 
 let enabledWButtonID = "btnCursor";
 let mode = "cursor";
@@ -68,30 +68,6 @@ function Startup() {
     ReadWork();
   });
 
-  document.getElementById("btnTest1").addEventListener("click", () => {
-    TempMessage("Gets list of all the polygons on the board.");
-    GetInfoOfAllPolygonsOnBoard();
-  });
-  document.getElementById("btnTest2").addEventListener("click", () => {
-    TempMessage("Gets the Current Mode");
-    GetCurrentMode(true);
-  });
-  document.getElementById("btnTest3").addEventListener("click", () => {
-    // TempMessage("Get Current Selected Color");
-    // GetCurrentSelectedColor();
-    SaveTest();
-  });
-  document.getElementById("btnTest4").addEventListener("click", () => {
-    // TempMessage("Doesn't work yet");
-    // ChangeBackgroundSize();
-
-    // let huh = prompt("Does this work?");
-
-    // console.log(huh + " was the input");
-    // SaveTest();
-    FindAllLocalStorage();
-  });
-
   // Adds select color functionality to the color buttons.
   const boxes = document.querySelectorAll(".colorBox");
 
@@ -122,6 +98,9 @@ function Startup() {
   });
 
   ChangeToCursorMode();
+
+  const Dev = new Developer();
+  Dev.setupDevButtonListeners();
 
   // Windows onload functions, adjust later to load multiple things loading.
   window.onload = FindAllLocalStorage;

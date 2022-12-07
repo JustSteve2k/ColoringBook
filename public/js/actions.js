@@ -39,35 +39,35 @@ export function selectColor(selection) {
 }
 
 // Update the currentColor in the upper right.
-function ConvertBoxSelectionToColorish(selection) {
-  let color = "";
+// function ConvertBoxSelectionToColorish(selection) {
+//   let color = "";
 
-  switch (selection) {
-    case "box0":
-      color = "Blackish";
-      break;
-    case "box1":
-      color = "Purplish";
-      break;
-    case "box2":
-      color = "Greenish";
-      break;
-    case "box3":
-      color = "Redish";
-      break;
-    case "box4":
-      color = "Fuschiaish";
-      break;
-    case "box5":
-      color = "Tealish";
-      break;
-    case "box6":
-      color = "Whiteish";
-      break;
-  }
+//   switch (selection) {
+//     case "box0":
+//       color = "Blackish";
+//       break;
+//     case "box1":
+//       color = "Purplish";
+//       break;
+//     case "box2":
+//       color = "Greenish";
+//       break;
+//     case "box3":
+//       color = "Redish";
+//       break;
+//     case "box4":
+//       color = "Fuschiaish";
+//       break;
+//     case "box5":
+//       color = "Tealish";
+//       break;
+//     case "box6":
+//       color = "Whiteish";
+//       break;
+//   }
 
-  document.getElementById("currentColor").innerText = color;
-}
+//   document.getElementById("currentColor").innerText = color;
+// }
 
 let lastAccessedPolygon = null;
 
@@ -232,6 +232,10 @@ export function GetInfoOfAllPolygonsOnBoard() {
   let zones = document.querySelectorAll(".zone");
   let log = [];
   let count = 0;
+
+  // Save differently if circle than if polygon.
+  // If type = polygon, save points, if type = circle, save r cx, rx
+  // Need to load like this too.
 
   zones.forEach((element) => {
     let info = {};

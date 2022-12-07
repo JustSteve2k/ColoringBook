@@ -122,4 +122,7 @@ function Startup() {
   });
 
   ChangeToCursorMode();
+
+  // Windows onload functions, adjust later to load multiple things loading.
+  window.onload = FindAllLocalStorage;
 }

@@ -1,4 +1,4 @@
-import { CreatePolygon } from "./shapes.js";
+import { AddCircle, AddCircleFromParams, CreatePolygon } from "./shapes.js";
 import { GetCurrentSelectedColor, GetCurrentMode, GetSelectedBox, TranslateColor } from "./helpers.js";
 import { FindAllLocalStorage } from "./savers.js";
 
@@ -236,12 +236,19 @@ export function GetInfoOfAllPolygonsOnBoard() {
   // Save differently if circle than if polygon.
   // If type = polygon, save points, if type = circle, save r cx, rx
   // Need to load like this too.
+  // if (e.target.nodeName === "polygon" || e.target.nodeName === "circle")
 
   zones.forEach((element) => {
     let info = {};
     info.id = element.id;
     info.class = element.getAttribute("class");
-    info.points = element.getAttribute("points");
+    info.type = element.nodeName;
+    if (element.nodeName === "polygon") info.points = element.getAttribute("points");
+    if (element.nodeName === "circle") {
+      info.r = element.getAttribute("r");
+      info.cx = element.getAttribute("cx");
+      info.cy = element.getAttribute("cy");
+    }
     info.fill = element.getAttribute("fill");
     info.locked = element.getAttribute("locked");
     if (info.locked === null) info.locked = "false";
@@ -292,7 +299,15 @@ export function RedrawBoard(log) {
 
   // Doesnt draw the board so it starts at spot 1.
   for (let x = 1; x < log.length; x++) {
-    CreatePolygon(log[x].points, log[x].id, log[x].class, log[x].fill, log[x].locked, log[x].selectable);
+    // console.log(`Looping ${x} times`);
+    if (log[x].type === "polygon") {
+      // console.log("attempting to make a polygon");
+      CreatePolygon(log[x].points, log[x].id, log[x].class, log[x].fill, log[x].locked, log[x].selectable);
+    } else if (log[x].type === "circle") {
+      // console.log("attempts to create a circle");
+      // AddCircle();
+      AddCircleFromParams(log[x].id, log[x].class, log[x].cx, log[x].cy, log[x].r, log[x].fill, log[x].locked, log[x].selectable);
+    }
   }
 
   // log.forEach((element) => {

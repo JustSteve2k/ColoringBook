@@ -52,6 +52,8 @@ export function AddTriangle() {
   CreatePolygon(pointsString);
 }
 
+// id = "", classes = "", pointsString, fill = "", locked = "", selectable = "" - was for polygon
+// id = "", classes = "", cx="", cy="", r="", fill = "", locked = "", selectable = "" - is for circle
 export function AddCircle() {
   let MaxX = 540;
   let MaxY = 500;
@@ -84,6 +86,59 @@ export function AddCircle() {
   AttachListener(UID);
 }
 
+// id = "", classes = "", cx="", cy="", r="", fill = "", locked = "", selectable = "" - is for circle
+export function AddCircleFromParams(id = "", classes = "", ExCx = "", ExCy = "", ExR = "", ExFill = "", ExLocked = "", ExSelectable = "") {
+  let MaxX = 540;
+  let MaxY = 500;
+
+  let adjustX = GetRandomInt(MaxX);
+  let adjustY = GetRandomInt(MaxY);
+
+  let cx = 0;
+  if (ExCx === "") cx = 50 + adjustX;
+  else cx = ExCx;
+
+  let cy = 0;
+  if (ExCy === "") cy = 50 + adjustY;
+  else cy = ExCy;
+
+  let r = 0;
+  if (ExR === "") r = GetRandomInt(50);
+  else r = ExR;
+
+  let fill = "";
+  if (ExFill === "") fill = GetCurrentSelectedColor();
+  else fill = ExFill;
+
+  let locked = "";
+  if (ExLocked === "") locked = "false";
+  else locked = ExLocked;
+
+  let seletable = "";
+  if (ExSelectable === "") seletable = "true";
+  else seletable = ExSelectable;
+
+  let circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+
+  let UID = "";
+  UID = id === "" ? (UID = GenerateUniqueID(24)) : (UID = id);
+
+  circle.setAttribute("cx", cx);
+  circle.setAttribute("cy", cy);
+  circle.setAttribute("r", r);
+  circle.setAttribute("id", UID);
+  circle.setAttribute("class", "zone ");
+  circle.setAttribute("fill", fill);
+  circle.setAttribute("locked", locked);
+  circle.setAttribute("selectable", seletable);
+
+  let drawing = document.getElementById("drawing");
+  drawing.append(circle);
+
+  AttachListener(UID);
+  console.log("You've created a circle from parameters!");
+}
+
 // Finishes creating a polygon and appends to the dom.  Need to know modesomehow.
 // id = "", classes = "", pointsString, fill = "", locked = "", selectable = ""
 export function CreatePolygon(pointsString = "", id = "", classes = "", color = "", locked = "", selectable = "") {
@@ -92,14 +147,11 @@ export function CreatePolygon(pointsString = "", id = "", classes = "", color = 
   let polygon = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
 
   let UID = "";
-  if (id === "") {
-    UID = GenerateUniqueID(24);
-  } else {
-    UID = id;
-  }
+  UID = id === "" ? (UID = GenerateUniqueID(24)) : (UID = id);
+
   polygon.setAttribute("id", UID);
 
-  polygon.setAttribute("class", "zone");
+  polygon.setAttribute("class", "zone ");
 
   polygon.setAttribute("points", pointsString);
 

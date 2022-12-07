@@ -28,12 +28,12 @@
           <svg id="drawing" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="900" height="600" viewBox="0 0 900 600">
             <!-- <polygon id="svgBackground" class="zone" points="0,0 0,600 640,600 640,0" fill="#013101" locked="true" selectable="false" /> -->
             <polygon id="svgBackground" class="zone" points="0,0 0,600 900,600 900,0" fill="#013101" locked="true" selectable="false" />
-            <polygon id="testBox1" class="zone" points="25,25, 100,25 100,100 25,100" fill="#68AB38" locked="false" selectable="true" />
+            <!-- <polygon id="testBox1" class="zone" points="25,25, 100,25 100,100 25,100" fill="#68AB38" locked="false" selectable="true" />
             <polygon id="testBox2" class="zone" points="125,25 200,25 200,100 125,100" fill="#28AB38" locked="false" selectable="true" />
             <polygon id="testBox3" class="zone" points="225,25 300,25 300,100 225,100" fill="#68CB38" locked="false" selectable="true" />
             <polygon id="testBox4" class="zone" points="325,25 400,25 400,100 325,100" fill="#28AB39" locked="false" selectable="true" />
             <polygon id="testBox5" class="zone" points="425,25 500,25 500,100 425,100" fill="#38CB38" locked="false" selectable="true" />
-            <polygon id="testBox6" class="zone" points="525,25 600,25 600,100 525,100" fill="#18ABE8" locked="false" selectable="true" />
+            <polygon id="testBox6" class="zone" points="525,25 600,25 600,100 525,100" fill="#18ABE8" locked="false" selectable="true" /> -->
           </svg>
         </div>
 
@@ -57,12 +57,12 @@
             <button id="btnLoad" class="smButton">Ld</button>
             <button class="smButton">?</button>
           </div>
-          <div class="testButtonGroup1">
+          <!-- <div class="testButtonGroup1">
             <button id="btnTest1" class="smButton">T1</button>
             <button id="btnTest2" class="smButton">T2</button>
             <button id="btnTest3" class="smButton">T3</button>
             <button id="btnTest4" class="smButton">T4</button>
-          </div>
+          </div> -->
 
           <div class="colorSelection">
             <input class="colorPicker" type="color" />
@@ -70,7 +70,15 @@
         </div>
       </div>
       <!-- Right bar -->
-      <div class="rightBar"></div>
+      <div class="rightBar">
+        <div class="devButtons">
+          <h3>Dev Test Buttons</h3>
+          <button id="btnDev1">Test Function</button>
+          <button id="btnDev2">Get Info of All Polygons On Board</button>
+          <button id="btnDev3">Get Current Mode</button>
+          <button id="btnDev4">Find All Local Storage</button>
+        </div>
+      </div>
     </div>
 
     <script type="module" src="./js/script.js"></script>

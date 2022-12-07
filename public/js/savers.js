@@ -1,3 +1,5 @@
+import { RedrawBoard } from "./actions.js";
+
 export function SaveTest() {
   do {
     let fileName = prompt("What would you like to save your file as?");
@@ -16,18 +18,13 @@ export function FindAllLocalStorage() {
   }
   console.log(list);
   console.log("----------------------");
-  //   console.log(Object.keys(localStorage));
-
-  //   for (let x = 0; x < localStorage.length; x++) {
-  //     console.log(localStorage.getItem(localStorage.key(x)));
-  //   }
 
   UpdateSaveList(list);
 
   return list;
 }
 
-function UpdateSaveList(list) {
+export function UpdateSaveList(list) {
   let leftBar = document.querySelector(".leftBar");
   let savesList = document.querySelector(".savesList");
 
@@ -45,10 +42,31 @@ function UpdateSaveList(list) {
   list.forEach((element) => {
     let li = document.createElement("li");
     li.textContent = element.slice(5);
+    li.className = "savedDrawing";
+    li.addEventListener("click", LoadFileFromSidebar);
     ul.appendChild(li);
     console.log(element);
   });
 
   leftBar.appendChild(ul);
   console.log("Saves list on the left updated!");
+}
+
+function LoadFileFromSidebar(e) {
+  let fileName = "CB - " + e.target.innerText;
+
+  // alert(`you clicked on ${e.target.innerText}`);
+  let answer = confirm(`Would you like to load ${e.target.innerText}`);
+  if (!answer) {
+    alert("ok We'll pass on that for now");
+    return;
+  }
+
+  let log = [];
+  log = JSON.parse(localStorage.getItem(fileName));
+
+  console.log(`${fileName} is being loaded`);
+  console.log(`This is the data included - ${log} `);
+
+  RedrawBoard(log);
 }

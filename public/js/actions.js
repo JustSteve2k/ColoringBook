@@ -1,5 +1,6 @@
 import { CreatePolygon } from "./shapes.js";
 import { GetCurrentSelectedColor, GetCurrentMode, GetSelectedBox, TranslateColor } from "./helpers.js";
+import { FindAllLocalStorage } from "./savers.js";
 
 // Paint item function.  Lets you paint selected svg.
 export function PaintItem(e) {
@@ -263,6 +264,7 @@ export function SaveWork() {
   localStorage.setItem("CB - " + saveName, JSON.stringify(log));
   alert(`file saved as ${saveName}, i think.`);
 
+  FindAllLocalStorage();
   // Note refresh save list here
 }
 
@@ -279,7 +281,7 @@ export function ReadWork() {
   RedrawBoard(log);
 }
 
-function RedrawBoard(log) {
+export function RedrawBoard(log) {
   ResetBoard(false);
 
   console.log(log);

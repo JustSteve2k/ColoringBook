@@ -124,6 +124,16 @@ button:hover {
   width: 15%;
 }
 
+.devButtons {
+  width: 80%;
+  margin: 2rem auto 0;
+  text-align: center;
+}
+
+.devButtons button {
+  width: 100%;
+}
+
 /*WORK BUTTONS SECTION*/
 .workButtons {
   border: 1px solid black;

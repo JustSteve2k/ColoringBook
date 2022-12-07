@@ -89,6 +89,25 @@ button:hover {
   width: 15%;
 }
 
+.leftBar h2 {
+  text-align: center;
+}
+
+.leftBar ul {
+  border: 1px solid black;
+}
+
+.leftBar li {
+  width: 80%;
+}
+
+.savedDrawing:hover {
+  background-color: blue;
+  transition: 0.25s;
+}
+
+/*Middle area? */
+
 .middleArea {
   display: flex;
   border: 1px solid black;

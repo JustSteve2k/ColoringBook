@@ -1,4 +1,4 @@
-import { RedrawBoard } from "./actions.js";
+import { GetInfoOfAllPolygonsOnBoard, RedrawBoard } from "./actions.js";
 
 export function FindAllLocalStorage() {
   const items = { ...localStorage };
@@ -11,9 +11,14 @@ export function FindAllLocalStorage() {
   console.log(list);
   console.log("----------------------");
 
-  UpdateSaveList(list);
+  // UpdateSaveList(list);
 
   return list;
+}
+
+export function FindAllSavesAndUpdateList() {
+  let list = FindAllLocalStorage();
+  UpdateSaveList(list);
 }
 
 export function UpdateSaveList(list) {
@@ -75,5 +80,33 @@ export function DeleteSaveFile() {
 
   localStorage.removeItem("CB - " + answer);
 
-  FindAllLocalStorage();
+  // FindAllLocalStorage();
+  FindAllSavesAndUpdateList();
+}
+
+export function SaveWork() {
+  let log = GetInfoOfAllPolygonsOnBoard();
+  let saveName;
+
+  do {
+    saveName = prompt("What do you want the save to be called?");
+  } while (saveName.trim(" ").length === 0);
+
+  let list = FindAllLocalStorage();
+
+  if (list.includes("CB - " + saveName)) {
+    let overwrite = confirm("Are you sure you want to overwrite that file?");
+    if (!overwrite) {
+      alert(`Ok, we won't not overwrite ${saveName} atm.`);
+      return;
+    }
+  }
+
+  // localStorage.setItem("polygons", JSON.stringify(log));
+  localStorage.setItem("CB - " + saveName, JSON.stringify(log));
+  alert(`file saved as ${saveName}, i think.`);
+
+  // FindAllLocalStorage();
+  FindAllSavesAndUpdateList();
+  // Note refresh save list here
 }

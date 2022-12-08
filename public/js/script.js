@@ -12,7 +12,7 @@ import {
   ReadWork,
   LockPolygon,
 } from "./actions.js";
-import { FindAllLocalStorage } from "./savers.js";
+import { DeleteSaveFile, FindAllLocalStorage } from "./savers.js";
 import Developer from "./dev.js";
 
 let enabledWButtonID = "btnCursor";
@@ -66,6 +66,9 @@ function Startup() {
   });
   document.getElementById("btnLoad").addEventListener("click", () => {
     ReadWork();
+  });
+  document.getElementById("btnDeleteFile").addEventListener("click", () => {
+    DeleteSaveFile();
   });
 
   // Adds select color functionality to the color buttons.

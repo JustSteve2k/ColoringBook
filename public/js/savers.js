@@ -69,6 +69,11 @@ function LoadFileFromSidebar(e) {
   RedrawBoard(log);
 }
 
-function DeleteFileFromSidebar(e) {
-  alert(e.target.innerText);
+export function DeleteSaveFile() {
+  let answer;
+  answer = prompt("Which file do you want to delete?");
+
+  localStorage.removeItem("CB - " + answer);
+
+  FindAllLocalStorage();
 }

@@ -8,11 +8,10 @@ import {
   ChangeToDeleteMode,
   CleanListeners,
   ResetBoard,
-  SaveWork,
   ReadWork,
   LockPolygon,
 } from "./actions.js";
-import { DeleteSaveFile, FindAllLocalStorage } from "./savers.js";
+import { DeleteSaveFile, FindAllSavesAndUpdateList, SaveWork } from "./savers.js";
 import Developer from "./dev.js";
 
 let enabledWButtonID = "btnCursor";
@@ -106,5 +105,5 @@ function Startup() {
   Dev.setupDevButtonListeners();
 
   // Windows onload functions, adjust later to load multiple things loading.
-  window.onload = FindAllLocalStorage;
+  window.onload = FindAllSavesAndUpdateList;
 }

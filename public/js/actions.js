@@ -228,15 +228,11 @@ export function ResetBoard(notice = true) {
 }
 
 // Gets info of all polygons on the board.
+// May move to savers?
 export function GetInfoOfAllPolygonsOnBoard() {
   let zones = document.querySelectorAll(".zone");
   let log = [];
   let count = 0;
-
-  // Save differently if circle than if polygon.
-  // If type = polygon, save points, if type = circle, save r cx, rx
-  // Need to load like this too.
-  // if (e.target.nodeName === "polygon" || e.target.nodeName === "circle")
 
   zones.forEach((element) => {
     let info = {};
@@ -261,22 +257,6 @@ export function GetInfoOfAllPolygonsOnBoard() {
   count == 1 ? console.log("Looks like only the board is there atm.") : console.log(`total of ${count} items catalogued.`);
   console.log(log);
   return log;
-}
-
-export function SaveWork() {
-  let log = GetInfoOfAllPolygonsOnBoard();
-  let saveName;
-
-  do {
-    saveName = prompt("What do you want the save to be called?");
-  } while (saveName.trim(" ").length === 0);
-
-  // localStorage.setItem("polygons", JSON.stringify(log));
-  localStorage.setItem("CB - " + saveName, JSON.stringify(log));
-  alert(`file saved as ${saveName}, i think.`);
-
-  FindAllLocalStorage();
-  // Note refresh save list here
 }
 
 export function ReadWork() {

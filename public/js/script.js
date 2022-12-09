@@ -12,7 +12,7 @@ import {
   LockPolygon,
 } from "./actions.js";
 import { DeleteSaveFile, FindAllSavesAndUpdateList, SaveWork } from "./savers.js";
-import Developer from "./dev.js";
+import Developer from "./Dev.js";
 
 let enabledWButtonID = "btnCursor";
 let mode = "cursor";

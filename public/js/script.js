@@ -32,9 +32,6 @@ elements.forEach((element) => {
 // sets up initial listener functionalitys on screen.
 function Startup() {
   // Sets up work buttons ( to be called action buttons later.)
-  document.getElementById("btnReset").addEventListener("click", () => {
-    ResetBoard();
-  });
 
   // Sets up create buttons
   document.getElementById("btnAddDynPolygon3").addEventListener("click", () => {
@@ -68,6 +65,9 @@ function Startup() {
   });
   document.getElementById("btnDeleteFile").addEventListener("click", () => {
     DeleteSaveFile();
+  });
+  document.getElementById("btnResetNew").addEventListener("click", () => {
+    ResetBoard();
   });
 
   // Adds select color functionality to the color buttons.

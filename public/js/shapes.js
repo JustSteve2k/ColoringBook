@@ -16,12 +16,13 @@ export function AddDynamicPolygon(points) {
   CreatePolygon(pointsString);
 }
 
+// Max and MaxY adre hardcoded currently.  Need to reach from global?
 export function AddSquare() {
-  let MaxX = 540;
-  let MaxY = 500;
+  let MaxX = 900 - 75;
+  let MaxY = 600 - 75;
 
-  let pointsX = [25, 100, 100, 25];
-  let pointsY = [25, 25, 100, 100];
+  let pointsX = [0, 75, 75, 0];
+  let pointsY = [0, 0, 75, 75];
 
   let adjustX = GetRandomInt(MaxX);
   let adjustY = GetRandomInt(MaxY);
@@ -35,8 +36,11 @@ export function AddSquare() {
 }
 
 export function AddTriangle() {
-  let MaxX = 540;
-  let MaxY = 500;
+  // let MaxX = 540;
+  // let MaxY = 500;
+  // Currently subtracts for the size of the triangle.  Needs to be adjusted dynamically;
+  let MaxX = 900 - 100;
+  let MaxY = 600 - 100;
 
   let pointsX = [50, 0, 100];
   let pointsY = [0, 100, 100];

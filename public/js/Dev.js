@@ -7,6 +7,10 @@ export default class Developer {
     this.onload();
   }
 
+  test() {
+    alert("test function");
+  }
+
   setupDevButtonListeners() {
     btnDev1.addEventListener("click", () => {
       alert("testFunctionWorks!");

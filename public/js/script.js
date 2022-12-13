@@ -1,8 +1,6 @@
 import { AddDynamicPolygon, AddSquare, AddTriangle, AddCircle } from "./shapes.js";
-import { GetCurrentSelectedColor, GetCurrentMode, TempMessage } from "./helpers.js";
 import {
   selectColor,
-  ChangeBackgroundSize,
   ChangeToPaintMode,
   ChangeToCursorMode,
   ChangeToDeleteMode,
@@ -10,12 +8,17 @@ import {
   ResetBoard,
   ReadWork,
   LockPolygon,
+  SetNewColor,
 } from "./actions.js";
 import { DeleteSaveFile, FindAllSavesAndUpdateList, SaveWork } from "./savers.js";
+import { GetRandomColor } from "./helpers.js";
 import Developer from "./Dev.js";
 
 let enabledWButtonID = "btnCursor";
 let mode = "cursor";
+
+export let boardSizeX = 900;
+export let boardSizeY = 600;
 
 // Runs on startup - move to startup function for cleanliness.
 Startup();
@@ -31,13 +34,10 @@ elements.forEach((element) => {
 
 // sets up initial listener functionalitys on screen.
 function Startup() {
-  // Sets up work buttons ( to be called action buttons later.)
-
-  // Sets up create buttons
+  // Sets up Action buttons
   document.getElementById("btnAddDynPolygon3").addEventListener("click", () => {
     AddDynamicPolygon(3);
   });
-
   document.getElementById("btnAddDynPolygon4").addEventListener("click", () => {
     AddDynamicPolygon(4);
   });
@@ -68,6 +68,9 @@ function Startup() {
   });
   document.getElementById("btnResetNew").addEventListener("click", () => {
     ResetBoard();
+  });
+  document.getElementById("btnSetRandomColor").addEventListener("click", () => {
+    SetNewColor();
   });
 
   // Adds select color functionality to the color buttons.
@@ -103,6 +106,10 @@ function Startup() {
 
   const Dev = new Developer();
   Dev.setupDevButtonListeners();
+
+  let colorPicker = document.querySelector(".colorPicker");
+
+  colorPicker.value = GetRandomColor();
 
   // Windows onload functions, adjust later to load multiple things loading.
   window.onload = FindAllSavesAndUpdateList;

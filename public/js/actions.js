@@ -1,5 +1,5 @@
 import { AddCircle, AddCircleFromParams, CreatePolygon } from "./shapes.js";
-import { GetCurrentSelectedColor, GetCurrentMode, GetSelectedBox, TranslateColor } from "./helpers.js";
+import { GetCurrentSelectedColor, GetCurrentMode, GetSelectedBox, GetRandomInt, GetRandomColor } from "./helpers.js";
 import { FindAllLocalStorage } from "./savers.js";
 
 // Paint item function.  Lets you paint selected svg.
@@ -214,6 +214,14 @@ export function ResetBoard(notice = true) {
   let zones = document.querySelectorAll(".zone");
   let count = 0;
 
+  let answer;
+
+  if (notice) {
+    answer = confirm("Are you sure you want to reset?");
+
+    if (!answer) return;
+  }
+
   zones.forEach((element) => {
     if (element.getAttribute("locked") != "true") {
       element.remove();
@@ -293,6 +301,15 @@ export function RedrawBoard(log) {
   // log.forEach((element) => {
   //   CreatePolygon(element.points, element.id, element.class, element.fill, element.locked, element.selectable);
   // });
+}
+
+// Sets the colorpicker to a random color.  Sets a specific value if one is provided.
+
+// DEV NOTE - Need to validate input provided to ensure a color provided works.
+export function SetNewColor(color = "") {
+  if (color !== "") document.querySelector(".colorPicker").value = color;
+
+  document.querySelector(".colorPicker").value = GetRandomColor();
 }
 
 export function ChangeBackgroundSize() {

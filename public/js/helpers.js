@@ -88,3 +88,14 @@ export function GetCurrentSelectedColor() {
   console.log(`The current color is ${currColor.value}`);
   return currColor.value;
 }
+
+export function GetRandomColor() {
+  var letters = "0123456789ABCDEF".split("");
+  var color = "#";
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.round(Math.random() * 15)];
+  }
+  console.log(`Random Color is ${color}`);
+
+  return color;
+}

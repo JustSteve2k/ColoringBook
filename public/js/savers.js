@@ -1,5 +1,6 @@
 import { GetInfoOfAllPolygonsOnBoard, RedrawBoard } from "./actions.js";
 
+// Finds all the local storage on that machine.
 export function FindAllLocalStorage() {
   const items = { ...localStorage };
   let list = [];
@@ -11,16 +12,16 @@ export function FindAllLocalStorage() {
   console.log(list);
   console.log("----------------------");
 
-  // UpdateSaveList(list);
-
   return list;
 }
 
+// Finds all the current saves in local Storage then updates the sidebar on the left.
 export function FindAllSavesAndUpdateList() {
   let list = FindAllLocalStorage();
   UpdateSaveList(list);
 }
 
+// Updates the list on the left with inputted save files.
 export function UpdateSaveList(list) {
   let leftBar = document.querySelector(".leftBar");
   let savesList = document.querySelector(".savesList");
@@ -44,8 +45,8 @@ export function UpdateSaveList(list) {
     li.addEventListener("click", LoadFileFromSidebar);
 
     // button.addEventListener("click", DeleteFileFromSidebar);
-
     // li.appendChild(button);
+
     ul.appendChild(li);
 
     console.log(element);
@@ -55,10 +56,10 @@ export function UpdateSaveList(list) {
   console.log("Saves list on the left updated!");
 }
 
+// Loads a file from the saves bar when clicked on.
 function LoadFileFromSidebar(e) {
   let fileName = "CB - " + e.target.innerText;
 
-  // alert(`you clicked on ${e.target.innerText}`);
   let answer = confirm(`Would you like to load ${e.target.innerText}`);
   if (!answer) {
     alert("ok We'll pass on that for now");
@@ -74,16 +75,23 @@ function LoadFileFromSidebar(e) {
   RedrawBoard(log);
 }
 
+// See if it is in the list first. If not, let user know. else remove.
 export function DeleteSaveFile() {
   let answer;
   answer = prompt("Which file do you want to delete?");
 
+  let list = FindAllLocalStorage();
+  if (!list.includes("CB - " + answer)) {
+    alert("i dont see that one, try again.");
+    return;
+  }
+
   localStorage.removeItem("CB - " + answer);
 
-  // FindAllLocalStorage();
   FindAllSavesAndUpdateList();
 }
 
+// Gets the info of all the items on the board, then saves it to local storage.
 export function SaveWork() {
   let log = GetInfoOfAllPolygonsOnBoard();
   let saveName;
@@ -102,11 +110,8 @@ export function SaveWork() {
     }
   }
 
-  // localStorage.setItem("polygons", JSON.stringify(log));
   localStorage.setItem("CB - " + saveName, JSON.stringify(log));
   alert(`file saved as ${saveName}, i think.`);
 
-  // FindAllLocalStorage();
   FindAllSavesAndUpdateList();
-  // Note refresh save list here
 }

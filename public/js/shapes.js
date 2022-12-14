@@ -1,5 +1,5 @@
 import { cursorCaller, cursorRemover, deleteCaller, paintCaller } from "./actions.js";
-import { GenerateUniqueID, GetCurrentMode, GetCurrentSelectedColor, GetRandomInt, GetSelectedBox, TranslateColor } from "./helpers.js";
+import { GenerateUniqueID, GetCurrentMode, GetCurrentSelectedColor, GetRandomInt } from "./helpers.js";
 
 export function AddDynamicPolygon(points) {
   let MaxX = 900;
@@ -35,9 +35,8 @@ export function AddSquare() {
   CreatePolygon(pointsString);
 }
 
+// Adds a generic triangle to the drawing board.
 export function AddTriangle() {
-  // let MaxX = 540;
-  // let MaxY = 500;
   // Currently subtracts for the size of the triangle.  Needs to be adjusted dynamically;
   let MaxX = 900 - 100;
   let MaxY = 600 - 100;
@@ -56,10 +55,10 @@ export function AddTriangle() {
   CreatePolygon(pointsString);
 }
 
-// id = "", classes = "", pointsString, fill = "", locked = "", selectable = "" - was for polygon
-// id = "", classes = "", cx="", cy="", r="", fill = "", locked = "", selectable = "" - is for circle
+// Adds a generic circle to the drawing board.
+// DEV NOTE - Some overlapping occuring when circle overlaps outside of the box.
 export function AddCircle() {
-  let MaxX = 540;
+  let MaxX = 840;
   let MaxY = 500;
 
   let adjustX = GetRandomInt(MaxX);
@@ -72,7 +71,6 @@ export function AddCircle() {
   let circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
 
   const UID = GenerateUniqueID(24);
-  // const color = TranslateColor(GetSelectedBox());
   let fill = GetCurrentSelectedColor();
 
   circle.setAttribute("cx", cx);
@@ -144,10 +142,7 @@ export function AddCircleFromParams(id = "", classes = "", ExCx = "", ExCy = "",
 }
 
 // Finishes creating a polygon and appends to the dom.  Need to know modesomehow.
-// id = "", classes = "", pointsString, fill = "", locked = "", selectable = ""
 export function CreatePolygon(pointsString = "", id = "", classes = "", color = "", locked = "", selectable = "") {
-  // console.log(`The points string for this polygon is - ${pointsString}`);
-
   let polygon = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
 
   let UID = "";
@@ -184,7 +179,7 @@ export function CreatePolygon(pointsString = "", id = "", classes = "", color = 
   AttachListener(UID);
 }
 
-// Determines which mode it is and attached said listener. - TBD
+// Determines which mode it is and attached said listener.
 function AttachListener(UID) {
   let mode = GetCurrentMode();
 

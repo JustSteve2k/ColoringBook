@@ -1,6 +1,8 @@
 import { GetCurrentMode } from "./helpers.js";
 import { GetInfoOfAllPolygonsOnBoard } from "./actions.js";
 import { FindAllLocalStorage } from "./savers.js";
+import { GetRandomInt } from "./helpers.js";
+// import { boardSizeX, boardSizeY } from "./script.js";
 
 export default class Developer {
   constructor() {
@@ -30,6 +32,16 @@ export default class Developer {
       this.tempMessage("Find All Local Saves");
       FindAllLocalStorage();
     });
+
+    btnDev5.addEventListener("click", () => {
+      // this.showBoardSize();
+
+      let num = GetRandomInt();
+      console.log(num);
+    });
+    // btnDev6.addEventListener("click", () => {
+    //   PickRandomColor();
+    // });
   }
 
   tempMessage(message) {
@@ -37,6 +49,12 @@ export default class Developer {
     console.log(message);
   }
 
+  // showBoardSize() {
+  //   console.log(`The current board size is X:${boardSizeX} and Y:${boardSizeY}`);
+  //   boardSizeX++;
+  // }
+
+  // Functions to do when loading file.
   onload() {
     console.log("dev class functions loaded");
   }

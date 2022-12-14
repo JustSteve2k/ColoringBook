@@ -11,13 +11,13 @@ test("4 + 2", () => {
   expect(Sum(4, 2)).toBe(6);
 });
 
-test("translate color", () => {
-  expect(TranslateColor("box1")).toBe("color1");
-});
+// test("translate color", () => {
+//   expect(TranslateColor("box1")).toBe("color1");
+// });
 
-test("default color test", () => {
-  expect(TranslateColor("box9")).toBe("color0");
-});
+// test("default color test", () => {
+//   expect(TranslateColor("box9")).toBe("color0");
+// });
 
 test("get a random number", () => {
   expect(GetRandomInt(50)).toBeLessThan(50);

@@ -115,3 +115,26 @@ export function SaveWork() {
 
   FindAllSavesAndUpdateList();
 }
+
+// Exports a string with all the polygons on the board,
+// Need to refactor to shorten string length for certain items.
+export function CreateExportString(){
+  let log = GetInfoOfAllPolygonsOnBoard();
+  let exportString = "";
+
+  exportString += log.length;
+
+  log.forEach(element => {
+      exportString += element.class;
+      exportString += element.fill;
+      exportString += element.id;
+      exportString += element.locked;
+      exportString += element.points;
+      exportString += element.selectable;
+      exportString += element.type;
+      exportString += ",";
+  });
+
+  console.log(log);
+  console.log(exportString);
+}

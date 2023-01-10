@@ -1,4 +1,5 @@
 /* istanbul ignore next */
+// Creates an alert with the provided parameter.
 export function TempMessage(message) {
   alert(message);
 }
@@ -41,6 +42,7 @@ export function GetSelectedBox() {
   return find;
 }
 
+// Generates a uniquie id of legnth required by parameter
 export function GenerateUniqueID(length = 24) {
   let idArray = [];
   let uniqueID = "";
@@ -63,6 +65,7 @@ export function GenerateUniqueID(length = 24) {
   return uniqueID;
 }
 
+// Returns the current color value
 export function GetCurrentSelectedColor() {
   const currColor = document.querySelector(".colorPicker");
 
@@ -70,6 +73,7 @@ export function GetCurrentSelectedColor() {
   return currColor.value;
 }
 
+// Gets a random color and returns that.
 export function GetRandomColor() {
   var letters = "0123456789ABCDEF".split("");
   var color = "#";

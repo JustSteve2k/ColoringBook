@@ -25,7 +25,7 @@ export let paintCaller = (e) => {
 
 // Event listener action when an item is clicked in cursor mode.
 export let cursorCaller = (e) => {
-  console.log(e.target);
+  // console.log(e.target);
 
   e.target.setAttribute("active", "true");
   e.target.setAttribute("stroke", "black");
@@ -34,6 +34,8 @@ export let cursorCaller = (e) => {
   if (e.target.nodeName === "polygon" || e.target.nodeName === "circle") {
     lastAccessedPolygon = e.target.id;
   }
+
+  getSelectedItemInfo(e.target)
 };
 
 // Event listener action when an item is unclicked in cursor mode.
@@ -41,7 +43,123 @@ export let cursorRemover = (e) => {
   e.target.removeAttribute("stroke");
   e.target.removeAttribute("stroke-width");
   e.target.removeAttribute("active");
+
+  let itemInfo = document.querySelector(".itemInfo");
+  itemInfo.remove();
+
+  let ul = document.createElement("ul");
+  ul.className = "itemInfo";
+  
+  let li = document.createElement("li");
+  li.textContent = "Nothing Selected";
+  ul.appendChild(li);
+  
+  let selectedItem = document.querySelector(".selectedItem");
+  selectedItem.appendChild(ul);
 };
+
+// Gets the type 
+function getSelectedItemInfo(selected){
+  let nodeName = selected.nodeName;
+  
+  console.log("The selected item is - ");
+  
+  console.log(selected.id);
+  console.log(nodeName);
+  console.log(selected.getAttribute("class"));
+  console.log(selected.getAttribute("points"));
+  console.log(selected.getAttribute("fill"));
+  console.log(selected.getAttribute("selectable"));
+  console.log(selected.getAttribute("active"));
+
+
+  let itemInfo = document.querySelector(".itemInfo");
+  itemInfo.remove();
+
+  // console.log(selected);
+  let selectedItem = document.querySelector(".selectedItem");
+  let ul = document.createElement("ul")
+  ul.className = "itemInfo"
+  
+  let li = document.createElement("li");
+  li.textContent = "===ID===";
+  ul.appendChild(li);  
+
+  li = document.createElement("li");
+  li.textContent = selected.getAttribute("id");
+  ul.appendChild(li);  
+
+  li = document.createElement("li");
+  li.textContent = "===NodeName===";
+  ul.appendChild(li);  
+
+  li = document.createElement("li");
+  li.textContent = selected.nodeName;
+  ul.appendChild(li);  
+
+  if(nodeName === "polygon"){
+    li = document.createElement("li");
+    li.textContent = "===Points===";
+    ul.appendChild(li);  
+  
+    li = document.createElement("li");
+    li.textContent = selected.getAttribute("points");
+    ul.appendChild(li);  
+  }
+
+  if(nodeName === "circle"){
+    li = document.createElement("li");
+    li.textContent = "===Cx===";
+    ul.appendChild(li);  
+  
+    li = document.createElement("li");
+    li.textContent = selected.getAttribute("cx");
+    ul.appendChild(li);  
+
+    li = document.createElement("li");
+    li.textContent = "===Cy===";
+    ul.appendChild(li);  
+  
+    li = document.createElement("li");
+    li.textContent = selected.getAttribute("cy");
+    ul.appendChild(li);  
+
+    li = document.createElement("li");
+    li.textContent = "===Radius===";
+    ul.appendChild(li);  
+  
+    li = document.createElement("li");
+    li.textContent = selected.getAttribute("r");
+    ul.appendChild(li);  
+  }
+
+  li = document.createElement("li");
+  li.textContent = "===Fill===";
+  ul.appendChild(li);  
+    
+  li = document.createElement("li");
+  li.textContent = selected.getAttribute("fill");
+  ul.appendChild(li);  
+
+  li = document.createElement("li");
+  li.textContent = "===Selectable===";
+  ul.appendChild(li);  
+
+  li = document.createElement("li");
+  li.textContent = selected.getAttribute("selectable");
+  ul.appendChild(li);  
+
+  li = document.createElement("li");
+  li.textContent = "===Locked===";
+  ul.appendChild(li);  
+
+  li = document.createElement("li");
+  li.textContent = selected.getAttribute("locked");
+  ul.appendChild(li);  
+
+  selectedItem.appendChild(ul);
+
+}
 
 // Event listener action for deleting a selected item.
 export let deleteCaller = (e) => {
@@ -252,7 +370,7 @@ export function GetInfoOfAllPolygonsOnBoard() {
   });
 
   count == 1 ? console.log("Looks like only the board is there atm.") : console.log(`total of ${count} items catalogued.`);
-  console.log(log);
+  // console.log(log);
   return log;
 }
 

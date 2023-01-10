@@ -134,6 +134,14 @@ button:hover {
   width: 100%;
 }
 
+.selectedItem h3 {
+  text-align: center;
+}
+
+.itemInfo{
+  list-style: none;
+}
+
 /*WORK BUTTONS SECTION*/
 .workButtons {
   border: 1px solid black;

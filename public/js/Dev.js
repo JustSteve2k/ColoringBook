@@ -1,6 +1,6 @@
 import { GetCurrentMode } from "./helpers.js";
 import { GetInfoOfAllPolygonsOnBoard } from "./actions.js";
-import { CreateExportString, FindAllLocalStorage } from "./savers.js";
+import { CreateExportString, ImportString, FindAllLocalStorage } from "./savers.js";
 import { GetRandomInt } from "./helpers.js";
 // import { boardSizeX, boardSizeY } from "./script.js";
 
@@ -39,8 +39,10 @@ export default class Developer {
       console.log(num);
     });
      btnDev6.addEventListener("click", () => {
-      //  PickRandomColor();
       CreateExportString();
+    });
+    btnDev7.addEventListener("click", () => {
+      ImportString();
     });
   }
   tempMessage(message) {

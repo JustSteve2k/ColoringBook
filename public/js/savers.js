@@ -1,16 +1,20 @@
 import { GetInfoOfAllPolygonsOnBoard, RedrawBoard } from "./actions.js";
+import Data from "./Data";
 
 // Finds all the local storage on that machine.
 export function FindAllLocalStorage() {
   const items = { ...localStorage };
   let list = [];
-  console.log("-----CurrentSAVES----------");
 
   for (const key in items) {
     if (key.includes("CB -")) list.push(key);
   }
-  console.log(list);
-  console.log("----------------------");
+
+  if (Data.savesOutput) {
+    console.log("-----CurrentSAVES----------");
+    console.log(list);
+    console.log("----------------------");
+  }
 
   return list;
 }
@@ -49,11 +53,11 @@ export function UpdateSaveList(list) {
 
     ul.appendChild(li);
 
-    console.log(element);
+    Data.savesOutput && console.log(element);
   });
 
   leftBar.appendChild(ul);
-  console.log("Saves list on the left updated!");
+  Data.savesOutput && console.log("Saves list on the left updated!");
 }
 
 // Loads a file from the saves bar when clicked on.

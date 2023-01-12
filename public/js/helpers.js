@@ -1,4 +1,6 @@
 /* istanbul ignore next */
+import Data from "./Data";
+
 // Creates an alert with the provided parameter.
 export function TempMessage(message) {
   alert(message);
@@ -69,7 +71,9 @@ export function GenerateUniqueID(length = 24) {
 export function GetCurrentSelectedColor() {
   const currColor = document.querySelector(".colorPicker");
 
-  console.log(`The current color is ${currColor.value}`);
+  Data.colorSelectedOutput &&
+    console.log(`The current color is ${currColor.value}`);
+
   return currColor.value;
 }
 
@@ -80,7 +84,7 @@ export function GetRandomColor() {
   for (var i = 0; i < 6; i++) {
     color += letters[Math.round(Math.random() * 15)];
   }
-  console.log(`Random Color is ${color}`);
+  Data.colorSelectedOutput && console.log(`Random Color is ${color}`);
 
   return color;
 }

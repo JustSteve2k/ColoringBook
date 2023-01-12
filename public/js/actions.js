@@ -1,7 +1,16 @@
 import { AddCircleFromParams, CreatePolygon } from "./shapes.js";
-import { GetCurrentSelectedColor, GetCurrentMode, GetSelectedBox, GetRandomColor } from "./helpers.js";
+import {
+  GetCurrentSelectedColor,
+  GetCurrentMode,
+  GetSelectedBox,
+  GetRandomColor,
+} from "./helpers.js";
+import Data from "./Data";
+import { create, SVG } from "@svgdotjs/svg.js";
+import "@svgdotjs/svg.draggable.js";
 
 let lastAccessedPolygon = null;
+let selectedElement;
 
 // Event listener for painting an item when in paint mode.
 export let paintCaller = (e) => {
@@ -35,7 +44,19 @@ export let cursorCaller = (e) => {
     lastAccessedPolygon = e.target.id;
   }
 
-  getSelectedItemInfo(e.target)
+  getSelectedItemInfo(e.target);
+
+  // Adds dragability to all items.
+
+  let zone = document.querySelectorAll(".zone");
+
+  zone.forEach((element) => {
+    let name = "#" + element.id;
+    let art = SVG(name).draggable();
+  });
+
+  // Removes dragability from background.
+  let art = SVG("#svgBackground").draggable(false);
 };
 
 // Event listener action when an item is unclicked in cursor mode.
@@ -49,116 +70,89 @@ export let cursorRemover = (e) => {
 
   let ul = document.createElement("ul");
   ul.className = "itemInfo";
-  
+
   let li = document.createElement("li");
   li.textContent = "Nothing Selected";
   ul.appendChild(li);
-  
+
   let selectedItem = document.querySelector(".selectedItem");
   selectedItem.appendChild(ul);
+
+  let zone = document.querySelectorAll(".zone");
+  zone.forEach((element) => {
+    let name = "#" + element.id;
+    let art = SVG(name);
+    art.draggable(false);
+    console.log(`Draggable removed from - ${name}`);
+  });
 };
 
-// Gets the type 
-function getSelectedItemInfo(selected){
+// let startDrag = (evt) => {};
+
+// let drag = (evt) => {};
+
+// let endDrag = (evt) => {};
+
+// Gets the type
+function getSelectedItemInfo(selected) {
   let nodeName = selected.nodeName;
-  
-  console.log("The selected item is - ");
-  
-  console.log(selected.id);
-  console.log(nodeName);
-  console.log(selected.getAttribute("class"));
-  console.log(selected.getAttribute("points"));
-  console.log(selected.getAttribute("fill"));
-  console.log(selected.getAttribute("selectable"));
-  console.log(selected.getAttribute("active"));
 
-
+  if (Data.selectedOutput) {
+    console.log("The selected item is - ");
+    console.log(selected.id);
+    console.log(nodeName);
+    console.log(selected.getAttribute("class"));
+    console.log(selected.getAttribute("points"));
+    console.log(selected.getAttribute("fill"));
+    console.log(selected.getAttribute("selectable"));
+    console.log(selected.getAttribute("active"));
+  }
   let itemInfo = document.querySelector(".itemInfo");
   itemInfo.remove();
 
-  // console.log(selected);
   let selectedItem = document.querySelector(".selectedItem");
-  let ul = document.createElement("ul")
-  ul.className = "itemInfo"
-  
-  let li = document.createElement("li");
-  li.textContent = "===ID===";
-  ul.appendChild(li);  
+  let ul = document.createElement("ul");
+  ul.className = "itemInfo";
 
-  li = document.createElement("li");
-  li.textContent = selected.getAttribute("id");
-  ul.appendChild(li);  
+  createListItem("===ID===");
+  createListItem(selected.nodeName);
 
-  li = document.createElement("li");
-  li.textContent = "===NodeName===";
-  ul.appendChild(li);  
+  createListItem("===NodeName===");
+  createListItem(selected.getAttribute("id"));
 
-  li = document.createElement("li");
-  li.textContent = selected.nodeName;
-  ul.appendChild(li);  
-
-  if(nodeName === "polygon"){
-    li = document.createElement("li");
-    li.textContent = "===Points===";
-    ul.appendChild(li);  
-  
-    li = document.createElement("li");
-    li.textContent = selected.getAttribute("points");
-    ul.appendChild(li);  
+  if (nodeName === "polygon") {
+    createListItem("===Points===");
+    createListItem(selected.getAttribute("points"));
   }
 
-  if(nodeName === "circle"){
-    li = document.createElement("li");
-    li.textContent = "===Cx===";
-    ul.appendChild(li);  
-  
-    li = document.createElement("li");
-    li.textContent = selected.getAttribute("cx");
-    ul.appendChild(li);  
+  if (nodeName === "circle") {
+    createListItem("===Cx===");
+    createListItem(selected.getAttribute("cx"));
 
-    li = document.createElement("li");
-    li.textContent = "===Cy===";
-    ul.appendChild(li);  
-  
-    li = document.createElement("li");
-    li.textContent = selected.getAttribute("cy");
-    ul.appendChild(li);  
+    createListItem("===Cy===");
+    createListItem(selected.getAttribute("cy"));
 
-    li = document.createElement("li");
-    li.textContent = "===Radius===";
-    ul.appendChild(li);  
-  
-    li = document.createElement("li");
-    li.textContent = selected.getAttribute("r");
-    ul.appendChild(li);  
+    createListItem("===Radius===");
+    createListItem(selected.getAttribute("r"));
   }
 
-  li = document.createElement("li");
-  li.textContent = "===Fill===";
-  ul.appendChild(li);  
-    
-  li = document.createElement("li");
-  li.textContent = selected.getAttribute("fill");
-  ul.appendChild(li);  
+  createListItem("===Fill===");
+  createListItem(selected.getAttribute("fill"));
 
-  li = document.createElement("li");
-  li.textContent = "===Selectable===";
-  ul.appendChild(li);  
+  createListItem("===Selectable===");
+  createListItem(selected.getAttribute("selectable"));
 
-  li = document.createElement("li");
-  li.textContent = selected.getAttribute("selectable");
-  ul.appendChild(li);  
-
-  li = document.createElement("li");
-  li.textContent = "===Locked===";
-  ul.appendChild(li);  
-
-  li = document.createElement("li");
-  li.textContent = selected.getAttribute("locked");
-  ul.appendChild(li);  
+  createListItem("===Locked===");
+  createListItem(selected.getAttribute("locked"));
 
   selectedItem.appendChild(ul);
 
+  // Creates a list item with the entered parameter.
+  function createListItem(attr) {
+    let li = document.createElement("li");
+    li.textContent = attr;
+    return ul.appendChild(li);
+  }
 }
 
 // Event listener action for deleting a selected item.
@@ -338,7 +332,9 @@ export function ResetBoard(notice = true) {
 
   if (notice === true)
     setTimeout(() => {
-      count >= 1 ? alert(`${count} items were removed.`) : alert(`Looks like the board is already empty.`);
+      count >= 1
+        ? alert(`${count} items were removed.`)
+        : alert(`Looks like the board is already empty.`);
     }, 0);
 }
 
@@ -354,7 +350,8 @@ export function GetInfoOfAllPolygonsOnBoard() {
     info.id = element.id;
     info.class = element.getAttribute("class");
     info.type = element.nodeName;
-    if (element.nodeName === "polygon") info.points = element.getAttribute("points");
+    if (element.nodeName === "polygon")
+      info.points = element.getAttribute("points");
     if (element.nodeName === "circle") {
       info.r = element.getAttribute("r");
       info.cx = element.getAttribute("cx");
@@ -369,7 +366,9 @@ export function GetInfoOfAllPolygonsOnBoard() {
     count++;
   });
 
-  count == 1 ? console.log("Looks like only the board is there atm.") : console.log(`total of ${count} items catalogued.`);
+  count == 1
+    ? console.log("Looks like only the board is there atm.")
+    : console.log(`total of ${count} items catalogued.`);
   // console.log(log);
   return log;
 }
@@ -396,9 +395,25 @@ export function RedrawBoard(log) {
   for (let x = 1; x < log.length; x++) {
     // console.log(`Looping ${x} times`);
     if (log[x].type === "polygon") {
-      CreatePolygon(log[x].points, log[x].id, log[x].class, log[x].fill, log[x].locked, log[x].selectable);
+      CreatePolygon(
+        log[x].points,
+        log[x].id,
+        log[x].class,
+        log[x].fill,
+        log[x].locked,
+        log[x].selectable
+      );
     } else if (log[x].type === "circle") {
-      AddCircleFromParams(log[x].id, log[x].class, log[x].cx, log[x].cy, log[x].r, log[x].fill, log[x].locked, log[x].selectable);
+      AddCircleFromParams(
+        log[x].id,
+        log[x].class,
+        log[x].cx,
+        log[x].cy,
+        log[x].r,
+        log[x].fill,
+        log[x].locked,
+        log[x].selectable
+      );
     }
   }
 }

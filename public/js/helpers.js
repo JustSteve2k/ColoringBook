@@ -72,8 +72,7 @@ export function GenerateUniqueID(length = 24) {
 export function GetCurrentSelectedColor() {
   const currColor = document.querySelector(".colorPicker");
 
-  Data.colorSelectedOutput &&
-    console.log(`The current color is ${currColor.value}`);
+  Data.colorSelectedOutput && console.log(`The current color is ${currColor.value}`);
 
   return currColor.value;
 }

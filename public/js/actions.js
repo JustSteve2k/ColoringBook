@@ -1,10 +1,5 @@
 import { AddCircleFromParams, CreatePolygon } from "./shapes.js";
-import {
-  GetCurrentSelectedColor,
-  GetCurrentMode,
-  GetSelectedBox,
-  GetRandomColor,
-} from "./helpers.js";
+import { GetCurrentSelectedColor, GetCurrentMode, GetSelectedBox, GetRandomColor } from "./helpers.js";
 import Data from "./Data";
 import { create, SVG } from "@svgdotjs/svg.js";
 import "@svgdotjs/svg.draggable.js";
@@ -23,7 +18,7 @@ export let paintCaller = (e) => {
   if (e.target.getAttribute("locked", "true") === "true") {
     console.log(e.target.id);
     console.log(e.target.getAttribute("locked"));
-    alert("Sorry, that target is locked, can't paint that.");
+    Data.alerts && alert("Sorry, that target is locked, can't paint that.");
     return;
   }
 
@@ -45,18 +40,6 @@ export let cursorCaller = (e) => {
   }
 
   getSelectedItemInfo(e.target);
-
-  // Adds dragability to all items.
-
-  let zone = document.querySelectorAll(".zone");
-
-  zone.forEach((element) => {
-    let name = "#" + element.id;
-    let art = SVG(name).draggable();
-  });
-
-  // Removes dragability from background.
-  let art = SVG("#svgBackground").draggable(false);
 };
 
 // Event listener action when an item is unclicked in cursor mode.
@@ -77,20 +60,40 @@ export let cursorRemover = (e) => {
 
   let selectedItem = document.querySelector(".selectedItem");
   selectedItem.appendChild(ul);
+};
 
+//Adds dragability to all with zone class.
+function AddDragabilityToAll() {
   let zone = document.querySelectorAll(".zone");
+  console.log(`Found ${zone.length} to add dragability to.`);
+
+  zone.forEach((element) => {
+    let name = "#" + element.id;
+    let art = SVG(name);
+    art.draggable();
+    console.log(`Draggable added to - ${name}`);
+  });
+
+  // Removes dragability from background added unnecessarily.
+  let art = SVG("#svgBackground").draggable(false);
+}
+
+//Removes dragability to all with zone class.
+function RemoveDragabilityFromAll() {
+  let zone = document.querySelectorAll(".zone");
+
   zone.forEach((element) => {
     let name = "#" + element.id;
     let art = SVG(name);
     art.draggable(false);
     console.log(`Draggable removed from - ${name}`);
   });
-};
+}
+
+//  Not used anymore.
 
 // let startDrag = (evt) => {};
-
 // let drag = (evt) => {};
-
 // let endDrag = (evt) => {};
 
 // Gets the type
@@ -107,8 +110,9 @@ function getSelectedItemInfo(selected) {
     console.log(selected.getAttribute("selectable"));
     console.log(selected.getAttribute("active"));
   }
+
   let itemInfo = document.querySelector(".itemInfo");
-  itemInfo.remove();
+  if (itemInfo !== null) itemInfo.remove();
 
   let selectedItem = document.querySelector(".selectedItem");
   let ul = document.createElement("ul");
@@ -215,6 +219,13 @@ export function ChangeToDeleteMode(verbose = false) {
   verbose && console.log("Delete Mode Added");
 }
 
+export function ChangeToMoveMode(verbose = false) {
+  // Adds dragability to all items.
+  AddDragabilityToAll();
+
+  verbose && console.log("Move Mode Added");
+}
+
 let enabledWButtonID = "btnCursor";
 let mode = "cursor";
 
@@ -239,6 +250,7 @@ export function SwapBetweenModes() {
       if (mode === "cursor") ChangeToCursorMode();
       if (mode === "paint") ChangeToPaintMode();
       if (mode === "delete") ChangeToDeleteMode();
+      if (mode === "move") ChangeToMoveMode();
     });
   });
 }
@@ -254,6 +266,9 @@ export function CleanListeners(mode, verbose = false) {
       element.removeEventListener("blur", cursorRemover);
       element.removeEventListener("click", paintCaller);
       element.removeEventListener("click", deleteCaller);
+
+      // Removes dragable functionality.
+      RemoveDragabilityFromAll();
     });
 
     verbose && console.log("All modes removed");
@@ -332,9 +347,7 @@ export function ResetBoard(notice = true) {
 
   if (notice === true)
     setTimeout(() => {
-      count >= 1
-        ? alert(`${count} items were removed.`)
-        : alert(`Looks like the board is already empty.`);
+      count >= 1 ? alert(`${count} items were removed.`) : alert(`Looks like the board is already empty.`);
     }, 0);
 }
 
@@ -350,8 +363,7 @@ export function GetInfoOfAllPolygonsOnBoard() {
     info.id = element.id;
     info.class = element.getAttribute("class");
     info.type = element.nodeName;
-    if (element.nodeName === "polygon")
-      info.points = element.getAttribute("points");
+    if (element.nodeName === "polygon") info.points = element.getAttribute("points");
     if (element.nodeName === "circle") {
       info.r = element.getAttribute("r");
       info.cx = element.getAttribute("cx");
@@ -366,9 +378,7 @@ export function GetInfoOfAllPolygonsOnBoard() {
     count++;
   });
 
-  count == 1
-    ? console.log("Looks like only the board is there atm.")
-    : console.log(`total of ${count} items catalogued.`);
+  count == 1 ? console.log("Looks like only the board is there atm.") : console.log(`total of ${count} items catalogued.`);
   // console.log(log);
   return log;
 }
@@ -395,25 +405,9 @@ export function RedrawBoard(log) {
   for (let x = 1; x < log.length; x++) {
     // console.log(`Looping ${x} times`);
     if (log[x].type === "polygon") {
-      CreatePolygon(
-        log[x].points,
-        log[x].id,
-        log[x].class,
-        log[x].fill,
-        log[x].locked,
-        log[x].selectable
-      );
+      CreatePolygon(log[x].points, log[x].id, log[x].class, log[x].fill, log[x].locked, log[x].selectable);
     } else if (log[x].type === "circle") {
-      AddCircleFromParams(
-        log[x].id,
-        log[x].class,
-        log[x].cx,
-        log[x].cy,
-        log[x].r,
-        log[x].fill,
-        log[x].locked,
-        log[x].selectable
-      );
+      AddCircleFromParams(log[x].id, log[x].class, log[x].cx, log[x].cy, log[x].r, log[x].fill, log[x].locked, log[x].selectable);
     }
   }
 }

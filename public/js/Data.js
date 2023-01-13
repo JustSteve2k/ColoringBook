@@ -10,6 +10,9 @@ const Data = {
 
   // Outputs info about dev products loading.
   devOutput: false,
+
+  // General alerts
+  alerts: false,
 };
 
 export default Data;

@@ -5,7 +5,6 @@ import { create, SVG } from "@svgdotjs/svg.js";
 import "@svgdotjs/svg.draggable.js";
 
 let lastAccessedPolygon = null;
-let selectedElement;
 
 // Event listener for painting an item when in paint mode.
 export let paintCaller = (e) => {
@@ -33,7 +32,7 @@ export let cursorCaller = (e) => {
 
   e.target.setAttribute("active", "true");
   e.target.setAttribute("stroke", "black");
-  e.target.setAttribute("stroke-width", "3");
+  e.target.setAttribute("stroke-width", "2");
 
   if (e.target.nodeName === "polygon" || e.target.nodeName === "circle") {
     lastAccessedPolygon = e.target.id;
@@ -219,8 +218,8 @@ export function ChangeToDeleteMode(verbose = false) {
   verbose && console.log("Delete Mode Added");
 }
 
+// Changes event listeners on the svgs to be draggable.
 export function ChangeToMoveMode(verbose = false) {
-  // Adds dragability to all items.
   AddDragabilityToAll();
 
   verbose && console.log("Move Mode Added");
@@ -326,6 +325,7 @@ export function LockPolygon() {
   }
 }
 
+// Removes all objects from the board.
 export function ResetBoard(notice = true) {
   let zones = document.querySelectorAll(".zone");
   let count = 0;
@@ -396,14 +396,14 @@ export function ReadWork() {
   RedrawBoard(log);
 }
 
+// Redraws the board with provided parameters.
 export function RedrawBoard(log) {
   ResetBoard(false);
 
   console.log(log);
 
-  // Doesnt draw the board so it starts at spot 1.
+  // Doesn't draw the board so it starts at spot 1.
   for (let x = 1; x < log.length; x++) {
-    // console.log(`Looping ${x} times`);
     if (log[x].type === "polygon") {
       CreatePolygon(log[x].points, log[x].id, log[x].class, log[x].fill, log[x].locked, log[x].selectable);
     } else if (log[x].type === "circle") {

@@ -138,7 +138,7 @@ button:hover {
   text-align: center;
 }
 
-.itemInfo{
+.itemInfo {
   list-style: none;
 }
 
@@ -205,8 +205,11 @@ button:hover {
   font-weight: bold;
 }
 .actionButtons {
-  /* border: 1px solid yellow; */
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   width: 16.5rem;
+  height: 5rem;
   align-items: center;
   justify-content: center;
 }
@@ -223,6 +226,14 @@ button:hover {
 
 .smButton {
   width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 8px;
+  margin: 0rem;
+  border: 0.5px solid black;
+}
+
+.medButton {
+  width: 3.5rem;
   height: 2.5rem;
   border-radius: 8px;
   margin: 0rem;

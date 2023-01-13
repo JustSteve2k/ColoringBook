@@ -10,9 +10,6 @@ export function AddDynamicPolygon(points) {
   let pointsX = GeneratePointsArray(points, MaxX);
   let pointsY = GeneratePointsArray(points, MaxY);
 
-  // console.log(pointsX);
-  // console.log(pointsY);
-
   let pointsString = GeneratePointsStringFromArray(pointsX, pointsY);
 
   CreatePolygon(pointsString);
@@ -99,28 +96,22 @@ export function AddCircleFromParams(id = "", classes = "", ExCx = "", ExCy = "",
   let adjustY = GetRandomInt(MaxY);
 
   let cx = 0;
-  if (ExCx === "") cx = 50 + adjustX;
-  else cx = ExCx;
+  ExCx === "" ? (cx = 50 + adjustX) : (cx = ExCx);
 
   let cy = 0;
-  if (ExCy === "") cy = 50 + adjustY;
-  else cy = ExCy;
+  ExCy === "" ? (cy = 50 + adjustY) : (cy = ExCy);
 
   let r = 0;
-  if (ExR === "") r = GetRandomInt(50);
-  else r = ExR;
+  ExR === "" ? (r = GetRandomInt(50)) : (r = ExR);
 
   let fill = "";
-  if (ExFill === "") fill = GetCurrentSelectedColor();
-  else fill = ExFill;
+  ExFill === "" ? (fill = GetCurrentSelectedColor()) : (fill = ExFill);
 
   let locked = "";
-  if (ExLocked === "") locked = "false";
-  else locked = ExLocked;
+  ExLocked === "" ? (locked = "false") : (locked = ExLocked);
 
-  let seletable = "";
-  if (ExSelectable === "") seletable = "true";
-  else seletable = ExSelectable;
+  let selectable = "";
+  ExSelectable === "" ? (selectable = "true") : (selectable = ExSelectable);
 
   let circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
 
@@ -134,7 +125,7 @@ export function AddCircleFromParams(id = "", classes = "", ExCx = "", ExCy = "",
   circle.setAttribute("class", "zone ");
   circle.setAttribute("fill", fill);
   circle.setAttribute("locked", locked);
-  circle.setAttribute("selectable", seletable);
+  circle.setAttribute("selectable", selectable);
 
   let drawing = document.getElementById("drawing");
   drawing.append(circle);
@@ -151,29 +142,14 @@ export function CreatePolygon(pointsString = "", id = "", classes = "", color = 
   UID = id === "" ? (UID = GenerateUniqueID(24)) : (UID = id);
 
   polygon.setAttribute("id", UID);
-
-  polygon.setAttribute("class", "zone ");
-
+  classes === "" ? polygon.setAttribute("class", "zone ") : polygon.setAttribute("class", classes);
   polygon.setAttribute("points", pointsString);
 
   const fill = GetCurrentSelectedColor();
-  if (color === "") {
-    polygon.setAttribute("fill", fill);
-  } else {
-    polygon.setAttribute("fill", color);
-  }
 
-  if (locked === "") {
-    polygon.setAttribute("locked", "false");
-  } else {
-    polygon.setAttribute("locked", locked);
-  }
-
-  if (selectable === "") {
-    polygon.setAttribute("selectable", "true");
-  } else {
-    polygon.setAttribute("selectable", selectable);
-  }
+  color === "" ? polygon.setAttribute("fill", fill) : polygon.setAttribute("fill", color);
+  locked === "" ? polygon.setAttribute("locked", "false") : polygon.setAttribute("locked", locked);
+  selectable === "" ? polygon.setAttribute("selectable", "true") : polygon.setAttribute("selectable", selectable);
 
   let drawing = document.getElementById("drawing");
   drawing.append(polygon);
@@ -211,6 +187,7 @@ function AttachListener(UID) {
   }
 }
 
+// Generates a random points array from a provided length and max number
 export function GeneratePointsArray(length, max, adjust = 1) {
   let points = [];
 

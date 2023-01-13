@@ -51,7 +51,8 @@ export function GenerateUniqueID(length = 24) {
   let character = "";
   let num = 0;
 
-  for (let x = 0; x < length; x++) {
+  idArray.push("B");
+  for (let x = 0; x < length - 1; x++) {
     num = GetRandomInt(36);
 
     if (num < 10) idArray.push(num);

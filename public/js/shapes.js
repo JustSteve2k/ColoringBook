@@ -1,5 +1,7 @@
 import { cursorCaller, cursorRemover, deleteCaller, paintCaller } from "./actions.js";
 import { GenerateUniqueID, GetCurrentMode, GetCurrentSelectedColor, GetRandomInt } from "./helpers.js";
+import { SVG } from "@svgdotjs/svg.js";
+import "@svgdotjs/svg.draggable.js";
 
 export function AddDynamicPolygon(points) {
   let MaxX = 900;
@@ -199,6 +201,13 @@ function AttachListener(UID) {
   if (mode === "delete") {
     console.log(`Delete mode added to id of ${UID}`);
     piece.addEventListener("click", deleteCaller);
+  }
+
+  if (mode === "move") {
+    console.log(`Move mode added to id of ${UID}`);
+
+    let item = SVG("#" + UID);
+    item.draggable();
   }
 }
 

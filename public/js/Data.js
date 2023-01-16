@@ -13,6 +13,9 @@ const Data = {
 
   // General alerts
   alerts: false,
+
+  // Picks a new random color at the start.
+  randomColorAtStart: true,
 };
 
 export default Data;

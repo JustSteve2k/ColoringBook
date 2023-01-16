@@ -142,6 +142,12 @@ button:hover {
   list-style: none;
 }
 
+.devMode {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+}
+
 /*WORK BUTTONS SECTION*/
 .workButtons {
   border: 1px solid black;
@@ -291,4 +297,8 @@ button:hover {
 .notReady {
   background-color: #3a3939;
   color: rgb(124, 28, 28);
+}
+
+.hidden {
+  display: none;
 }

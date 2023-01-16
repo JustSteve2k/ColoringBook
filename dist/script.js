@@ -7331,6 +7331,9 @@ const Data = {
 
   // General alerts
   alerts: false,
+
+  // Picks a new random color at the start.
+  randomColorAtStart: true,
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Data);
@@ -7964,14 +7967,15 @@ function GetSelectedBox() {
 }
 
 // Generates a uniquie id of legnth required by parameter
-function GenerateUniqueID(length = 24) {
+function GenerateUniqueID(length = 24, type = "") {
   let idArray = [];
   let uniqueID = "";
   let character = "";
   let num = 0;
 
-  idArray.push("B");
-  for (let x = 0; x < length - 1; x++) {
+  type === "" ? idArray.push("GENE") : idArray.push(type);
+
+  for (let x = 0; x < length - 4; x++) {
     num = GetRandomInt(36);
 
     if (num < 10) idArray.push(num);
@@ -8259,9 +8263,6 @@ function AddDynamicPolygon(points) {
   let pointsX = GeneratePointsArray(points, MaxX);
   let pointsY = GeneratePointsArray(points, MaxY);
 
-  // console.log(pointsX);
-  // console.log(pointsY);
-
   let pointsString = GeneratePointsStringFromArray(pointsX, pointsY);
 
   CreatePolygon(pointsString);
@@ -8321,7 +8322,7 @@ function AddCircle() {
 
   let circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
 
-  const UID = (0,_helpers_js__WEBPACK_IMPORTED_MODULE_1__.GenerateUniqueID)(24);
+  const UID = (0,_helpers_js__WEBPACK_IMPORTED_MODULE_1__.GenerateUniqueID)(24, "CIRC");
   let fill = (0,_helpers_js__WEBPACK_IMPORTED_MODULE_1__.GetCurrentSelectedColor)();
 
   circle.setAttribute("cx", cx);
@@ -8368,7 +8369,7 @@ function AddCircleFromParams(id = "", classes = "", ExCx = "", ExCy = "", ExR = 
   let circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
 
   let UID = "";
-  UID = id === "" ? (UID = (0,_helpers_js__WEBPACK_IMPORTED_MODULE_1__.GenerateUniqueID)(24)) : (UID = id);
+  UID = id === "" ? (UID = (0,_helpers_js__WEBPACK_IMPORTED_MODULE_1__.GenerateUniqueID)(24, "CIRC")) : (UID = id);
 
   circle.setAttribute("cx", cx);
   circle.setAttribute("cy", cy);
@@ -8391,7 +8392,7 @@ function CreatePolygon(pointsString = "", id = "", classes = "", color = "", loc
   let polygon = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
 
   let UID = "";
-  UID = id === "" ? (UID = (0,_helpers_js__WEBPACK_IMPORTED_MODULE_1__.GenerateUniqueID)(24)) : (UID = id);
+  UID = id === "" ? (UID = (0,_helpers_js__WEBPACK_IMPORTED_MODULE_1__.GenerateUniqueID)(24, "POLY")) : (UID = id);
 
   polygon.setAttribute("id", UID);
   classes === "" ? polygon.setAttribute("class", "zone ") : polygon.setAttribute("class", classes);
@@ -8543,6 +8544,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _savers_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./savers.js */ "./public/js/savers.js");
 /* harmony import */ var _helpers_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./helpers.js */ "./public/js/helpers.js");
 /* harmony import */ var _Dev_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Dev.js */ "./public/js/Dev.js");
+/* harmony import */ var _Data_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Data.js */ "./public/js/Data.js");
+
 
 
 
@@ -8595,12 +8598,25 @@ function Startup() {
     (0,_actions_js__WEBPACK_IMPORTED_MODULE_1__.SetNewColor)();
   });
 
+  devModeCheckbox.addEventListener("change", (e) => {
+    console.log(e.target.checked);
+    let devButtons = document.querySelector(".devButtons");
+
+    if (e.target.checked) {
+      console.log("devMode is enabled");
+      devButtons.classList.toggle("hidden");
+    } else {
+      console.log("devMode is disabled");
+      devButtons.classList.toggle("hidden");
+    }
+  });
+
   // Other startup functionality.
   (0,_actions_js__WEBPACK_IMPORTED_MODULE_1__.SwapBetweenModes)();
   (0,_actions_js__WEBPACK_IMPORTED_MODULE_1__.ChangeToCursorMode)();
 
   let colorPicker = document.querySelector(".colorPicker");
-  colorPicker.value = (0,_helpers_js__WEBPACK_IMPORTED_MODULE_3__.GetRandomColor)();
+  _Data_js__WEBPACK_IMPORTED_MODULE_5__["default"].randomColorAtStart ? (colorPicker.value = (0,_helpers_js__WEBPACK_IMPORTED_MODULE_3__.GetRandomColor)()) : (colorPicker.value = "#000000");
 
   (0,_savers_js__WEBPACK_IMPORTED_MODULE_2__.FindAllSavesAndUpdateList)();
 

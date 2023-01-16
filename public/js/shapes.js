@@ -69,7 +69,7 @@ export function AddCircle() {
 
   let circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
 
-  const UID = GenerateUniqueID(24);
+  const UID = GenerateUniqueID(24, "CIRC");
   let fill = GetCurrentSelectedColor();
 
   circle.setAttribute("cx", cx);
@@ -116,7 +116,7 @@ export function AddCircleFromParams(id = "", classes = "", ExCx = "", ExCy = "",
   let circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
 
   let UID = "";
-  UID = id === "" ? (UID = GenerateUniqueID(24)) : (UID = id);
+  UID = id === "" ? (UID = GenerateUniqueID(24, "CIRC")) : (UID = id);
 
   circle.setAttribute("cx", cx);
   circle.setAttribute("cy", cy);
@@ -139,7 +139,7 @@ export function CreatePolygon(pointsString = "", id = "", classes = "", color = 
   let polygon = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
 
   let UID = "";
-  UID = id === "" ? (UID = GenerateUniqueID(24)) : (UID = id);
+  UID = id === "" ? (UID = GenerateUniqueID(24, "POLY")) : (UID = id);
 
   polygon.setAttribute("id", UID);
   classes === "" ? polygon.setAttribute("class", "zone ") : polygon.setAttribute("class", classes);

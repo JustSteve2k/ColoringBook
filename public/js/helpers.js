@@ -45,14 +45,15 @@ export function GetSelectedBox() {
 }
 
 // Generates a uniquie id of legnth required by parameter
-export function GenerateUniqueID(length = 24) {
+export function GenerateUniqueID(length = 24, type = "") {
   let idArray = [];
   let uniqueID = "";
   let character = "";
   let num = 0;
 
-  idArray.push("B");
-  for (let x = 0; x < length - 1; x++) {
+  type === "" ? idArray.push("GENE") : idArray.push(type);
+
+  for (let x = 0; x < length - 4; x++) {
     num = GetRandomInt(36);
 
     if (num < 10) idArray.push(num);

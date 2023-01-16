@@ -10,87 +10,93 @@
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
   </head>
   <body>
-    <div class="titleBar">
-      <h2>SVG Coloring Book</h2>
-    </div>
+    <header>
+      <div class="titleBar">
+        <h2>SVG Coloring Book</h2>
+      </div>
+    </header>
+    <main>
+      <div class="container">
+        <!-- Left Button Area  -->
 
-    <div class="container">
-      <!-- Left Button Area  -->
-
-      <div class="leftBar">
-        <!-- <div id="selectedColorArea">
+        <div class="leftBar">
+          <!-- <div id="selectedColorArea">
           <h2>Current Color</h2>
           <h3 id="currentColor">None</h3>
         </div> -->
-      </div>
-
-      <!-- SVG container -->
-      <div class="middleArea">
-        <div id="svgContainer" class="svgContainer">
-          <svg id="drawing" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="900" height="600" viewBox="0 0 900 600">
-            <!-- <polygon id="svgBackground" class="zone" points="0,0 0,600 640,600 640,0" fill="#013101" locked="true" selectable="false" /> -->
-            <polygon id="svgBackground" class="zone" points="0,0 0,600 900,600 900,0" fill="#013101" locked="true" selectable="false" />
-          </svg>
         </div>
 
-        <!-- Lower Tool Bar bar -->
-        <div class="lowerToolbar">
-          <div class="lowerButtonGroup1">
-            <div class="modeLabel">Mode</div>
-            <div class="modeButtons">
-              <button id="btnCursor" class="medButton wButton enabled">Cursor Mode</button>
-              <button id="btnPaint" class="medButton wButton">Paint Mode</button>
-              <button id="btnDelete" class="medButton wButton">Delete Mode</button>
-              <button id="btnMove" class="medButton wButton">Move Mode</button>
+        <!-- SVG container -->
+        <div class="middleArea">
+          <div id="svgContainer" class="svgContainer">
+            <svg id="drawing" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="900" height="600" viewBox="0 0 900 600">
+              <!-- <polygon id="svgBackground" class="zone" points="0,0 0,600 640,600 640,0" fill="#013101" locked="true" selectable="false" /> -->
+              <polygon id="svgBackground" class="zone" points="0,0 0,600 900,600 900,0" fill="#013101" locked="true" selectable="false" />
+            </svg>
+          </div>
+
+          <!-- Lower Tool Bar bar -->
+          <div class="lowerToolbar">
+            <div class="lowerButtonGroup1">
+              <div class="modeLabel">Mode</div>
+              <div class="modeButtons">
+                <button id="btnCursor" class="medButton wButton enabled">Cursor Mode</button>
+                <button id="btnPaint" class="medButton wButton">Paint Mode</button>
+                <button id="btnDelete" class="medButton wButton">Delete Mode</button>
+                <button id="btnMove" class="medButton wButton">Move Mode</button>
+              </div>
+            </div>
+            <div class="lowerButtonGroup2">
+              <div class="actionButtonsLabel">Actions</div>
+              <div class="actionButtons">
+                <button id="btnAddDynPolygon3" class="smButton">3P</button>
+                <button id="btnAddDynPolygon4" class="smButton">4P</button>
+                <button id="btnAddDynPolygon5" class="smButton">5P</button>
+                <button id="btnAddSquare" class="smButton">Sq</button>
+                <button id="btnAddNewTriangle" class="smButton">Tr</button>
+                <button id="btnAddNewCircle" class="smButton">Ci</button>
+                <button id="btnLock" class="smButton">Lo</button>
+                <button id="btnSave" class="smButton">Sa</button>
+                <button id="btnLoad" class="smButton">Ld</button>
+                <button id="btnDeleteFile" class="smButton">Df</button>
+                <button id="btnResetNew" class="smButton">Re</button>
+                <button id="btnSetRandomColor" class="smButton">SRC</button>
+              </div>
+            </div>
+            <div class="colorSelection">
+              <input class="colorPicker" type="color" />
             </div>
           </div>
-          <div class="lowerButtonGroup2">
-            <div class="actionButtonsLabel">Actions</div>
-            <div class="actionButtons">
-              <button id="btnAddDynPolygon3" class="smButton">3P</button>
-              <button id="btnAddDynPolygon4" class="smButton">4P</button>
-              <button id="btnAddDynPolygon5" class="smButton">5P</button>
-              <button id="btnAddSquare" class="smButton">Sq</button>
-              <button id="btnAddNewTriangle" class="smButton">Tr</button>
-              <button id="btnAddNewCircle" class="smButton">Ci</button>
-              <button id="btnLock" class="smButton">Lo</button>
-              <button id="btnSave" class="smButton">Sa</button>
-              <button id="btnLoad" class="smButton">Ld</button>
-              <button id="btnDeleteFile" class="smButton">Df</button>
-              <button id="btnResetNew" class="smButton">Re</button>
-              <button id="btnSetRandomColor" class="smButton">SRC</button>
+        </div>
+        <!-- Right bar -->
+        <div class="rightBar">
+          <div class="devButtons hidden">
+            <h3>Dev Test Buttons</h3>
+            <button id="btnDev1">Test Function</button>
+            <button id="btnDev2">Get Info of All Polygons On Board</button>
+            <button id="btnDev3">Get Current Mode</button>
+            <button id="btnDev4">Find All Local Storage</button>
+            <button id="btnDev5">GetRandomInt</button>
+            <button id="btnDev6">Export String</button>
+            <button id="btnDev7">Import String</button>
+            <button id="btnDev8">Test</button>
+            <button id="btnDev9">?</button>
+          </div>
+          <div class="selectedItem">
+            <h3>Selected Item</h3>
+            <div class="info">
+              <ul class="itemInfo">
+                <li>Nothing Selected</li>
+              </ul>
             </div>
           </div>
-          <div class="colorSelection">
-            <input class="colorPicker" type="color" />
+          <div class="devMode">
+            <label for="devModeCheckbox">DevMode</label>
+            <input type="checkbox" id="devModeCheckbox" class="devModeCheckbox" />
           </div>
         </div>
       </div>
-      <!-- Right bar -->
-      <div class="rightBar">
-        <div class="devButtons">
-          <h3>Dev Test Buttons</h3>
-          <button id="btnDev1">Test Function</button>
-          <button id="btnDev2">Get Info of All Polygons On Board</button>
-          <button id="btnDev3">Get Current Mode</button>
-          <button id="btnDev4">Find All Local Storage</button>
-          <button id="btnDev5">GetRandomInt</button>
-          <button id="btnDev6">Export String</button>
-          <button id="btnDev7">Import String</button>
-          <button id="btnDev8">Test</button>
-          <button id="btnDev9">?</button>
-        </div>
-        <div class="selectedItem">
-          <h3>Selected Item</h3>
-          <div class="info">
-            <ul class="itemInfo">
-              <li>Nothing Selected</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-
+    </main>
     <script type="module" src="./script.js"></script>
   </body>
 </html>

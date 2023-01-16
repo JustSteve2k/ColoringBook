@@ -3,6 +3,7 @@ import { ChangeToCursorMode, ResetBoard, ReadWork, SwapBetweenModes, LockPolygon
 import { DeleteSaveFile, FindAllSavesAndUpdateList, SaveWork } from "./savers.js";
 import { GetRandomColor } from "./helpers.js";
 import Developer from "./Dev.js";
+import Data from "./Data.js";
 
 // let boardSizeX = 900;
 // let boardSizeY = 600;
@@ -50,12 +51,25 @@ function Startup() {
     SetNewColor();
   });
 
+  devModeCheckbox.addEventListener("change", (e) => {
+    console.log(e.target.checked);
+    let devButtons = document.querySelector(".devButtons");
+
+    if (e.target.checked) {
+      console.log("devMode is enabled");
+      devButtons.classList.toggle("hidden");
+    } else {
+      console.log("devMode is disabled");
+      devButtons.classList.toggle("hidden");
+    }
+  });
+
   // Other startup functionality.
   SwapBetweenModes();
   ChangeToCursorMode();
 
   let colorPicker = document.querySelector(".colorPicker");
-  colorPicker.value = GetRandomColor();
+  Data.randomColorAtStart ? (colorPicker.value = GetRandomColor()) : (colorPicker.value = "#000000");
 
   FindAllSavesAndUpdateList();
 

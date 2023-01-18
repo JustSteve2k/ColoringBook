@@ -1,4 +1,4 @@
-import { AdjustPointsOnPointsArray, AdjustPointsOnPointsStinrg, GeneratePointsArray, GeneratePointsStringFromArray } from "./shapes.js";
+import { AdjustPointsOnPointsArray, GeneratePointsArray, GeneratePointsStringFromArray } from "./shapes.js";
 
 test("generates string 1", () => {
   expect(GeneratePointsStringFromArray([50, 0, 100], [0, 100, 100])).toBe("50,0 0,100 100,100");

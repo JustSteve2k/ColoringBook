@@ -1,7 +1,7 @@
 import { AddCircleFromParams, CreatePolygon } from "./shapes.js";
 import { GetCurrentSelectedColor, GetCurrentMode, GetSelectedBox, GetRandomColor } from "./helpers.js";
 import Data from "./Data";
-import { create, SVG } from "@svgdotjs/svg.js";
+import { SVG } from "@svgdotjs/svg.js";
 import "@svgdotjs/svg.draggable.js";
 
 let lastAccessedPolygon = null;
@@ -88,12 +88,6 @@ function RemoveDragabilityFromAll() {
     console.log(`Draggable removed from - ${name}`);
   });
 }
-
-//  Not used anymore.
-
-// let startDrag = (evt) => {};
-// let drag = (evt) => {};
-// let endDrag = (evt) => {};
 
 // Gets the type
 function getSelectedItemInfo(selected) {
@@ -431,4 +425,17 @@ export function ChangeBackgroundSize() {
   // UL, BL, BR, UR
 
   // alert("background updated!");
+}
+
+export function EnableDevMode(e) {
+  console.log(e.target.checked);
+  let devButtons = document.querySelector(".devButtons");
+
+  if (e.target.checked) {
+    console.log("devMode is enabled");
+    devButtons.classList.toggle("hidden");
+  } else {
+    console.log("devMode is disabled");
+    devButtons.classList.toggle("hidden");
+  }
 }

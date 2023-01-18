@@ -1,13 +1,8 @@
 import { GetCurrentMode } from "./helpers.js";
 import { GetInfoOfAllPolygonsOnBoard } from "./actions.js";
-import {
-  CreateExportString,
-  ImportString,
-  FindAllLocalStorage,
-} from "./savers.js";
+import { CreateExportString, ImportString, FindAllLocalStorage } from "./savers.js";
 import { GetRandomInt } from "./helpers.js";
 import Data from "./Data";
-// import { boardSizeX, boardSizeY } from "./script.js";
 
 export default class Developer {
   constructor() {
@@ -24,9 +19,7 @@ export default class Developer {
     });
 
     btnDev2.addEventListener("click", () => {
-      this.tempMessage(
-        "Gets list of all the polygons on the board, look at the console."
-      );
+      this.tempMessage("Gets list of all the polygons on the board, look at the console.");
       GetInfoOfAllPolygonsOnBoard();
     });
 
@@ -41,7 +34,6 @@ export default class Developer {
     });
 
     btnDev5.addEventListener("click", () => {
-      // this.showBoardSize();
       let num = GetRandomInt();
       console.log(num);
     });
@@ -52,12 +44,7 @@ export default class Developer {
       ImportString();
     });
     btnDev8.addEventListener("click", () => {
-      // ImportString();
-      // initialize SVG.js
       var draw = SVG().addTo("#drawing");
-
-      // draw pink square
-      // draw.rect(100, 100).move(100, 50).fill("#f06");
       draw.rect(100, 200).fill("#a06");
     });
   }

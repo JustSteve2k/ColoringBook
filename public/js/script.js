@@ -3,7 +3,7 @@ import { ChangeToCursorMode, EnableDevMode, ResetBoard, ReadWork, SwapBetweenMod
 import { DeleteSaveFile, FindAllSavesAndUpdateList, SaveWork } from "./savers.js";
 import { GetRandomColor } from "./helpers.js";
 import Developer from "./Dev.js";
-import Data from "./Data.js";
+import Config from "./Config.js";
 
 // let boardSizeX = 900;
 // let boardSizeY = 600;
@@ -61,7 +61,7 @@ function Startup() {
   ChangeToCursorMode();
 
   let colorPicker = document.querySelector(".colorPicker");
-  Data.randomColorAtStart ? (colorPicker.value = GetRandomColor()) : (colorPicker.value = "#000000");
+  Config.randomColorAtStart ? (colorPicker.value = GetRandomColor()) : (colorPicker.value = "#000000");
 
   FindAllSavesAndUpdateList();
 

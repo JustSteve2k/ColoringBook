@@ -2,7 +2,7 @@ import { GetCurrentMode } from "./helpers.js";
 import { GetInfoOfAllPolygonsOnBoard } from "./actions.js";
 import { CreateExportString, ImportString, FindAllLocalStorage } from "./savers.js";
 import { GetRandomInt } from "./helpers.js";
-import Data from "./Data";
+import Config from "./Config";
 
 export default class Developer {
   constructor() {
@@ -60,6 +60,6 @@ export default class Developer {
 
   // Functions to do when loading file.
   onload() {
-    Data.devOutput && console.log("dev class functions loaded");
+    Config.devOutput && console.log("dev class functions loaded");
   }
 }

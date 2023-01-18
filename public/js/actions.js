@@ -1,6 +1,6 @@
 import { AddCircleFromParams, CreatePolygon } from "./shapes.js";
 import { GetCurrentSelectedColor, GetCurrentMode, GetSelectedBox, GetRandomColor } from "./helpers.js";
-import Data from "./Data";
+import Config from "./Config";
 import { SVG } from "@svgdotjs/svg.js";
 import "@svgdotjs/svg.draggable.js";
 
@@ -17,7 +17,7 @@ export let paintCaller = (e) => {
   if (e.target.getAttribute("locked", "true") === "true") {
     console.log(e.target.id);
     console.log(e.target.getAttribute("locked"));
-    Data.alerts && alert("Sorry, that target is locked, can't paint that.");
+    Config.alerts && alert("Sorry, that target is locked, can't paint that.");
     return;
   }
 
@@ -93,7 +93,7 @@ function RemoveDragabilityFromAll() {
 function getSelectedItemInfo(selected) {
   let nodeName = selected.nodeName;
 
-  if (Data.selectedOutput) {
+  if (Config.selectedOutput) {
     console.log("The selected item is - ");
     console.log(selected.id);
     console.log(nodeName);

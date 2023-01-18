@@ -1,5 +1,5 @@
 /* istanbul ignore next */
-import Data from "./Data";
+import Config from "./Config";
 
 // Creates an alert with the provided parameter.
 export function TempMessage(message) {
@@ -73,7 +73,7 @@ export function GenerateUniqueID(length = 24, type = "") {
 export function GetCurrentSelectedColor() {
   const currColor = document.querySelector(".colorPicker");
 
-  Data.colorSelectedOutput && console.log(`The current color is ${currColor.value}`);
+  Config.colorSelectedOutput && console.log(`The current color is ${currColor.value}`);
 
   return currColor.value;
 }
@@ -85,7 +85,7 @@ export function GetRandomColor() {
   for (var i = 0; i < 6; i++) {
     color += letters[Math.round(Math.random() * 15)];
   }
-  Data.colorSelectedOutput && console.log(`Random Color is ${color}`);
+  Config.colorSelectedOutput && console.log(`Random Color is ${color}`);
 
   return color;
 }

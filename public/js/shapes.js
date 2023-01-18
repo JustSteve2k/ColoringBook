@@ -3,6 +3,7 @@ import { GenerateUniqueID, GetCurrentMode, GetCurrentSelectedColor, GetRandomInt
 import { SVG } from "@svgdotjs/svg.js";
 import "@svgdotjs/svg.draggable.js";
 
+// Construct a polygon from points string only.
 export function AddDynamicPolygon(points) {
   let MaxX = 900;
   let MaxY = 600;

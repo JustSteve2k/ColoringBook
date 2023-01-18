@@ -7360,7 +7360,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-// import { boardSizeX, boardSizeY } from "./script.js";
 
 class Developer {
   constructor() {
@@ -7377,9 +7376,7 @@ class Developer {
     });
 
     btnDev2.addEventListener("click", () => {
-      this.tempMessage(
-        "Gets list of all the polygons on the board, look at the console."
-      );
+      this.tempMessage("Gets list of all the polygons on the board, look at the console.");
       (0,_actions_js__WEBPACK_IMPORTED_MODULE_1__.GetInfoOfAllPolygonsOnBoard)();
     });
 
@@ -7394,7 +7391,6 @@ class Developer {
     });
 
     btnDev5.addEventListener("click", () => {
-      // this.showBoardSize();
       let num = (0,_helpers_js__WEBPACK_IMPORTED_MODULE_0__.GetRandomInt)();
       console.log(num);
     });
@@ -7405,12 +7401,7 @@ class Developer {
       (0,_savers_js__WEBPACK_IMPORTED_MODULE_2__.ImportString)();
     });
     btnDev8.addEventListener("click", () => {
-      // ImportString();
-      // initialize SVG.js
       var draw = SVG().addTo("#drawing");
-
-      // draw pink square
-      // draw.rect(100, 100).move(100, 50).fill("#f06");
       draw.rect(100, 200).fill("#a06");
     });
   }
@@ -7447,6 +7438,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "ChangeToMoveMode": () => (/* binding */ ChangeToMoveMode),
 /* harmony export */   "ChangeToPaintMode": () => (/* binding */ ChangeToPaintMode),
 /* harmony export */   "CleanListeners": () => (/* binding */ CleanListeners),
+/* harmony export */   "EnableDevMode": () => (/* binding */ EnableDevMode),
 /* harmony export */   "GetInfoOfAllPolygonsOnBoard": () => (/* binding */ GetInfoOfAllPolygonsOnBoard),
 /* harmony export */   "LockPolygon": () => (/* binding */ LockPolygon),
 /* harmony export */   "ReadWork": () => (/* binding */ ReadWork),
@@ -7554,12 +7546,6 @@ function RemoveDragabilityFromAll() {
     console.log(`Draggable removed from - ${name}`);
   });
 }
-
-//  Not used anymore.
-
-// let startDrag = (evt) => {};
-// let drag = (evt) => {};
-// let endDrag = (evt) => {};
 
 // Gets the type
 function getSelectedItemInfo(selected) {
@@ -7897,6 +7883,19 @@ function ChangeBackgroundSize() {
   // UL, BL, BR, UR
 
   // alert("background updated!");
+}
+
+function EnableDevMode(e) {
+  console.log(e.target.checked);
+  let devButtons = document.querySelector(".devButtons");
+
+  if (e.target.checked) {
+    console.log("devMode is enabled");
+    devButtons.classList.toggle("hidden");
+  } else {
+    console.log("devMode is disabled");
+    devButtons.classList.toggle("hidden");
+  }
 }
 
 
@@ -8256,6 +8255,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+// Construct a polygon from points string only.
 function AddDynamicPolygon(points) {
   let MaxX = 900;
   let MaxY = 600;
@@ -8597,18 +8597,8 @@ function Startup() {
   btnSetRandomColor.addEventListener("click", () => {
     (0,_actions_js__WEBPACK_IMPORTED_MODULE_1__.SetNewColor)();
   });
-
   devModeCheckbox.addEventListener("change", (e) => {
-    console.log(e.target.checked);
-    let devButtons = document.querySelector(".devButtons");
-
-    if (e.target.checked) {
-      console.log("devMode is enabled");
-      devButtons.classList.toggle("hidden");
-    } else {
-      console.log("devMode is disabled");
-      devButtons.classList.toggle("hidden");
-    }
+    (0,_actions_js__WEBPACK_IMPORTED_MODULE_1__.EnableDevMode)(e);
   });
 
   // Other startup functionality.

@@ -88,8 +88,8 @@ export function AddCircle() {
   AttachListener(UID);
 }
 
-// id = "", classes = "", cx="", cy="", r="", fill = "", locked = "", selectable = "" - is for circle
-export function AddCircleFromParams(id = "", classes = "", ExCx = "", ExCy = "", ExR = "", ExFill = "", ExLocked = "", ExSelectable = "") {
+// Creates a circle from provided object
+export function AddCircleFromParams(item) {
   let MaxX = 540;
   let MaxY = 500;
 
@@ -97,27 +97,27 @@ export function AddCircleFromParams(id = "", classes = "", ExCx = "", ExCy = "",
   let adjustY = GetRandomInt(MaxY);
 
   let cx = 0;
-  ExCx === "" ? (cx = 50 + adjustX) : (cx = ExCx);
+  item.cx === undefined ? (cx = 50 + adjustX) : (cx = item.cx);
 
   let cy = 0;
-  ExCy === "" ? (cy = 50 + adjustY) : (cy = ExCy);
+  item.cy === undefined ? (cy = 50 + adjustY) : (cy = item.cy);
 
   let r = 0;
-  ExR === "" ? (r = GetRandomInt(50)) : (r = ExR);
+  item.r === undefined ? (r = GetRandomInt(50)) : (r = item.r);
 
   let fill = "";
-  ExFill === "" ? (fill = GetCurrentSelectedColor()) : (fill = ExFill);
+  item.fill === undefined ? (fill = GetCurrentSelectedColor()) : (fill = item.fill);
 
   let locked = "";
-  ExLocked === "" ? (locked = "false") : (locked = ExLocked);
+  item.locked === undefined ? (locked = "false") : (locked = item.locked);
 
   let selectable = "";
-  ExSelectable === "" ? (selectable = "true") : (selectable = ExSelectable);
+  item.selectable === undefined ? (selectable = "true") : (selectable = item.selectable);
 
   let circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
 
   let UID = "";
-  UID = id === "" ? (UID = GenerateUniqueID(24, "CIRC")) : (UID = id);
+  item.id === undefined ? (UID = GenerateUniqueID(24, "CIRC")) : (UID = item.id);
 
   circle.setAttribute("cx", cx);
   circle.setAttribute("cy", cy);

@@ -7306,10 +7306,10 @@ makeMorphable();
 
 /***/ }),
 
-/***/ "./public/js/Data.js":
-/*!***************************!*\
-  !*** ./public/js/Data.js ***!
-  \***************************/
+/***/ "./public/js/Config.js":
+/*!*****************************!*\
+  !*** ./public/js/Config.js ***!
+  \*****************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -7334,6 +7334,12 @@ const Data = {
 
   // Picks a new random color at the start.
   randomColorAtStart: true,
+
+  // Shows a modal at the start
+  modal: true,
+
+  // Message included within the modal
+  modalMessage: "Welcome to the coloring book program! <br /><br /> This is in early stages, so you may encounter some bugs.",
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Data);
@@ -7354,7 +7360,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _helpers_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./helpers.js */ "./public/js/helpers.js");
 /* harmony import */ var _actions_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./actions.js */ "./public/js/actions.js");
 /* harmony import */ var _savers_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./savers.js */ "./public/js/savers.js");
-/* harmony import */ var _Data__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Data */ "./public/js/Data.js");
+/* harmony import */ var _Config__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Config */ "./public/js/Config.js");
 
 
 
@@ -7417,7 +7423,7 @@ class Developer {
 
   // Functions to do when loading file.
   onload() {
-    _Data__WEBPACK_IMPORTED_MODULE_3__["default"].devOutput && console.log("dev class functions loaded");
+    _Config__WEBPACK_IMPORTED_MODULE_3__["default"].devOutput && console.log("dev class functions loaded");
   }
 }
 
@@ -7438,6 +7444,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "ChangeToMoveMode": () => (/* binding */ ChangeToMoveMode),
 /* harmony export */   "ChangeToPaintMode": () => (/* binding */ ChangeToPaintMode),
 /* harmony export */   "CleanListeners": () => (/* binding */ CleanListeners),
+/* harmony export */   "CreateModal": () => (/* binding */ CreateModal),
 /* harmony export */   "EnableDevMode": () => (/* binding */ EnableDevMode),
 /* harmony export */   "GetInfoOfAllPolygonsOnBoard": () => (/* binding */ GetInfoOfAllPolygonsOnBoard),
 /* harmony export */   "LockPolygon": () => (/* binding */ LockPolygon),
@@ -7453,7 +7460,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _shapes_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./shapes.js */ "./public/js/shapes.js");
 /* harmony import */ var _helpers_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers.js */ "./public/js/helpers.js");
-/* harmony import */ var _Data__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Data */ "./public/js/Data.js");
+/* harmony import */ var _Config__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Config */ "./public/js/Config.js");
 /* harmony import */ var _svgdotjs_svg_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @svgdotjs/svg.js */ "./node_modules/@svgdotjs/svg.js/dist/svg.esm.js");
 /* harmony import */ var _svgdotjs_svg_draggable_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @svgdotjs/svg.draggable.js */ "./node_modules/@svgdotjs/svg.draggable.js/src/svg.draggable.js");
 
@@ -7475,7 +7482,7 @@ let paintCaller = (e) => {
   if (e.target.getAttribute("locked", "true") === "true") {
     console.log(e.target.id);
     console.log(e.target.getAttribute("locked"));
-    _Data__WEBPACK_IMPORTED_MODULE_2__["default"].alerts && alert("Sorry, that target is locked, can't paint that.");
+    _Config__WEBPACK_IMPORTED_MODULE_2__["default"].alerts && alert("Sorry, that target is locked, can't paint that.");
     return;
   }
 
@@ -7551,7 +7558,7 @@ function RemoveDragabilityFromAll() {
 function getSelectedItemInfo(selected) {
   let nodeName = selected.nodeName;
 
-  if (_Data__WEBPACK_IMPORTED_MODULE_2__["default"].selectedOutput) {
+  if (_Config__WEBPACK_IMPORTED_MODULE_2__["default"].selectedOutput) {
     console.log("The selected item is - ");
     console.log(selected.id);
     console.log(nodeName);
@@ -7856,10 +7863,28 @@ function RedrawBoard(log) {
 
   // Doesn't draw the board so it starts at spot 1.
   for (let x = 1; x < log.length; x++) {
+    let item = {
+      type: log[x].type,
+      id: log[x].id,
+      class: log[x].class,
+      fill: log[x].fill,
+      locked: log[x].locked,
+      selectable: log[x].selectable,
+    };
+
+    if (item.type === "polygon") {
+      item.points = log[x].points;
+    }
+    if (item.type === "circle") {
+      item.r = log[x].r;
+      item.cx = log[x].cx;
+      item.cy = log[x].cy;
+    }
+
     if (log[x].type === "polygon") {
       (0,_shapes_js__WEBPACK_IMPORTED_MODULE_0__.CreatePolygon)(log[x].points, log[x].id, log[x].class, log[x].fill, log[x].locked, log[x].selectable);
-    } else if (log[x].type === "circle") {
-      (0,_shapes_js__WEBPACK_IMPORTED_MODULE_0__.AddCircleFromParams)(log[x].id, log[x].class, log[x].cx, log[x].cy, log[x].r, log[x].fill, log[x].locked, log[x].selectable);
+    } else if (item.type === "circle") {
+      (0,_shapes_js__WEBPACK_IMPORTED_MODULE_0__.AddCircleFromParams)(item);
     }
   }
 }
@@ -7898,6 +7923,35 @@ function EnableDevMode(e) {
   }
 }
 
+function CreateModal() {
+  let div = document.createElement("div");
+  div.setAttribute("class", "modalBackground");
+
+  let modal = document.createElement("div");
+  modal.setAttribute("class", "modal");
+
+  let p = document.createElement("p");
+  p.innerHTML = _Config__WEBPACK_IMPORTED_MODULE_2__["default"].modalMessage;
+
+  let button = document.createElement("button");
+  button.setAttribute("class", "modalButton");
+  button.textContent = "Ok";
+
+  modal.append(button);
+  modal.append(p);
+  div.append(modal);
+
+  let container = document.querySelector(".container");
+  container.append(div);
+
+  button.addEventListener("click", RemoveModal);
+}
+
+function RemoveModal() {
+  let element = document.querySelector(".modalBackground");
+  element.remove();
+}
+
 
 /***/ }),
 
@@ -7918,7 +7972,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "Sum": () => (/* binding */ Sum),
 /* harmony export */   "TempMessage": () => (/* binding */ TempMessage)
 /* harmony export */ });
-/* harmony import */ var _Data__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Data */ "./public/js/Data.js");
+/* harmony import */ var _Config__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Config */ "./public/js/Config.js");
 /* istanbul ignore next */
 
 
@@ -7994,7 +8048,7 @@ function GenerateUniqueID(length = 24, type = "") {
 function GetCurrentSelectedColor() {
   const currColor = document.querySelector(".colorPicker");
 
-  _Data__WEBPACK_IMPORTED_MODULE_0__["default"].colorSelectedOutput && console.log(`The current color is ${currColor.value}`);
+  _Config__WEBPACK_IMPORTED_MODULE_0__["default"].colorSelectedOutput && console.log(`The current color is ${currColor.value}`);
 
   return currColor.value;
 }
@@ -8006,7 +8060,7 @@ function GetRandomColor() {
   for (var i = 0; i < 6; i++) {
     color += letters[Math.round(Math.random() * 15)];
   }
-  _Data__WEBPACK_IMPORTED_MODULE_0__["default"].colorSelectedOutput && console.log(`Random Color is ${color}`);
+  _Config__WEBPACK_IMPORTED_MODULE_0__["default"].colorSelectedOutput && console.log(`Random Color is ${color}`);
 
   return color;
 }
@@ -8031,7 +8085,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "UpdateSaveList": () => (/* binding */ UpdateSaveList)
 /* harmony export */ });
 /* harmony import */ var _actions_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./actions.js */ "./public/js/actions.js");
-/* harmony import */ var _Data__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Data */ "./public/js/Data.js");
+/* harmony import */ var _Config__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Config */ "./public/js/Config.js");
 
 
 
@@ -8044,7 +8098,7 @@ function FindAllLocalStorage() {
     if (key.includes("CB -")) list.push(key);
   }
 
-  if (_Data__WEBPACK_IMPORTED_MODULE_1__["default"].savesOutput) {
+  if (_Config__WEBPACK_IMPORTED_MODULE_1__["default"].savesOutput) {
     console.log("-----CurrentSAVES----------");
     console.log(list);
     console.log("----------------------");
@@ -8087,11 +8141,11 @@ function UpdateSaveList(list) {
 
     ul.appendChild(li);
 
-    _Data__WEBPACK_IMPORTED_MODULE_1__["default"].savesOutput && console.log(element);
+    _Config__WEBPACK_IMPORTED_MODULE_1__["default"].savesOutput && console.log(element);
   });
 
   leftBar.appendChild(ul);
-  _Data__WEBPACK_IMPORTED_MODULE_1__["default"].savesOutput && console.log("Saves list on the left updated!");
+  _Config__WEBPACK_IMPORTED_MODULE_1__["default"].savesOutput && console.log("Saves list on the left updated!");
 }
 
 // Loads a file from the saves bar when clicked on.
@@ -8218,7 +8272,7 @@ function ImportString() {
 
   (0,_actions_js__WEBPACK_IMPORTED_MODULE_0__.RedrawBoard)(info);
 
-  _Data__WEBPACK_IMPORTED_MODULE_1__["default"].alerts && alert(`${length} items were imported!`);
+  _Config__WEBPACK_IMPORTED_MODULE_1__["default"].alerts && alert(`${length} items were imported!`);
 
   // Couple of example strings
   // polygon-zone-#013101-svgBackground-true-false-0,0 0,600 900,600 900,0-@polygon-zone -#5630c0-87qLlC7V4o5FM583heOL8wA3-false-true-848,324 688,33 756,569-@polygon-zone -#5c685f-lD37KR8ZT9W73YWawg7JH071-false-true-570,229 449,414 367,561-@polygon-zone -#30c054-sp9sCfQgUBo1V7MD4xGk2xa0-false-true-762,513 558,468 536,107-@polygon-zone -#5c685f-ZK2lgVn560r7msKLw5d06Lw9-false-true-284,594 830,339 793,565-@polygon-zone -#c03030-2zfCE4Kn6QkL4LZ86MpSkGlX-false-true-372,129 322,229 422,229-@polygon-zone -#c03030-85x2I0mdF7HWwszm2KyH30O8-false-true-547,152 497,252 597,252-@polygon-zone -#c03030-puAIGIoP1lkc7UcGx4prv2n5-false-true-154,189 104,289 204,289-@polygon-zone -#c03030-zxa28lgTMiRGHtN62hnPgv7u-false-true-126,47 76,147 176,147-@polygon-zone -#c03030-0X7QaU3D4zZM8G4XQFR19qID-false-true-565,349 515,449 615,449-@
@@ -8340,8 +8394,8 @@ function AddCircle() {
   AttachListener(UID);
 }
 
-// id = "", classes = "", cx="", cy="", r="", fill = "", locked = "", selectable = "" - is for circle
-function AddCircleFromParams(id = "", classes = "", ExCx = "", ExCy = "", ExR = "", ExFill = "", ExLocked = "", ExSelectable = "") {
+// Creates a circle from provided object
+function AddCircleFromParams(item) {
   let MaxX = 540;
   let MaxY = 500;
 
@@ -8349,27 +8403,27 @@ function AddCircleFromParams(id = "", classes = "", ExCx = "", ExCy = "", ExR = 
   let adjustY = (0,_helpers_js__WEBPACK_IMPORTED_MODULE_1__.GetRandomInt)(MaxY);
 
   let cx = 0;
-  ExCx === "" ? (cx = 50 + adjustX) : (cx = ExCx);
+  item.cx === undefined ? (cx = 50 + adjustX) : (cx = item.cx);
 
   let cy = 0;
-  ExCy === "" ? (cy = 50 + adjustY) : (cy = ExCy);
+  item.cy === undefined ? (cy = 50 + adjustY) : (cy = item.cy);
 
   let r = 0;
-  ExR === "" ? (r = (0,_helpers_js__WEBPACK_IMPORTED_MODULE_1__.GetRandomInt)(50)) : (r = ExR);
+  item.r === undefined ? (r = (0,_helpers_js__WEBPACK_IMPORTED_MODULE_1__.GetRandomInt)(50)) : (r = item.r);
 
   let fill = "";
-  ExFill === "" ? (fill = (0,_helpers_js__WEBPACK_IMPORTED_MODULE_1__.GetCurrentSelectedColor)()) : (fill = ExFill);
+  item.fill === undefined ? (fill = (0,_helpers_js__WEBPACK_IMPORTED_MODULE_1__.GetCurrentSelectedColor)()) : (fill = item.fill);
 
   let locked = "";
-  ExLocked === "" ? (locked = "false") : (locked = ExLocked);
+  item.locked === undefined ? (locked = "false") : (locked = item.locked);
 
   let selectable = "";
-  ExSelectable === "" ? (selectable = "true") : (selectable = ExSelectable);
+  item.selectable === undefined ? (selectable = "true") : (selectable = item.selectable);
 
   let circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
 
   let UID = "";
-  UID = id === "" ? (UID = (0,_helpers_js__WEBPACK_IMPORTED_MODULE_1__.GenerateUniqueID)(24, "CIRC")) : (UID = id);
+  item.id === undefined ? (UID = (0,_helpers_js__WEBPACK_IMPORTED_MODULE_1__.GenerateUniqueID)(24, "CIRC")) : (UID = item.id);
 
   circle.setAttribute("cx", cx);
   circle.setAttribute("cy", cy);
@@ -8544,7 +8598,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _savers_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./savers.js */ "./public/js/savers.js");
 /* harmony import */ var _helpers_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./helpers.js */ "./public/js/helpers.js");
 /* harmony import */ var _Dev_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Dev.js */ "./public/js/Dev.js");
-/* harmony import */ var _Data_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Data.js */ "./public/js/Data.js");
+/* harmony import */ var _Config_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Config.js */ "./public/js/Config.js");
 
 
 
@@ -8597,6 +8651,8 @@ function Startup() {
   btnSetRandomColor.addEventListener("click", () => {
     (0,_actions_js__WEBPACK_IMPORTED_MODULE_1__.SetNewColor)();
   });
+
+  // Dev mode checkbox functionality.
   devModeCheckbox.addEventListener("change", (e) => {
     (0,_actions_js__WEBPACK_IMPORTED_MODULE_1__.EnableDevMode)(e);
   });
@@ -8606,9 +8662,10 @@ function Startup() {
   (0,_actions_js__WEBPACK_IMPORTED_MODULE_1__.ChangeToCursorMode)();
 
   let colorPicker = document.querySelector(".colorPicker");
-  _Data_js__WEBPACK_IMPORTED_MODULE_5__["default"].randomColorAtStart ? (colorPicker.value = (0,_helpers_js__WEBPACK_IMPORTED_MODULE_3__.GetRandomColor)()) : (colorPicker.value = "#000000");
+  _Config_js__WEBPACK_IMPORTED_MODULE_5__["default"].randomColorAtStart ? (colorPicker.value = (0,_helpers_js__WEBPACK_IMPORTED_MODULE_3__.GetRandomColor)()) : (colorPicker.value = "#000000");
 
   (0,_savers_js__WEBPACK_IMPORTED_MODULE_2__.FindAllSavesAndUpdateList)();
+  _Config_js__WEBPACK_IMPORTED_MODULE_5__["default"].modal && (0,_actions_js__WEBPACK_IMPORTED_MODULE_1__.CreateModal)();
 
   const Dev = new _Dev_js__WEBPACK_IMPORTED_MODULE_4__["default"]();
   Dev.setupDevButtonListeners();

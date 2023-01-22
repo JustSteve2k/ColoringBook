@@ -16,6 +16,12 @@ const Data = {
 
   // Picks a new random color at the start.
   randomColorAtStart: true,
+
+  // Shows a modal at the start
+  modal: true,
+
+  // Message included within the modal
+  modalMessage: "Welcome to the coloring book program! <br /><br /> This is in early stages, so you may encounter some bugs.",
 };
 
 export default Data;

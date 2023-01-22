@@ -1,5 +1,5 @@
 import { AddDynamicPolygon, AddSquare, AddTriangle, AddCircle } from "./shapes.js";
-import { ChangeToCursorMode, EnableDevMode, ResetBoard, ReadWork, SwapBetweenModes, LockPolygon, SetNewColor } from "./actions.js";
+import { ChangeToCursorMode, CreateModal, EnableDevMode, ResetBoard, ReadWork, SwapBetweenModes, LockPolygon, SetNewColor } from "./actions.js";
 import { DeleteSaveFile, FindAllSavesAndUpdateList, SaveWork } from "./savers.js";
 import { GetRandomColor } from "./helpers.js";
 import Developer from "./Dev.js";
@@ -64,6 +64,7 @@ function Startup() {
   Config.randomColorAtStart ? (colorPicker.value = GetRandomColor()) : (colorPicker.value = "#000000");
 
   FindAllSavesAndUpdateList();
+  Config.modal && CreateModal();
 
   const Dev = new Developer();
   Dev.setupDevButtonListeners();

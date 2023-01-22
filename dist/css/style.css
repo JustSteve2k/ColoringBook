@@ -302,3 +302,35 @@ button:hover {
 .hidden {
   display: none;
 }
+
+/*MODAL SETTINGS*/
+.modalBackground {
+  background-color: rgba(0, 0, 0, 0.6);
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+}
+
+.modal {
+  width: 40%;
+  margin: 10rem auto;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+  background-color: bisque;
+  color: black;
+  text-align: center;
+  position: absolute;
+  top: 0rem;
+  left: 30%;
+  z-index: 2;
+  transition: 0.5s;
+}
+
+.modalButton {
+  position: absolute;
+  width: 5rem;
+  height: 2rem;
+  bottom: 2rem;
+  right: 2rem;
+}

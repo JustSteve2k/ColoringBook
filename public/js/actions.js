@@ -398,10 +398,28 @@ export function RedrawBoard(log) {
 
   // Doesn't draw the board so it starts at spot 1.
   for (let x = 1; x < log.length; x++) {
+    let item = {
+      type: log[x].type,
+      id: log[x].id,
+      class: log[x].class,
+      fill: log[x].fill,
+      locked: log[x].locked,
+      selectable: log[x].selectable,
+    };
+
+    if (item.type === "polygon") {
+      item.points = log[x].points;
+    }
+    if (item.type === "circle") {
+      item.r = log[x].r;
+      item.cx = log[x].cx;
+      item.cy = log[x].cy;
+    }
+
     if (log[x].type === "polygon") {
       CreatePolygon(log[x].points, log[x].id, log[x].class, log[x].fill, log[x].locked, log[x].selectable);
-    } else if (log[x].type === "circle") {
-      AddCircleFromParams(log[x].id, log[x].class, log[x].cx, log[x].cy, log[x].r, log[x].fill, log[x].locked, log[x].selectable);
+    } else if (item.type === "circle") {
+      AddCircleFromParams(item);
     }
   }
 }
@@ -438,4 +456,33 @@ export function EnableDevMode(e) {
     console.log("devMode is disabled");
     devButtons.classList.toggle("hidden");
   }
+}
+
+export function CreateModal() {
+  let div = document.createElement("div");
+  div.setAttribute("class", "modalBackground");
+
+  let modal = document.createElement("div");
+  modal.setAttribute("class", "modal");
+
+  let p = document.createElement("p");
+  p.innerHTML = Config.modalMessage;
+
+  let button = document.createElement("button");
+  button.setAttribute("class", "modalButton");
+  button.textContent = "Ok";
+
+  modal.append(button);
+  modal.append(p);
+  div.append(modal);
+
+  let container = document.querySelector(".container");
+  container.append(div);
+
+  button.addEventListener("click", RemoveModal);
+}
+
+function RemoveModal() {
+  let element = document.querySelector(".modalBackground");
+  element.remove();
 }

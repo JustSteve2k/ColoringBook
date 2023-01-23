@@ -18,10 +18,15 @@ const Data = {
   randomColorAtStart: true,
 
   // Shows a modal at the start
-  modal: true,
+  modal: false,
 
   // Message included within the modal
   modalMessage: "Welcome to the coloring book program! <br /><br /> This is in early stages, so you may encounter some bugs.",
+};
+
+export const Announce = {
+  // Listener Added alerts
+  listener: false,
 };
 
 export default Data;

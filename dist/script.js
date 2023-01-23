@@ -7314,6 +7314,7 @@ makeMorphable();
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Announce": () => (/* binding */ Announce),
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 const Data = {
@@ -7336,10 +7337,15 @@ const Data = {
   randomColorAtStart: true,
 
   // Shows a modal at the start
-  modal: true,
+  modal: false,
 
   // Message included within the modal
   modalMessage: "Welcome to the coloring book program! <br /><br /> This is in early stages, so you may encounter some bugs.",
+};
+
+const Announce = {
+  // Listener Added alerts
+  listener: false,
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Data);
@@ -7866,7 +7872,7 @@ function RedrawBoard(log) {
     let item = {
       type: log[x].type,
       id: log[x].id,
-      class: log[x].class,
+      classList: log[x].class,
       fill: log[x].fill,
       locked: log[x].locked,
       selectable: log[x].selectable,
@@ -7882,7 +7888,7 @@ function RedrawBoard(log) {
     }
 
     if (log[x].type === "polygon") {
-      (0,_shapes_js__WEBPACK_IMPORTED_MODULE_0__.CreatePolygon)(log[x].points, log[x].id, log[x].class, log[x].fill, log[x].locked, log[x].selectable);
+      (0,_shapes_js__WEBPACK_IMPORTED_MODULE_0__.AddPolygonFromParams)(item);
     } else if (item.type === "circle") {
       (0,_shapes_js__WEBPACK_IMPORTED_MODULE_0__.AddCircleFromParams)(item);
     }
@@ -8290,20 +8296,21 @@ function ImportString() {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "AddCircle": () => (/* binding */ AddCircle),
 /* harmony export */   "AddCircleFromParams": () => (/* binding */ AddCircleFromParams),
 /* harmony export */   "AddDynamicPolygon": () => (/* binding */ AddDynamicPolygon),
+/* harmony export */   "AddPolygonFromParams": () => (/* binding */ AddPolygonFromParams),
 /* harmony export */   "AddSquare": () => (/* binding */ AddSquare),
 /* harmony export */   "AddTriangle": () => (/* binding */ AddTriangle),
 /* harmony export */   "AdjustPointsOnPointsArray": () => (/* binding */ AdjustPointsOnPointsArray),
-/* harmony export */   "CreatePolygon": () => (/* binding */ CreatePolygon),
 /* harmony export */   "GeneratePointsArray": () => (/* binding */ GeneratePointsArray),
 /* harmony export */   "GeneratePointsStringFromArray": () => (/* binding */ GeneratePointsStringFromArray)
 /* harmony export */ });
 /* harmony import */ var _actions_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./actions.js */ "./public/js/actions.js");
 /* harmony import */ var _helpers_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers.js */ "./public/js/helpers.js");
-/* harmony import */ var _svgdotjs_svg_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @svgdotjs/svg.js */ "./node_modules/@svgdotjs/svg.js/dist/svg.esm.js");
-/* harmony import */ var _svgdotjs_svg_draggable_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @svgdotjs/svg.draggable.js */ "./node_modules/@svgdotjs/svg.draggable.js/src/svg.draggable.js");
+/* harmony import */ var _Config_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Config.js */ "./public/js/Config.js");
+/* harmony import */ var _svgdotjs_svg_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @svgdotjs/svg.js */ "./node_modules/@svgdotjs/svg.js/dist/svg.esm.js");
+/* harmony import */ var _svgdotjs_svg_draggable_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @svgdotjs/svg.draggable.js */ "./node_modules/@svgdotjs/svg.draggable.js/src/svg.draggable.js");
+
 
 
 
@@ -8319,7 +8326,7 @@ function AddDynamicPolygon(points) {
 
   let pointsString = GeneratePointsStringFromArray(pointsX, pointsY);
 
-  CreatePolygon(pointsString);
+  AddPolygonFromParams({ points: pointsString });
 }
 
 // Max and MaxY adre hardcoded currently.  Need to reach from global?
@@ -8338,7 +8345,7 @@ function AddSquare() {
 
   let pointsString = GeneratePointsStringFromArray(pointsX, pointsY);
 
-  CreatePolygon(pointsString);
+  AddPolygonFromParams({ points: pointsString });
 }
 
 // Adds a generic triangle to the drawing board.
@@ -8358,44 +8365,11 @@ function AddTriangle() {
 
   let pointsString = GeneratePointsStringFromArray(pointsX, pointsY);
 
-  CreatePolygon(pointsString);
-}
-
-// Adds a generic circle to the drawing board.
-// DEV NOTE - Some overlapping occuring when circle overlaps outside of the box.
-function AddCircle() {
-  let MaxX = 840;
-  let MaxY = 500;
-
-  let adjustX = (0,_helpers_js__WEBPACK_IMPORTED_MODULE_1__.GetRandomInt)(MaxX);
-  let adjustY = (0,_helpers_js__WEBPACK_IMPORTED_MODULE_1__.GetRandomInt)(MaxY);
-
-  let cx = 50 + adjustX;
-  let cy = 50 + adjustY;
-  let r = (0,_helpers_js__WEBPACK_IMPORTED_MODULE_1__.GetRandomInt)(50);
-
-  let circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-
-  const UID = (0,_helpers_js__WEBPACK_IMPORTED_MODULE_1__.GenerateUniqueID)(24, "CIRC");
-  let fill = (0,_helpers_js__WEBPACK_IMPORTED_MODULE_1__.GetCurrentSelectedColor)();
-
-  circle.setAttribute("cx", cx);
-  circle.setAttribute("cy", cy);
-  circle.setAttribute("r", r);
-  circle.setAttribute("id", UID);
-  circle.setAttribute("class", "zone ");
-  circle.setAttribute("fill", fill);
-  circle.setAttribute("locked", "false");
-  circle.setAttribute("selectable", "true");
-
-  let drawing = document.getElementById("drawing");
-  drawing.append(circle);
-
-  AttachListener(UID);
+  AddPolygonFromParams({ points: pointsString });
 }
 
 // Creates a circle from provided object
-function AddCircleFromParams(item) {
+function AddCircleFromParams(item = "") {
   let MaxX = 540;
   let MaxY = 500;
 
@@ -8420,10 +8394,10 @@ function AddCircleFromParams(item) {
   let selectable = "";
   item.selectable === undefined ? (selectable = "true") : (selectable = item.selectable);
 
-  let circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-
   let UID = "";
   item.id === undefined ? (UID = (0,_helpers_js__WEBPACK_IMPORTED_MODULE_1__.GenerateUniqueID)(24, "CIRC")) : (UID = item.id);
+
+  let circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
 
   circle.setAttribute("cx", cx);
   circle.setAttribute("cy", cy);
@@ -8438,25 +8412,36 @@ function AddCircleFromParams(item) {
   drawing.append(circle);
 
   AttachListener(UID);
-  console.log("You've created a circle from parameters!");
 }
 
 // Finishes creating a polygon and appends to the dom.  Need to know modesomehow.
-function CreatePolygon(pointsString = "", id = "", classes = "", color = "", locked = "", selectable = "") {
+function AddPolygonFromParams(item = "") {
   let polygon = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
 
   let UID = "";
-  UID = id === "" ? (UID = (0,_helpers_js__WEBPACK_IMPORTED_MODULE_1__.GenerateUniqueID)(24, "POLY")) : (UID = id);
+  item.id === undefined ? (UID = (0,_helpers_js__WEBPACK_IMPORTED_MODULE_1__.GenerateUniqueID)(24, "POLY")) : (UID = item.id);
+
+  let classList = "";
+  item.classList === undefined ? (classList = "zone ") : (classList = item.classList);
+
+  let fill = "";
+  item.fill === undefined ? (fill = (0,_helpers_js__WEBPACK_IMPORTED_MODULE_1__.GetCurrentSelectedColor)()) : (fill = item.fill);
+
+  let locked = "";
+  item.locked === undefined ? (locked = "false") : (locked = item.locked);
+
+  let selectable = "";
+  item.selectable === undefined ? (selectable = "true") : (selectable = item.selectable);
+
+  let pointsString = "";
+  item.points === undefined ? "0 0" : (pointsString = item.points);
 
   polygon.setAttribute("id", UID);
-  classes === "" ? polygon.setAttribute("class", "zone ") : polygon.setAttribute("class", classes);
   polygon.setAttribute("points", pointsString);
-
-  const fill = (0,_helpers_js__WEBPACK_IMPORTED_MODULE_1__.GetCurrentSelectedColor)();
-
-  color === "" ? polygon.setAttribute("fill", fill) : polygon.setAttribute("fill", color);
-  locked === "" ? polygon.setAttribute("locked", "false") : polygon.setAttribute("locked", locked);
-  selectable === "" ? polygon.setAttribute("selectable", "true") : polygon.setAttribute("selectable", selectable);
+  polygon.setAttribute("class", classList);
+  polygon.setAttribute("fill", fill);
+  polygon.setAttribute("locked", locked);
+  polygon.setAttribute("selectable", selectable);
 
   let drawing = document.getElementById("drawing");
   drawing.append(polygon);
@@ -8471,25 +8456,25 @@ function AttachListener(UID) {
   let piece = document.getElementById(UID);
 
   if (mode === "paint") {
-    console.log(`Paint mode added to id of ${UID}`);
+    _Config_js__WEBPACK_IMPORTED_MODULE_2__.Announce.listener && console.log(`Paint mode added to id of ${UID}`);
     piece.addEventListener("click", _actions_js__WEBPACK_IMPORTED_MODULE_0__.paintCaller);
   }
 
   if (mode === "cursor") {
-    console.log(`Cursor mode added to id of ${UID}`);
+    _Config_js__WEBPACK_IMPORTED_MODULE_2__.Announce.listener && console.log(`Cursor mode added to id of ${UID}`);
     piece.addEventListener("focus", _actions_js__WEBPACK_IMPORTED_MODULE_0__.cursorCaller);
     piece.addEventListener("blur", _actions_js__WEBPACK_IMPORTED_MODULE_0__.cursorRemover);
   }
 
   if (mode === "delete") {
-    console.log(`Delete mode added to id of ${UID}`);
+    _Config_js__WEBPACK_IMPORTED_MODULE_2__.Announce.listener && console.log(`Delete mode added to id of ${UID}`);
     piece.addEventListener("click", _actions_js__WEBPACK_IMPORTED_MODULE_0__.deleteCaller);
   }
 
   if (mode === "move") {
-    console.log(`Move mode added to id of ${UID}`);
+    _Config_js__WEBPACK_IMPORTED_MODULE_2__.Announce.listener && console.log(`Move mode added to id of ${UID}`);
 
-    let item = (0,_svgdotjs_svg_js__WEBPACK_IMPORTED_MODULE_2__.SVG)("#" + UID);
+    let item = (0,_svgdotjs_svg_js__WEBPACK_IMPORTED_MODULE_3__.SVG)("#" + UID);
     item.draggable();
   }
 }
@@ -8631,7 +8616,7 @@ function Startup() {
     (0,_shapes_js__WEBPACK_IMPORTED_MODULE_0__.AddTriangle)();
   });
   btnAddNewCircle.addEventListener("click", () => {
-    (0,_shapes_js__WEBPACK_IMPORTED_MODULE_0__.AddCircle)();
+    (0,_shapes_js__WEBPACK_IMPORTED_MODULE_0__.AddCircleFromParams)();
   });
   btnLock.addEventListener("click", () => {
     (0,_actions_js__WEBPACK_IMPORTED_MODULE_1__.LockPolygon)();

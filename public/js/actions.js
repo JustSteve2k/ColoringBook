@@ -1,4 +1,4 @@
-import { AddCircleFromParams, CreatePolygon } from "./shapes.js";
+import { AddCircleFromParams, AddPolygonFromParams } from "./shapes.js";
 import { GetCurrentSelectedColor, GetCurrentMode, GetSelectedBox, GetRandomColor } from "./helpers.js";
 import Config from "./Config";
 import { SVG } from "@svgdotjs/svg.js";
@@ -401,7 +401,7 @@ export function RedrawBoard(log) {
     let item = {
       type: log[x].type,
       id: log[x].id,
-      class: log[x].class,
+      classList: log[x].class,
       fill: log[x].fill,
       locked: log[x].locked,
       selectable: log[x].selectable,
@@ -417,7 +417,7 @@ export function RedrawBoard(log) {
     }
 
     if (log[x].type === "polygon") {
-      CreatePolygon(log[x].points, log[x].id, log[x].class, log[x].fill, log[x].locked, log[x].selectable);
+      AddPolygonFromParams(item);
     } else if (item.type === "circle") {
       AddCircleFromParams(item);
     }

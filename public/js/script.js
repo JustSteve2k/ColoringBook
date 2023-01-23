@@ -1,4 +1,4 @@
-import { AddDynamicPolygon, AddSquare, AddTriangle, AddCircle } from "./shapes.js";
+import { AddDynamicPolygon, AddSquare, AddTriangle, AddCircleFromParams } from "./shapes.js";
 import { ChangeToCursorMode, CreateModal, EnableDevMode, ResetBoard, ReadWork, SwapBetweenModes, LockPolygon, SetNewColor } from "./actions.js";
 import { DeleteSaveFile, FindAllSavesAndUpdateList, SaveWork } from "./savers.js";
 import { GetRandomColor } from "./helpers.js";
@@ -30,7 +30,7 @@ function Startup() {
     AddTriangle();
   });
   btnAddNewCircle.addEventListener("click", () => {
-    AddCircle();
+    AddCircleFromParams();
   });
   btnLock.addEventListener("click", () => {
     LockPolygon();

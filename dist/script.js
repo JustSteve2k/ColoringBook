@@ -7853,7 +7853,6 @@ function ReadWork() {
 
   let fileName = prompt("What save would you like to load?");
 
-  // log = JSON.parse(localStorage.getItem("polygons"));
   log = JSON.parse(localStorage.getItem("CB - " + fileName));
 
   console.log(log);
@@ -7869,30 +7868,37 @@ function RedrawBoard(log) {
 
   // Doesn't draw the board so it starts at spot 1.
   for (let x = 1; x < log.length; x++) {
-    let item = {
-      type: log[x].type,
-      id: log[x].id,
-      classList: log[x].class,
-      fill: log[x].fill,
-      locked: log[x].locked,
-      selectable: log[x].selectable,
-    };
+    let item = ConvertEntryToObject(log[x]);
 
     if (item.type === "polygon") {
-      item.points = log[x].points;
-    }
-    if (item.type === "circle") {
-      item.r = log[x].r;
-      item.cx = log[x].cx;
-      item.cy = log[x].cy;
-    }
-
-    if (log[x].type === "polygon") {
       (0,_shapes_js__WEBPACK_IMPORTED_MODULE_0__.AddPolygonFromParams)(item);
     } else if (item.type === "circle") {
       (0,_shapes_js__WEBPACK_IMPORTED_MODULE_0__.AddCircleFromParams)(item);
     }
   }
+}
+
+// Cleans up object in array of objects be shaped properly.
+function ConvertEntryToObject(log) {
+  let item = {
+    type: log.type,
+    id: log.id,
+    classList: log.class,
+    fill: log.fill,
+    locked: log.locked,
+    selectable: log.selectable,
+  };
+
+  if (item.type === "polygon") {
+    item.points = log.points;
+  }
+  if (item.type === "circle") {
+    item.r = log.r;
+    item.cx = log.cx;
+    item.cy = log.cy;
+  }
+
+  return item;
 }
 
 // Sets the colorpicker to a random color.  Sets a specific value if one is provided.
@@ -7912,8 +7918,6 @@ function ChangeBackgroundSize() {
 
   // points="0,0 0,600 900,600 900,0"
   // UL, BL, BR, UR
-
-  // alert("background updated!");
 }
 
 function EnableDevMode(e) {
@@ -7929,6 +7933,7 @@ function EnableDevMode(e) {
   }
 }
 
+// Creates a modal and adds message provided from Config file.
 function CreateModal() {
   let div = document.createElement("div");
   div.setAttribute("class", "modalBackground");
@@ -7953,6 +7958,7 @@ function CreateModal() {
   button.addEventListener("click", RemoveModal);
 }
 
+// Removes modal from DOM.
 function RemoveModal() {
   let element = document.querySelector(".modalBackground");
   element.remove();
@@ -8368,7 +8374,7 @@ function AddTriangle() {
   AddPolygonFromParams({ points: pointsString });
 }
 
-// Creates a circle from provided object
+// Creates a circle from provided parameters.  Sets default if not provided.
 function AddCircleFromParams(item = "") {
   let MaxX = 540;
   let MaxY = 500;
@@ -8414,7 +8420,7 @@ function AddCircleFromParams(item = "") {
   AttachListener(UID);
 }
 
-// Finishes creating a polygon and appends to the dom.  Need to know modesomehow.
+// Creates a polygon from provided parameters.  Sets default if not provided.
 function AddPolygonFromParams(item = "") {
   let polygon = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
 
@@ -8434,7 +8440,7 @@ function AddPolygonFromParams(item = "") {
   item.selectable === undefined ? (selectable = "true") : (selectable = item.selectable);
 
   let pointsString = "";
-  item.points === undefined ? "0 0" : (pointsString = item.points);
+  item.points === undefined ? "0,0" : (pointsString = item.points);
 
   polygon.setAttribute("id", UID);
   polygon.setAttribute("points", pointsString);

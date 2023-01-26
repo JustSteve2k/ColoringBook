@@ -382,7 +382,6 @@ export function ReadWork() {
 
   let fileName = prompt("What save would you like to load?");
 
-  // log = JSON.parse(localStorage.getItem("polygons"));
   log = JSON.parse(localStorage.getItem("CB - " + fileName));
 
   console.log(log);
@@ -398,30 +397,37 @@ export function RedrawBoard(log) {
 
   // Doesn't draw the board so it starts at spot 1.
   for (let x = 1; x < log.length; x++) {
-    let item = {
-      type: log[x].type,
-      id: log[x].id,
-      classList: log[x].class,
-      fill: log[x].fill,
-      locked: log[x].locked,
-      selectable: log[x].selectable,
-    };
+    let item = ConvertEntryToObject(log[x]);
 
     if (item.type === "polygon") {
-      item.points = log[x].points;
-    }
-    if (item.type === "circle") {
-      item.r = log[x].r;
-      item.cx = log[x].cx;
-      item.cy = log[x].cy;
-    }
-
-    if (log[x].type === "polygon") {
       AddPolygonFromParams(item);
     } else if (item.type === "circle") {
       AddCircleFromParams(item);
     }
   }
+}
+
+// Cleans up object in array of objects be shaped properly.
+function ConvertEntryToObject(log) {
+  let item = {
+    type: log.type,
+    id: log.id,
+    classList: log.class,
+    fill: log.fill,
+    locked: log.locked,
+    selectable: log.selectable,
+  };
+
+  if (item.type === "polygon") {
+    item.points = log.points;
+  }
+  if (item.type === "circle") {
+    item.r = log.r;
+    item.cx = log.cx;
+    item.cy = log.cy;
+  }
+
+  return item;
 }
 
 // Sets the colorpicker to a random color.  Sets a specific value if one is provided.
@@ -441,8 +447,6 @@ export function ChangeBackgroundSize() {
 
   // points="0,0 0,600 900,600 900,0"
   // UL, BL, BR, UR
-
-  // alert("background updated!");
 }
 
 export function EnableDevMode(e) {
@@ -458,6 +462,7 @@ export function EnableDevMode(e) {
   }
 }
 
+// Creates a modal and adds message provided from Config file.
 export function CreateModal() {
   let div = document.createElement("div");
   div.setAttribute("class", "modalBackground");
@@ -482,6 +487,7 @@ export function CreateModal() {
   button.addEventListener("click", RemoveModal);
 }
 
+// Removes modal from DOM.
 function RemoveModal() {
   let element = document.querySelector(".modalBackground");
   element.remove();

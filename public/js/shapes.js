@@ -56,7 +56,7 @@ export function AddTriangle() {
   AddPolygonFromParams({ points: pointsString });
 }
 
-// Creates a circle from provided object
+// Creates a circle from provided parameters.  Sets default if not provided.
 export function AddCircleFromParams(item = "") {
   let MaxX = 540;
   let MaxY = 500;
@@ -102,7 +102,7 @@ export function AddCircleFromParams(item = "") {
   AttachListener(UID);
 }
 
-// Finishes creating a polygon and appends to the dom.  Need to know modesomehow.
+// Creates a polygon from provided parameters.  Sets default if not provided.
 export function AddPolygonFromParams(item = "") {
   let polygon = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
 
@@ -122,7 +122,7 @@ export function AddPolygonFromParams(item = "") {
   item.selectable === undefined ? (selectable = "true") : (selectable = item.selectable);
 
   let pointsString = "";
-  item.points === undefined ? "0 0" : (pointsString = item.points);
+  item.points === undefined ? "0,0" : (pointsString = item.points);
 
   polygon.setAttribute("id", UID);
   polygon.setAttribute("points", pointsString);

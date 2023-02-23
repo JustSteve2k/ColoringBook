@@ -93,17 +93,19 @@ button:hover {
   text-align: center;
 }
 
-.leftBar ul {
-  border: 1px solid black;
-}
-
 .leftBar li {
   width: 80%;
 }
 
+.saveBorder {
+  border: 1px solid black;
+}
+
 .savedDrawing:hover {
-  background-color: blue;
+  background-color: green;
   transition: 0.25s;
+  border: 1px solid black;
+  padding: 0.5rem;
 }
 
 /*Middle area? */

@@ -305,6 +305,16 @@ button:hover {
   display: none;
 }
 
+.hoverText {
+  width: 10rem;
+  background: white;
+  border: 1px solid white;
+  margin: 0 auto;
+  color: black;
+  text-align: center;
+  padding: 0.5rem;
+}
+
 /*MODAL SETTINGS*/
 .modalBackground {
   background-color: rgba(0, 0, 0, 0.6);

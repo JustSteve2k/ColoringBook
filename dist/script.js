@@ -7416,6 +7416,9 @@ class Developer {
       var draw = SVG().addTo("#drawing");
       draw.rect(100, 200).fill("#a06");
     });
+    btnDev9.addEventListener("click", () => {
+      (0,_helpers_js__WEBPACK_IMPORTED_MODULE_0__.ShowHoverText)("tester");
+    });
   }
   tempMessage(message) {
     alert(message);
@@ -7981,6 +7984,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "GetRandomColor": () => (/* binding */ GetRandomColor),
 /* harmony export */   "GetRandomInt": () => (/* binding */ GetRandomInt),
 /* harmony export */   "GetSelectedBox": () => (/* binding */ GetSelectedBox),
+/* harmony export */   "ShowHoverText": () => (/* binding */ ShowHoverText),
 /* harmony export */   "Sum": () => (/* binding */ Sum),
 /* harmony export */   "TempMessage": () => (/* binding */ TempMessage)
 /* harmony export */ });
@@ -8075,6 +8079,16 @@ function GetRandomColor() {
   _Config__WEBPACK_IMPORTED_MODULE_0__["default"].colorSelectedOutput && console.log(`Random Color is ${color}`);
 
   return color;
+}
+
+function ShowHoverText(words) {
+  let div = document.createElement("div");
+  div.className = "hoverText";
+  div.textContent = words;
+
+  let bar = document.querySelector(".middleArea");
+
+  bar.append(div);
 }
 
 

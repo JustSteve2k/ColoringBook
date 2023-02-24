@@ -1,7 +1,7 @@
 import { GetCurrentMode } from "./helpers.js";
 import { GetInfoOfAllPolygonsOnBoard } from "./actions.js";
 import { CreateExportString, ImportString, FindAllLocalStorage } from "./savers.js";
-import { GetRandomInt } from "./helpers.js";
+import { GetRandomInt, ShowHoverText } from "./helpers.js";
 import Config from "./Config";
 
 export default class Developer {
@@ -46,6 +46,9 @@ export default class Developer {
     btnDev8.addEventListener("click", () => {
       var draw = SVG().addTo("#drawing");
       draw.rect(100, 200).fill("#a06");
+    });
+    btnDev9.addEventListener("click", () => {
+      ShowHoverText("tester");
     });
   }
   tempMessage(message) {

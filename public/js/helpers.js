@@ -89,3 +89,13 @@ export function GetRandomColor() {
 
   return color;
 }
+
+export function ShowHoverText(words) {
+  let div = document.createElement("div");
+  div.className = "hoverText";
+  div.textContent = words;
+
+  let bar = document.querySelector(".middleArea");
+
+  bar.append(div);
+}

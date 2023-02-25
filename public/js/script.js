@@ -1,7 +1,7 @@
 import { AddDynamicPolygon, AddSquare, AddTriangle, AddCircleFromParams } from "./shapes.js";
 import { ChangeToCursorMode, CreateModal, EnableDevMode, ResetBoard, ReadWork, SwapBetweenModes, LockPolygon, SetNewColor } from "./actions.js";
 import { DeleteSaveFile, FindAllSavesAndUpdateList, SaveWork } from "./savers.js";
-import { GetRandomColor } from "./helpers.js";
+import { AddHoverFunctionality, GetRandomColor } from "./helpers.js";
 import Developer from "./Dev.js";
 import Config from "./Config.js";
 
@@ -57,6 +57,8 @@ function Startup() {
   });
 
   // Other startup functionality.
+
+  AddHoverFunctionality();
   SwapBetweenModes();
   ChangeToCursorMode();
 

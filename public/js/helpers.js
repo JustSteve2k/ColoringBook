@@ -90,8 +90,49 @@ export function GetRandomColor() {
   return color;
 }
 
+// Adds hover functionality to lower buttons
+export function AddHoverFunctionality() {
+  const list = {
+    btnCursor: "Changes to cursor mode that tells info about an item.",
+    btnPaint: "Changes to paint mode, allowing you to color the items.",
+    btnDelete: "Changs to delete mode, allowing you to remove items.",
+    btnMove: "Changes to move mode allowing you to relocate items",
+    btnAddDynPolygon3: "Adds a dynamic 3 sided polygon.",
+    btnAddDynPolygon4: "Adds a dynamic 4 sided polygon.",
+    btnAddDynPolygon5: "Adds a dynamic 5 sided polygon.",
+    btnAddSquare: "Adds a square.",
+    btnAddNewTriangle: "Adds a triangle.",
+    btnAddNewCircle: "Adds a circle",
+    btnLock: "Locks the selected item",
+    btnSave: "Saves your file",
+    btnLoad: "Loads a file",
+    btnDeleteFile: "Allows you to delete a file.",
+    btnResetNew: "Resets board",
+    btnSetRandomColor: "Changes the cololor to a random one.",
+  };
+
+  let buttons = document.querySelectorAll(".smButton, .medButton");
+
+  buttons.forEach((element) => {
+    console.log(element.id);
+
+    let item = document.getElementById(element.id);
+
+    item.addEventListener("mouseover", () => {
+      // ShowHoverText(element.id);
+      ShowHoverText(list[element.id]);
+    });
+
+    item.addEventListener("mouseout", () => {
+      let l = document.getElementById("hoverText");
+      l.remove();
+    });
+  });
+}
+
 export function ShowHoverText(words) {
   let div = document.createElement("div");
+  div.id = "hoverText";
   div.className = "hoverText";
   div.textContent = words;
 

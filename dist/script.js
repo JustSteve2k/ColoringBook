@@ -7383,46 +7383,73 @@ class Developer {
   }
 
   setupDevButtonListeners() {
+    this.SetButtonLabel("btnDev1", "Test Function");
+
     btnDev1.addEventListener("click", () => {
       alert("testFunctionWorks!");
     });
+
+    this.SetButtonLabel("btnDev2", "Get Info of All Polygons");
 
     btnDev2.addEventListener("click", () => {
       this.tempMessage("Gets list of all the polygons on the board, look at the console.");
       (0,_actions_js__WEBPACK_IMPORTED_MODULE_1__.GetInfoOfAllPolygonsOnBoard)();
     });
 
+    this.SetButtonLabel("btnDev3", "Get Current Mode");
+
     btnDev3.addEventListener("click", () => {
       this.tempMessage("Gets the Current Mode, look at the console.");
       (0,_helpers_js__WEBPACK_IMPORTED_MODULE_0__.GetCurrentMode)(true);
     });
+
+    this.SetButtonLabel("btnDev4", "Find all Local Storage");
 
     btnDev4.addEventListener("click", () => {
       this.tempMessage("Find All Local Saves");
       (0,_savers_js__WEBPACK_IMPORTED_MODULE_2__.FindAllLocalStorage)();
     });
 
+    this.SetButtonLabel("btnDev5", "Get Random Int");
+
     btnDev5.addEventListener("click", () => {
       let num = (0,_helpers_js__WEBPACK_IMPORTED_MODULE_0__.GetRandomInt)();
       console.log(num);
     });
+
+    this.SetButtonLabel("btnDev6", "Export String");
+
     btnDev6.addEventListener("click", () => {
       (0,_savers_js__WEBPACK_IMPORTED_MODULE_2__.CreateExportString)();
     });
+
+    this.SetButtonLabel("btnDev7", "Import String");
+
     btnDev7.addEventListener("click", () => {
       (0,_savers_js__WEBPACK_IMPORTED_MODULE_2__.ImportString)();
     });
+
+    this.SetButtonLabel("btnDev8", "Test Draw Button");
+
     btnDev8.addEventListener("click", () => {
       var draw = SVG().addTo("#drawing");
       draw.rect(100, 200).fill("#a06");
     });
+
+    this.SetButtonLabel("btnDev9", "Replacement Text");
+
     btnDev9.addEventListener("click", () => {
-      (0,_helpers_js__WEBPACK_IMPORTED_MODULE_0__.ShowHoverText)("tester");
+      (0,_helpers_js__WEBPACK_IMPORTED_MODULE_0__.AddHoverFunctionality)();
     });
   }
+
   tempMessage(message) {
     alert(message);
     console.log(message);
+  }
+
+  SetButtonLabel(id, text) {
+    document.getElementById(id).innerText = text;
   }
 
   // showBoardSize() {
@@ -7978,6 +8005,7 @@ function RemoveModal() {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "AddHoverFunctionality": () => (/* binding */ AddHoverFunctionality),
 /* harmony export */   "GenerateUniqueID": () => (/* binding */ GenerateUniqueID),
 /* harmony export */   "GetCurrentMode": () => (/* binding */ GetCurrentMode),
 /* harmony export */   "GetCurrentSelectedColor": () => (/* binding */ GetCurrentSelectedColor),
@@ -8081,8 +8109,49 @@ function GetRandomColor() {
   return color;
 }
 
+// Adds hover functionality to lower buttons
+function AddHoverFunctionality() {
+  const list = {
+    btnCursor: "Changes to cursor mode that tells info about an item.",
+    btnPaint: "Changes to paint mode, allowing you to color the items.",
+    btnDelete: "Changs to delete mode, allowing you to remove items.",
+    btnMove: "Changes to move mode allowing you to relocate items",
+    btnAddDynPolygon3: "Adds a dynamic 3 sided polygon.",
+    btnAddDynPolygon4: "Adds a dynamic 4 sided polygon.",
+    btnAddDynPolygon5: "Adds a dynamic 5 sided polygon.",
+    btnAddSquare: "Adds a square.",
+    btnAddNewTriangle: "Adds a triangle.",
+    btnAddNewCircle: "Adds a circle",
+    btnLock: "Locks the selected item",
+    btnSave: "Saves your file",
+    btnLoad: "Loads a file",
+    btnDeleteFile: "Allows you to delete a file.",
+    btnResetNew: "Resets board",
+    btnSetRandomColor: "Changes the cololor to a random one.",
+  };
+
+  let buttons = document.querySelectorAll(".smButton, .medButton");
+
+  buttons.forEach((element) => {
+    console.log(element.id);
+
+    let item = document.getElementById(element.id);
+
+    item.addEventListener("mouseover", () => {
+      // ShowHoverText(element.id);
+      ShowHoverText(list[element.id]);
+    });
+
+    item.addEventListener("mouseout", () => {
+      let l = document.getElementById("hoverText");
+      l.remove();
+    });
+  });
+}
+
 function ShowHoverText(words) {
   let div = document.createElement("div");
+  div.id = "hoverText";
   div.className = "hoverText";
   div.textContent = words;
 
@@ -8663,6 +8732,8 @@ function Startup() {
   });
 
   // Other startup functionality.
+
+  (0,_helpers_js__WEBPACK_IMPORTED_MODULE_3__.AddHoverFunctionality)();
   (0,_actions_js__WEBPACK_IMPORTED_MODULE_1__.SwapBetweenModes)();
   (0,_actions_js__WEBPACK_IMPORTED_MODULE_1__.ChangeToCursorMode)();
 

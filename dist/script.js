@@ -7452,6 +7452,21 @@ class Developer {
     document.getElementById(id).innerText = text;
   }
 
+  CreateDevButtons(amount) {
+    let devButtons = document.querySelector(".devButtons");
+
+    let h2 = document.createElement("h2");
+    h2.textContent = "Dev Buttons!";
+    devButtons.append(h2);
+
+    for (let x = 1; x <= amount; x++) {
+      let button = document.createElement("button");
+      button.id = `btnDev${x}`;
+      button.textContent = "test";
+      devButtons.append(button);
+    }
+  }
+
   // showBoardSize() {
   //   console.log(`The current board size is X:${boardSizeX} and Y:${boardSizeY}`);
   //   boardSizeX++;
@@ -8744,6 +8759,7 @@ function Startup() {
   _Config_js__WEBPACK_IMPORTED_MODULE_5__["default"].modal && (0,_actions_js__WEBPACK_IMPORTED_MODULE_1__.CreateModal)();
 
   const Dev = new _Dev_js__WEBPACK_IMPORTED_MODULE_4__["default"]();
+  Dev.CreateDevButtons(9);
   Dev.setupDevButtonListeners();
 }
 

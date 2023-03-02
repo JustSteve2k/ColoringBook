@@ -69,6 +69,8 @@ function Startup() {
   Config.modal && CreateModal();
 
   const Dev = new Developer();
+
   Dev.CreateDevButtons(9);
+  Dev.CreateCheckBoxes(3);
   Dev.setupDevButtonListeners();
 }

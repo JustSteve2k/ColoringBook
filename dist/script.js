@@ -7467,6 +7467,32 @@ class Developer {
     }
   }
 
+  CreateCheckBoxes(amount) {
+    let devButtons = document.querySelector(".devButtons");
+
+    let devBoxesContainer = document.createElement("div");
+    devBoxesContainer.className = "devBoxesContainer";
+
+    for (let x = 1; x <= amount; x++) {
+      let div = document.createElement("div");
+      div.className = "devItem";
+
+      let box = document.createElement("input");
+      box.type = "checkbox";
+      box.id = `boxDev${x}`;
+
+      let label = document.createElement("label");
+      label.textContent = "TEST LABEL";
+
+      div.append(box);
+      div.append(label);
+
+      devBoxesContainer.append(div);
+    }
+
+    devButtons.append(devBoxesContainer);
+  }
+
   // showBoardSize() {
   //   console.log(`The current board size is X:${boardSizeX} and Y:${boardSizeY}`);
   //   boardSizeX++;
@@ -8759,7 +8785,9 @@ function Startup() {
   _Config_js__WEBPACK_IMPORTED_MODULE_5__["default"].modal && (0,_actions_js__WEBPACK_IMPORTED_MODULE_1__.CreateModal)();
 
   const Dev = new _Dev_js__WEBPACK_IMPORTED_MODULE_4__["default"]();
+
   Dev.CreateDevButtons(9);
+  Dev.CreateCheckBoxes(3);
   Dev.setupDevButtonListeners();
 }
 

@@ -98,6 +98,32 @@ export default class Developer {
     }
   }
 
+  CreateCheckBoxes(amount) {
+    let devButtons = document.querySelector(".devButtons");
+
+    let devBoxesContainer = document.createElement("div");
+    devBoxesContainer.className = "devBoxesContainer";
+
+    for (let x = 1; x <= amount; x++) {
+      let div = document.createElement("div");
+      div.className = "devItem";
+
+      let box = document.createElement("input");
+      box.type = "checkbox";
+      box.id = `boxDev${x}`;
+
+      let label = document.createElement("label");
+      label.textContent = "TEST LABEL";
+
+      div.append(box);
+      div.append(label);
+
+      devBoxesContainer.append(div);
+    }
+
+    devButtons.append(devBoxesContainer);
+  }
+
   // showBoardSize() {
   //   console.log(`The current board size is X:${boardSizeX} and Y:${boardSizeY}`);
   //   boardSizeX++;

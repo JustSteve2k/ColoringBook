@@ -345,3 +345,15 @@ button:hover {
   bottom: 2rem;
   right: 2rem;
 }
+
+/* Dev Items */
+.devBoxesContainer {
+  margin-top: 2rem;
+  border: 1px solid red;
+}
+
+.devItem {
+  border: 1px solid white;
+  /* display: flex;
+  flex-direction: row; */
+}

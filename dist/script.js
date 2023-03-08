@@ -7441,6 +7441,10 @@ class Developer {
     btnDev9.addEventListener("click", () => {
       (0,_helpers_js__WEBPACK_IMPORTED_MODULE_0__.AddHoverFunctionality)();
     });
+
+    this.SetButtonLabel("boxLabelDev1", "Show Tooltips");
+    //this.SetButtonLabel("boxLabelDev2", "Test bar 2");
+    //this.SetButtonLabel("boxLabelDev3", "Test bar 3");
   }
 
   tempMessage(message) {
@@ -7467,7 +7471,7 @@ class Developer {
     }
   }
 
-  CreateCheckBoxes(amount) {
+  CreateDevCheckBoxes(amount) {
     let devButtons = document.querySelector(".devButtons");
 
     let devBoxesContainer = document.createElement("div");
@@ -7483,6 +7487,7 @@ class Developer {
 
       let label = document.createElement("label");
       label.textContent = "TEST LABEL";
+      label.id = `boxLabelDev${x}`;
 
       div.append(box);
       div.append(label);
@@ -8154,36 +8159,39 @@ function GetRandomColor() {
 function AddHoverFunctionality() {
   const list = {
     btnCursor: "Changes to cursor mode that tells info about an item.",
-    btnPaint: "Changes to paint mode, allowing you to color the items.",
-    btnDelete: "Changs to delete mode, allowing you to remove items.",
-    btnMove: "Changes to move mode allowing you to relocate items",
+    btnPaint: "Changes to paint mode, allowing you to color items with the selected color.",
+    btnDelete: "Changs to delete mode, allowing you to remove items from the board.",
+    btnMove: "Changes to move mode allowing you to relocate items around the board.",
     btnAddDynPolygon3: "Adds a dynamic 3 sided polygon.",
     btnAddDynPolygon4: "Adds a dynamic 4 sided polygon.",
     btnAddDynPolygon5: "Adds a dynamic 5 sided polygon.",
     btnAddSquare: "Adds a square.",
     btnAddNewTriangle: "Adds a triangle.",
-    btnAddNewCircle: "Adds a circle",
-    btnLock: "Locks the selected item",
-    btnSave: "Saves your file",
-    btnLoad: "Loads a file",
+    btnAddNewCircle: "Adds a circle.",
+    btnLock: "Locks the selected item.",
+    btnSave: "Saves your file.",
+    btnLoad: "Loads a file.",
     btnDeleteFile: "Allows you to delete a file.",
-    btnResetNew: "Resets board",
-    btnSetRandomColor: "Changes the cololor to a random one.",
+    btnResetNew: "Resets board back to a clean slate.",
+    btnSetRandomColor: "Changes the color to a random one.",
   };
 
   let buttons = document.querySelectorAll(".smButton, .medButton");
 
   buttons.forEach((element) => {
-    console.log(element.id);
-
     let item = document.getElementById(element.id);
 
     item.addEventListener("mouseover", () => {
-      // ShowHoverText(element.id);
+      let boxDev1 = document.getElementById("boxDev1").checked;
+      if (!boxDev1) return;
+
       ShowHoverText(list[element.id]);
     });
 
     item.addEventListener("mouseout", () => {
+      let boxDev1 = document.getElementById("boxDev1").checked;
+      if (!boxDev1) return;
+
       let l = document.getElementById("hoverText");
       l.remove();
     });
@@ -8708,6 +8716,9 @@ var __webpack_exports__ = {};
   !*** ./public/js/script.js ***!
   \*****************************/
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "showToolTips": () => (/* binding */ showToolTips)
+/* harmony export */ });
 /* harmony import */ var _shapes_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./shapes.js */ "./public/js/shapes.js");
 /* harmony import */ var _actions_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./actions.js */ "./public/js/actions.js");
 /* harmony import */ var _savers_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./savers.js */ "./public/js/savers.js");
@@ -8723,6 +8734,7 @@ __webpack_require__.r(__webpack_exports__);
 
 // let boardSizeX = 900;
 // let boardSizeY = 600;
+let showToolTips = false;
 
 // Windows onload functions, adjust later to load multiple things loading.
 window.onload = Startup;
@@ -8787,7 +8799,7 @@ function Startup() {
   const Dev = new _Dev_js__WEBPACK_IMPORTED_MODULE_4__["default"]();
 
   Dev.CreateDevButtons(9);
-  Dev.CreateCheckBoxes(3);
+  Dev.CreateDevCheckBoxes(1);
   Dev.setupDevButtonListeners();
 }
 

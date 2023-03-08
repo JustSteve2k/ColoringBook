@@ -72,6 +72,10 @@ export default class Developer {
     btnDev9.addEventListener("click", () => {
       AddHoverFunctionality();
     });
+
+    this.SetButtonLabel("boxLabelDev1", "Show Tooltips");
+    //this.SetButtonLabel("boxLabelDev2", "Test bar 2");
+    //this.SetButtonLabel("boxLabelDev3", "Test bar 3");
   }
 
   tempMessage(message) {
@@ -98,7 +102,7 @@ export default class Developer {
     }
   }
 
-  CreateCheckBoxes(amount) {
+  CreateDevCheckBoxes(amount) {
     let devButtons = document.querySelector(".devButtons");
 
     let devBoxesContainer = document.createElement("div");
@@ -114,6 +118,7 @@ export default class Developer {
 
       let label = document.createElement("label");
       label.textContent = "TEST LABEL";
+      label.id = `boxLabelDev${x}`;
 
       div.append(box);
       div.append(label);

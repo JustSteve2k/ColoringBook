@@ -117,10 +117,16 @@ export function AddHoverFunctionality() {
     let item = document.getElementById(element.id);
 
     item.addEventListener("mouseover", () => {
+      let boxDev1 = document.getElementById("boxDev1").checked;
+      if (!boxDev1) return;
+
       ShowHoverText(list[element.id]);
     });
 
     item.addEventListener("mouseout", () => {
+      let boxDev1 = document.getElementById("boxDev1").checked;
+      if (!boxDev1) return;
+
       let l = document.getElementById("hoverText");
       l.remove();
     });

@@ -7443,7 +7443,7 @@ class Developer {
     });
 
     this.SetButtonLabel("boxLabelDev1", "Show Tooltips");
-    //this.SetButtonLabel("boxLabelDev2", "Test bar 2");
+    this.SetButtonLabel("boxLabelDev2", "Change Color on Each Item");
     //this.SetButtonLabel("boxLabelDev3", "Test bar 3");
   }
 
@@ -8550,6 +8550,8 @@ function AddCircleFromParams(item = "") {
   drawing.append(circle);
 
   AttachListener(UID);
+
+  if (document.getElementById("boxDev2").checked) (0,_actions_js__WEBPACK_IMPORTED_MODULE_0__.SetNewColor)();
 }
 
 // Creates a polygon from provided parameters.  Sets default if not provided.
@@ -8585,6 +8587,8 @@ function AddPolygonFromParams(item = "") {
   drawing.append(polygon);
 
   AttachListener(UID);
+
+  if (document.getElementById("boxDev2").checked) (0,_actions_js__WEBPACK_IMPORTED_MODULE_0__.SetNewColor)();
 }
 
 // Determines which mode it is and attached said listener.
@@ -8716,9 +8720,6 @@ var __webpack_exports__ = {};
   !*** ./public/js/script.js ***!
   \*****************************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "showToolTips": () => (/* binding */ showToolTips)
-/* harmony export */ });
 /* harmony import */ var _shapes_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./shapes.js */ "./public/js/shapes.js");
 /* harmony import */ var _actions_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./actions.js */ "./public/js/actions.js");
 /* harmony import */ var _savers_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./savers.js */ "./public/js/savers.js");
@@ -8734,7 +8735,6 @@ __webpack_require__.r(__webpack_exports__);
 
 // let boardSizeX = 900;
 // let boardSizeY = 600;
-let showToolTips = false;
 
 // Windows onload functions, adjust later to load multiple things loading.
 window.onload = Startup;
@@ -8799,7 +8799,7 @@ function Startup() {
   const Dev = new _Dev_js__WEBPACK_IMPORTED_MODULE_4__["default"]();
 
   Dev.CreateDevButtons(9);
-  Dev.CreateDevCheckBoxes(1);
+  Dev.CreateDevCheckBoxes(2);
   Dev.setupDevButtonListeners();
 }
 

@@ -71,6 +71,6 @@ function Startup() {
   const Dev = new Developer();
 
   Dev.CreateDevButtons(9);
-  Dev.CreateDevCheckBoxes(1);
+  Dev.CreateDevCheckBoxes(2);
   Dev.setupDevButtonListeners();
 }

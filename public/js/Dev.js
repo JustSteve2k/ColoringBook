@@ -74,7 +74,7 @@ export default class Developer {
     });
 
     this.SetButtonLabel("boxLabelDev1", "Show Tooltips");
-    //this.SetButtonLabel("boxLabelDev2", "Test bar 2");
+    this.SetButtonLabel("boxLabelDev2", "Change Color on Each Item");
     //this.SetButtonLabel("boxLabelDev3", "Test bar 3");
   }
 

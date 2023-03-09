@@ -1,4 +1,4 @@
-import { cursorCaller, cursorRemover, deleteCaller, paintCaller } from "./actions.js";
+import { cursorCaller, cursorRemover, deleteCaller, paintCaller, SetNewColor } from "./actions.js";
 import { GenerateUniqueID, GetCurrentMode, GetCurrentSelectedColor, GetRandomInt } from "./helpers.js";
 import { Announce } from "./Config.js";
 import { SVG } from "@svgdotjs/svg.js";
@@ -100,6 +100,8 @@ export function AddCircleFromParams(item = "") {
   drawing.append(circle);
 
   AttachListener(UID);
+
+  if (document.getElementById("boxDev2").checked) SetNewColor();
 }
 
 // Creates a polygon from provided parameters.  Sets default if not provided.
@@ -135,6 +137,8 @@ export function AddPolygonFromParams(item = "") {
   drawing.append(polygon);
 
   AttachListener(UID);
+
+  if (document.getElementById("boxDev2").checked) SetNewColor();
 }
 
 // Determines which mode it is and attached said listener.

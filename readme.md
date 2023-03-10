@@ -2,6 +2,14 @@
 This is a coloring book applications that will allow the creation of svg elements and designs and color them as with a coloring book.
 The user can create and share designs through strings
 
+##v0.2.2
+###New Features
+
+- Add new features to dev menu.
+- Create a tooltip feature that explains function of button.
+- Create option that allows you to have a different color after each item created.
+- Small bugfixes on save files.
+
 ##v0.2.1
 ###New Features
 

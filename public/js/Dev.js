@@ -115,6 +115,7 @@ export default class Developer {
       let box = document.createElement("input");
       box.type = "checkbox";
       box.id = `boxDev${x}`;
+      box.checked = true;
 
       let label = document.createElement("label");
       label.textContent = "TEST LABEL";

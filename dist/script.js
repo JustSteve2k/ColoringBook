@@ -8280,21 +8280,25 @@ function UpdateSaveList(list) {
     li.textContent = element.slice(5);
     li.className = "savedDrawing";
 
-    //li.addEventListener("click", LoadFileFromSidebar);
+    let div = document.createElement("div");
+    div.classList = "saveButtons";
 
     let button = document.createElement("button");
     button.textContent = "L";
     button.classList = "testClass";
     button.addEventListener("click", LoadFileFromSidebar);
-    li.appendChild(button);
+    // li.appendChild(button);
+    div.appendChild(button);
 
     button = document.createElement("button");
     button.textContent = "D";
     button.classList = "testClass";
     button.addEventListener("click", DeleteFileFromSidebar);
 
-    li.appendChild(button);
+    //li.appendChild(button);
+    div.appendChild(button);
 
+    li.appendChild(div);
     ul.appendChild(li);
 
     _Config__WEBPACK_IMPORTED_MODULE_1__["default"].savesOutput && console.log(element);
@@ -8306,20 +8310,26 @@ function UpdateSaveList(list) {
 
 // Powers button on sidebar to delete file without input.
 function DeleteFileFromSidebar(e) {
-  let word = e.target.parentElement.innerText;
-  word = word.slice(0, -2);
+  let word = e.target.parentElement.parentElement.innerText;
+  word = word.slice(0, -3);
+
+  let answer = confirm("Do you want to remove this file?");
+
+  if (!answer) {
+    alert("ok we wont delete this one.");
+    return;
+  }
 
   DeleteSaveFile(word);
 }
 
 // Loads a file from the saves bar when clicked on.
 function LoadFileFromSidebar(e) {
-  let word = e.target.parentElement.innerText;
-  word = word.slice(0, -2);
+  let word = e.target.parentElement.parentElement.innerText;
+  word = word.slice(0, -3);
 
   alert(word);
   let fileName = "CB - " + word;
-  //let fileName = "CB - " + e.target.innerText;
 
   let answer = confirm(`Would you like to load ${fileName}`);
   if (!answer) {

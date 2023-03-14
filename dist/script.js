@@ -7484,6 +7484,7 @@ class Developer {
       let box = document.createElement("input");
       box.type = "checkbox";
       box.id = `boxDev${x}`;
+      box.checked = true;
 
       let label = document.createElement("label");
       label.textContent = "TEST LABEL";
@@ -8278,10 +8279,21 @@ function UpdateSaveList(list) {
 
     li.textContent = element.slice(5);
     li.className = "savedDrawing";
-    li.addEventListener("click", LoadFileFromSidebar);
 
-    // button.addEventListener("click", DeleteFileFromSidebar);
-    // li.appendChild(button);
+    //li.addEventListener("click", LoadFileFromSidebar);
+
+    let button = document.createElement("button");
+    button.textContent = "L";
+    button.classList = "testClass";
+    button.addEventListener("click", LoadFileFromSidebar);
+    li.appendChild(button);
+
+    button = document.createElement("button");
+    button.textContent = "D";
+    button.classList = "testClass";
+    button.addEventListener("click", DeleteFileFromSidebar);
+
+    li.appendChild(button);
 
     ul.appendChild(li);
 
@@ -8292,16 +8304,34 @@ function UpdateSaveList(list) {
   _Config__WEBPACK_IMPORTED_MODULE_1__["default"].savesOutput && console.log("Saves list on the left updated!");
 }
 
+// Powers button on sidebar to delete file without input.
+function DeleteFileFromSidebar(e) {
+  let word = e.target.parentElement.innerText;
+  word = word.slice(0, -2);
+
+  DeleteSaveFile(word);
+}
+
 // Loads a file from the saves bar when clicked on.
 function LoadFileFromSidebar(e) {
-  let fileName = "CB - " + e.target.innerText;
+  let word = e.target.parentElement.innerText;
+  word = word.slice(0, -2);
 
-  let answer = confirm(`Would you like to load ${e.target.innerText}`);
+  alert(word);
+  let fileName = "CB - " + word;
+  //let fileName = "CB - " + e.target.innerText;
+
+  let answer = confirm(`Would you like to load ${fileName}`);
   if (!answer) {
     alert("ok We'll pass on that for now");
     return;
   }
 
+  LoadFile(fileName);
+}
+
+// Loads file from provided filename.
+function LoadFile(fileName) {
   let log = [];
   log = JSON.parse(localStorage.getItem(fileName));
 
@@ -8312,9 +8342,14 @@ function LoadFileFromSidebar(e) {
 }
 
 // See if it is in the list first. If not, let user know. else remove.
-function DeleteSaveFile() {
-  let answer;
-  answer = prompt("Which file do you want to delete?");
+function DeleteSaveFile(word = "") {
+  let answer = "";
+
+  if (word === "") {
+    answer = prompt("Which file do you want to delete?");
+  } else {
+    answer = word;
+  }
 
   let list = FindAllLocalStorage();
   if (!list.includes("CB - " + answer)) {

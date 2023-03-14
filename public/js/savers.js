@@ -76,6 +76,13 @@ function DeleteFileFromSidebar(e) {
   let word = e.target.parentElement.innerText;
   word = word.slice(0, -2);
 
+  let answer = confirm("Do you want to remove this file?");
+
+  if (!answer) {
+    alert("ok we wont delete this one.");
+    return;
+  }
+
   DeleteSaveFile(word);
 }
 

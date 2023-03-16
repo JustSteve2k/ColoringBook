@@ -94,8 +94,13 @@ button:hover {
 }
 
 .leftBar li {
-  width: 80%;
+  width: 90%;
   margin-top: 0.5rem;
+  margin-left: -1rem;
+}
+
+.savesList {
+  /* border: 1px solid red; */
 }
 
 .saveBorder {
@@ -104,23 +109,25 @@ button:hover {
 
 .savedDrawing {
   display: flex;
-  border: 1px solid white;
-  height: 3rem;
+  border: 1px solid black;
+  border-radius: 12px;
+  height: 4rem;
   position: relative;
+  padding: 0.5rem;
+  background: #283535;
+  box-shadow: 0px 0px 12px black;
 }
 
 .savedDrawing:hover {
   background-color: green;
   transition: 0.25s;
   border: 1px solid black;
-  padding: 0.5rem;
 }
 
 .saveButtons {
-  /* border: 1px solid red; */
   position: absolute;
-  right: 0.25rem;
-  bottom: 0.25rem;
+  right: 0.5rem;
+  bottom: 0.5rem;
 }
 
 /*Middle area? */

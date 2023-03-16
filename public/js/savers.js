@@ -77,8 +77,12 @@ export function UpdateSaveList(list) {
 
 // Powers button on sidebar to delete file without input.
 function DeleteFileFromSidebar(e) {
+  // let word = e.target.parentElement.parentElement.innerText;
+  // word = word.slice(0, -3);
+
   let word = e.target.parentElement.parentElement.innerText;
-  word = word.slice(0, -3);
+  let tempWord = word.split("\n");
+  word = tempWord[0];
 
   let answer = confirm("Do you want to remove this file?");
 
@@ -93,12 +97,14 @@ function DeleteFileFromSidebar(e) {
 // Loads a file from the saves bar when clicked on.
 function LoadFileFromSidebar(e) {
   let word = e.target.parentElement.parentElement.innerText;
-  word = word.slice(0, -3);
+  let tempWord = word.split("\n");
+  word = tempWord[0];
 
-  alert(word);
+  console.log(word);
+
   let fileName = "CB - " + word;
 
-  let answer = confirm(`Would you like to load ${fileName}`);
+  let answer = confirm(`Would you like to load ${word}?`);
   if (!answer) {
     alert("ok We'll pass on that for now");
     return;

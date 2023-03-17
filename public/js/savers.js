@@ -154,8 +154,15 @@ export function DeleteSaveFile(word = "") {
 
   FindAllSavesAndUpdateList();
 }
+
+// Saves any changes to an existing file.
 function SaveFileFromSidebar(e) {
-  console.log("Will save Eventually");
+  let word = GetFileName(e);
+  console.log(word);
+
+  SaveWork(word);
+
+  console.log("File saved i htink.");
 }
 
 // Prompts user for a new name and moves info to that new name from old spot.
@@ -174,13 +181,17 @@ function RenameFileFromSidebar(e) {
 }
 
 // Gets the info of all the items on the board, then saves it to local storage.
-export function SaveWork() {
+export function SaveWork(word = "") {
   let log = GetInfoOfAllPolygonsOnBoard();
   let saveName;
 
-  do {
-    saveName = prompt("What do you want the save to be called?");
-  } while (saveName.trim(" ").length === 0);
+  if (word === "") {
+    do {
+      saveName = prompt("What do you want the save to be called?");
+    } while (saveName.trim(" ").length === 0);
+  } else {
+    saveName = word;
+  }
 
   let list = FindAllLocalStorage();
 

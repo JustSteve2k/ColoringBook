@@ -8287,15 +8287,24 @@ function UpdateSaveList(list) {
     button.textContent = "L";
     button.classList = "testClass";
     button.addEventListener("click", LoadFileFromSidebar);
-    // li.appendChild(button);
+    div.appendChild(button);
+
+    button = document.createElement("button");
+    button.textContent = "S";
+    button.classList = "testClass";
+    button.addEventListener("click", SaveFileFromSidebar);
+    div.appendChild(button);
+
+    button = document.createElement("button");
+    button.textContent = "R";
+    button.classList = "testClass";
+    button.addEventListener("click", RenameFileFromSidebar);
     div.appendChild(button);
 
     button = document.createElement("button");
     button.textContent = "D";
     button.classList = "testClass";
     button.addEventListener("click", DeleteFileFromSidebar);
-
-    //li.appendChild(button);
     div.appendChild(button);
 
     li.appendChild(div);
@@ -8308,10 +8317,17 @@ function UpdateSaveList(list) {
   _Config__WEBPACK_IMPORTED_MODULE_1__["default"].savesOutput && console.log("Saves list on the left updated!");
 }
 
+function GetFileName(e) {
+  let word = e.target.parentElement.parentElement.innerText;
+  let tempWord = word.split("\n");
+  word = tempWord[0];
+
+  return word;
+}
+
 // Powers button on sidebar to delete file without input.
 function DeleteFileFromSidebar(e) {
-  let word = e.target.parentElement.parentElement.innerText;
-  word = word.slice(0, -3);
+  let fileName = GetFileName(e);
 
   let answer = confirm("Do you want to remove this file?");
 
@@ -8320,24 +8336,24 @@ function DeleteFileFromSidebar(e) {
     return;
   }
 
-  DeleteSaveFile(word);
+  DeleteSaveFile(fileName);
 }
 
 // Loads a file from the saves bar when clicked on.
 function LoadFileFromSidebar(e) {
-  let word = e.target.parentElement.parentElement.innerText;
-  word = word.slice(0, -3);
+  let word = GetFileName(e);
 
-  alert(word);
-  let fileName = "CB - " + word;
+  console.log(word);
 
-  let answer = confirm(`Would you like to load ${fileName}`);
+  let fullFileName = "CB - " + word;
+
+  let answer = confirm(`Would you like to load ${word}?`);
   if (!answer) {
     alert("ok We'll pass on that for now");
     return;
   }
 
-  LoadFile(fileName);
+  LoadFile(fullFileName);
 }
 
 // Loads file from provided filename.
@@ -8372,14 +8388,43 @@ function DeleteSaveFile(word = "") {
   FindAllSavesAndUpdateList();
 }
 
+// Saves any changes to an existing file.
+function SaveFileFromSidebar(e) {
+  let word = GetFileName(e);
+  console.log(word);
+
+  SaveWork(word);
+
+  console.log("File saved i htink.");
+}
+
+// Prompts user for a new name and moves info to that new name from old spot.
+function RenameFileFromSidebar(e) {
+  let word = GetFileName(e);
+  let fullFileName = "CB - " + word;
+
+  let newName = prompt("What would you like the new filename to be?");
+
+  let info = localStorage.getItem(fullFileName);
+  localStorage.setItem("CB - " + newName, info);
+
+  localStorage.removeItem(fullFileName);
+
+  FindAllSavesAndUpdateList();
+}
+
 // Gets the info of all the items on the board, then saves it to local storage.
-function SaveWork() {
+function SaveWork(word = "") {
   let log = (0,_actions_js__WEBPACK_IMPORTED_MODULE_0__.GetInfoOfAllPolygonsOnBoard)();
   let saveName;
 
-  do {
-    saveName = prompt("What do you want the save to be called?");
-  } while (saveName.trim(" ").length === 0);
+  if (word === "") {
+    do {
+      saveName = prompt("What do you want the save to be called?");
+    } while (saveName.trim(" ").length === 0);
+  } else {
+    saveName = word;
+  }
 
   let list = FindAllLocalStorage();
 

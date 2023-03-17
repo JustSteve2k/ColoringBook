@@ -29,6 +29,9 @@ export function FindAllSavesAndUpdateList() {
 export function UpdateSaveList(list) {
   let leftBar = document.querySelector(".leftBar");
   let savesList = document.querySelector(".savesList");
+  let newSave = document.querySelector(".newSave");
+
+  if (newSave) newSave.remove();
 
   if (savesList) {
     savesList.remove();
@@ -81,6 +84,16 @@ export function UpdateSaveList(list) {
   });
 
   leftBar.appendChild(ul);
+
+  // button for a new save
+  let button = document.createElement("button");
+  button.textContent = "+";
+  button.classList = "newSave";
+  button.addEventListener("click", () => {
+    SaveWork();
+  });
+  leftBar.appendChild(button);
+
   Config.savesOutput && console.log("Saves list on the left updated!");
 }
 
@@ -190,6 +203,7 @@ export function SaveWork(word = "") {
   if (word === "") {
     do {
       saveName = prompt("What do you want the save to be called?");
+      if (saveName === null) return;
     } while (saveName.trim(" ").length === 0);
   } else {
     saveName = word;

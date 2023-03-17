@@ -54,15 +54,24 @@ export function UpdateSaveList(list) {
     button.textContent = "L";
     button.classList = "testClass";
     button.addEventListener("click", LoadFileFromSidebar);
-    // li.appendChild(button);
+    div.appendChild(button);
+
+    button = document.createElement("button");
+    button.textContent = "S";
+    button.classList = "testClass";
+    button.addEventListener("click", SaveFileFromSidebar);
+    div.appendChild(button);
+
+    button = document.createElement("button");
+    button.textContent = "R";
+    button.classList = "testClass";
+    button.addEventListener("click", RenameFileFromSidebar);
     div.appendChild(button);
 
     button = document.createElement("button");
     button.textContent = "D";
     button.classList = "testClass";
     button.addEventListener("click", DeleteFileFromSidebar);
-
-    //li.appendChild(button);
     div.appendChild(button);
 
     li.appendChild(div);
@@ -75,14 +84,17 @@ export function UpdateSaveList(list) {
   Config.savesOutput && console.log("Saves list on the left updated!");
 }
 
-// Powers button on sidebar to delete file without input.
-function DeleteFileFromSidebar(e) {
-  // let word = e.target.parentElement.parentElement.innerText;
-  // word = word.slice(0, -3);
-
+function GetFileName(e) {
   let word = e.target.parentElement.parentElement.innerText;
   let tempWord = word.split("\n");
   word = tempWord[0];
+
+  return word;
+}
+
+// Powers button on sidebar to delete file without input.
+function DeleteFileFromSidebar(e) {
+  let fileName = GetFileName(e);
 
   let answer = confirm("Do you want to remove this file?");
 
@@ -91,18 +103,16 @@ function DeleteFileFromSidebar(e) {
     return;
   }
 
-  DeleteSaveFile(word);
+  DeleteSaveFile(fileName);
 }
 
 // Loads a file from the saves bar when clicked on.
 function LoadFileFromSidebar(e) {
-  let word = e.target.parentElement.parentElement.innerText;
-  let tempWord = word.split("\n");
-  word = tempWord[0];
+  let word = GetFileName(e);
 
   console.log(word);
 
-  let fileName = "CB - " + word;
+  let fullFileName = "CB - " + word;
 
   let answer = confirm(`Would you like to load ${word}?`);
   if (!answer) {
@@ -110,7 +120,7 @@ function LoadFileFromSidebar(e) {
     return;
   }
 
-  LoadFile(fileName);
+  LoadFile(fullFileName);
 }
 
 // Loads file from provided filename.
@@ -141,6 +151,24 @@ export function DeleteSaveFile(word = "") {
   }
 
   localStorage.removeItem("CB - " + answer);
+
+  FindAllSavesAndUpdateList();
+}
+function SaveFileFromSidebar(e) {
+  console.log("Will save Eventually");
+}
+
+// Prompts user for a new name and moves info to that new name from old spot.
+function RenameFileFromSidebar(e) {
+  let word = GetFileName(e);
+  let fullFileName = "CB - " + word;
+
+  let newName = prompt("What would you like the new filename to be?");
+
+  let info = localStorage.getItem(fullFileName);
+  localStorage.setItem("CB - " + newName, info);
+
+  localStorage.removeItem(fullFileName);
 
   FindAllSavesAndUpdateList();
 }

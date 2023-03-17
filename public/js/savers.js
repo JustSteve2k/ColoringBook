@@ -172,6 +172,8 @@ function RenameFileFromSidebar(e) {
 
   let newName = prompt("What would you like the new filename to be?");
 
+  if (newName === null) return;
+
   let info = localStorage.getItem(fullFileName);
   localStorage.setItem("CB - " + newName, info);
 

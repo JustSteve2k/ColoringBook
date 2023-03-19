@@ -1,3 +1,4 @@
+import { A } from "@svgdotjs/svg.js";
 import { GetInfoOfAllPolygonsOnBoard, RedrawBoard } from "./actions.js";
 import Config from "./Config";
 
@@ -199,12 +200,19 @@ function RenameFileFromSidebar(e) {
 export function SaveWork(word = "") {
   let log = GetInfoOfAllPolygonsOnBoard();
   let saveName;
+  let proceed = false;
 
   if (word === "") {
     do {
       saveName = prompt("What do you want the save to be called?");
-      if (saveName === null) return;
-    } while (saveName.trim(" ").length === 0);
+
+      if (saveName === null) {
+        console.log("canceled action of saving.");
+        return;
+      }
+
+      proceed = CheckSaveFileName(saveName);
+    } while (!proceed);
   } else {
     saveName = word;
   }
@@ -223,6 +231,28 @@ export function SaveWork(word = "") {
   alert(`file saved as ${saveName}, i think.`);
 
   FindAllSavesAndUpdateList();
+}
+
+// Checks for any special characters or spaces.
+function CheckSaveFileName(fileName) {
+  console.log("this makes sure the file being saved is legit.");
+
+  if (fileName.trim(" ").length === 0) {
+    alert("Why dont you add an actual filename there?");
+    return false;
+  }
+
+  if (fileName.includes(" ")) {
+    alert("No spaces allowed");
+    return false;
+  }
+
+  if (fileName.includes("*") || fileName.includes("/")) {
+    alert("No special characters!");
+    return false;
+  }
+
+  return true;
 }
 
 // Exports a string with all the polygons on the board,

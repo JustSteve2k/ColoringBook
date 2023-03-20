@@ -8418,9 +8418,23 @@ function RenameFileFromSidebar(e) {
   let word = GetFileName(e);
   let fullFileName = "CB - " + word;
 
-  let newName = prompt("What would you like the new filename to be?");
+  // let newName = prompt("What would you like the new filename to be?");
 
-  if (newName === null) return;
+  // if (newName === null) return;
+
+  let newName;
+  let proceed = false;
+
+  do {
+    newName = prompt("What do you want the new filename to be?");
+
+    if (newName === null) {
+      console.log("canceled action of saving.");
+      return;
+    }
+
+    proceed = CheckSaveFileName(newName);
+  } while (!proceed);
 
   let info = localStorage.getItem(fullFileName);
   localStorage.setItem("CB - " + newName, info);
@@ -8469,15 +8483,23 @@ function SaveWork(word = "") {
 
 // Checks for any special characters or spaces as well as blanks and if its too long.
 function CheckSaveFileName(fileName) {
-  console.log("this makes sure the file being saved is legit.");
+  if ("CB - " + fileName in localStorage) {
+    alert("That filename already exists, pick a new name.");
+    return false;
+  }
 
   if (fileName.trim(" ").length === 0) {
     alert("Why dont you add an actual filename there? I dont see anything.");
     return false;
   }
 
-  if (fileName.length > 10) {
-    alert("That filename is too long, make it under 10 characters.");
+  if (fileName.length < 3 && fileName.length > 0) {
+    alert("That filename is too short, atleats make it between 5 and 12 characters.");
+    return false;
+  }
+
+  if (fileName.length > 12) {
+    alert("That filename is too long, make it under 12 characters.");
     return false;
   }
 
@@ -8486,10 +8508,10 @@ function CheckSaveFileName(fileName) {
     return false;
   }
 
-  let charsNotAllowed = ["*", "/", ",", "!", "@"];
+  let charsNotAllowed = ["*", "/", ",", "!", "@", "%", "^", "&", "(", ")", "$"];
 
   if (charsNotAllowed.some((i) => fileName.includes(i))) {
-    alert("special characters */,!@ are not allowed.");
+    alert("special characters * / , ! @ % ^ & ( ) $ are not allowed in the filename.");
     return false;
   }
 

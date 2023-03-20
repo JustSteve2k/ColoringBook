@@ -233,12 +233,17 @@ export function SaveWork(word = "") {
   FindAllSavesAndUpdateList();
 }
 
-// Checks for any special characters or spaces.
+// Checks for any special characters or spaces as well as blanks and if its too long.
 function CheckSaveFileName(fileName) {
   console.log("this makes sure the file being saved is legit.");
 
   if (fileName.trim(" ").length === 0) {
-    alert("Why dont you add an actual filename there?");
+    alert("Why dont you add an actual filename there? I dont see anything.");
+    return false;
+  }
+
+  if (fileName.length > 10) {
+    alert("That filename is too long, make it under 10 characters.");
     return false;
   }
 
@@ -247,8 +252,10 @@ function CheckSaveFileName(fileName) {
     return false;
   }
 
-  if (fileName.includes("*") || fileName.includes("/")) {
-    alert("No special characters!");
+  let charsNotAllowed = ["*", "/", ",", "!", "@"];
+
+  if (charsNotAllowed.some((i) => fileName.includes(i))) {
+    alert("special characters */,!@ are not allowed.");
     return false;
   }
 

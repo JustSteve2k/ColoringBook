@@ -130,7 +130,7 @@ function LoadFileFromSidebar(e) {
 
   let answer = confirm(`Would you like to load ${word}?`);
   if (!answer) {
-    alert("ok We'll pass on that for now");
+    console.log("canceled the action of loading the file for now.");
     return;
   }
 
@@ -183,19 +183,15 @@ function SaveFileFromSidebar(e) {
 function RenameFileFromSidebar(e) {
   let word = GetFileName(e);
   let fullFileName = "CB - " + word;
-
-  // let newName = prompt("What would you like the new filename to be?");
-
-  // if (newName === null) return;
-
   let newName;
+
   let proceed = false;
 
   do {
     newName = prompt("What do you want the new filename to be?");
 
     if (newName === null) {
-      console.log("canceled action of saving.");
+      console.log("canceled action of renaming file.");
       return;
     }
 

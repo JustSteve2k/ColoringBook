@@ -8229,8 +8229,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "SaveWork": () => (/* binding */ SaveWork),
 /* harmony export */   "UpdateSaveList": () => (/* binding */ UpdateSaveList)
 /* harmony export */ });
-/* harmony import */ var _actions_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./actions.js */ "./public/js/actions.js");
-/* harmony import */ var _Config__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Config */ "./public/js/Config.js");
+/* harmony import */ var _svgdotjs_svg_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @svgdotjs/svg.js */ "./node_modules/@svgdotjs/svg.js/dist/svg.esm.js");
+/* harmony import */ var _actions_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./actions.js */ "./public/js/actions.js");
+/* harmony import */ var _Config__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Config */ "./public/js/Config.js");
+
 
 
 
@@ -8243,7 +8245,7 @@ function FindAllLocalStorage() {
     if (key.includes("CB -")) list.push(key);
   }
 
-  if (_Config__WEBPACK_IMPORTED_MODULE_1__["default"].savesOutput) {
+  if (_Config__WEBPACK_IMPORTED_MODULE_2__["default"].savesOutput) {
     console.log("-----CurrentSAVES----------");
     console.log(list);
     console.log("----------------------");
@@ -8262,6 +8264,9 @@ function FindAllSavesAndUpdateList() {
 function UpdateSaveList(list) {
   let leftBar = document.querySelector(".leftBar");
   let savesList = document.querySelector(".savesList");
+  let newSave = document.querySelector(".newSave");
+
+  if (newSave) newSave.remove();
 
   if (savesList) {
     savesList.remove();
@@ -8310,11 +8315,21 @@ function UpdateSaveList(list) {
     li.appendChild(div);
     ul.appendChild(li);
 
-    _Config__WEBPACK_IMPORTED_MODULE_1__["default"].savesOutput && console.log(element);
+    _Config__WEBPACK_IMPORTED_MODULE_2__["default"].savesOutput && console.log(element);
   });
 
   leftBar.appendChild(ul);
-  _Config__WEBPACK_IMPORTED_MODULE_1__["default"].savesOutput && console.log("Saves list on the left updated!");
+
+  // button for a new save
+  let button = document.createElement("button");
+  button.textContent = "+";
+  button.classList = "newSave";
+  button.addEventListener("click", () => {
+    SaveWork();
+  });
+  leftBar.appendChild(button);
+
+  _Config__WEBPACK_IMPORTED_MODULE_2__["default"].savesOutput && console.log("Saves list on the left updated!");
 }
 
 function GetFileName(e) {
@@ -8364,7 +8379,7 @@ function LoadFile(fileName) {
   console.log(`${fileName} is being loaded`);
   console.log(`This is the data included - ${log} `);
 
-  (0,_actions_js__WEBPACK_IMPORTED_MODULE_0__.RedrawBoard)(log);
+  (0,_actions_js__WEBPACK_IMPORTED_MODULE_1__.RedrawBoard)(log);
 }
 
 // See if it is in the list first. If not, let user know. else remove.
@@ -8405,6 +8420,8 @@ function RenameFileFromSidebar(e) {
 
   let newName = prompt("What would you like the new filename to be?");
 
+  if (newName === null) return;
+
   let info = localStorage.getItem(fullFileName);
   localStorage.setItem("CB - " + newName, info);
 
@@ -8415,13 +8432,21 @@ function RenameFileFromSidebar(e) {
 
 // Gets the info of all the items on the board, then saves it to local storage.
 function SaveWork(word = "") {
-  let log = (0,_actions_js__WEBPACK_IMPORTED_MODULE_0__.GetInfoOfAllPolygonsOnBoard)();
+  let log = (0,_actions_js__WEBPACK_IMPORTED_MODULE_1__.GetInfoOfAllPolygonsOnBoard)();
   let saveName;
+  let proceed = false;
 
   if (word === "") {
     do {
       saveName = prompt("What do you want the save to be called?");
-    } while (saveName.trim(" ").length === 0);
+
+      if (saveName === null) {
+        console.log("canceled action of saving.");
+        return;
+      }
+
+      proceed = CheckSaveFileName(saveName);
+    } while (!proceed);
   } else {
     saveName = word;
   }
@@ -8442,10 +8467,39 @@ function SaveWork(word = "") {
   FindAllSavesAndUpdateList();
 }
 
+// Checks for any special characters or spaces as well as blanks and if its too long.
+function CheckSaveFileName(fileName) {
+  console.log("this makes sure the file being saved is legit.");
+
+  if (fileName.trim(" ").length === 0) {
+    alert("Why dont you add an actual filename there? I dont see anything.");
+    return false;
+  }
+
+  if (fileName.length > 10) {
+    alert("That filename is too long, make it under 10 characters.");
+    return false;
+  }
+
+  if (fileName.includes(" ")) {
+    alert("No spaces allowed");
+    return false;
+  }
+
+  let charsNotAllowed = ["*", "/", ",", "!", "@"];
+
+  if (charsNotAllowed.some((i) => fileName.includes(i))) {
+    alert("special characters */,!@ are not allowed.");
+    return false;
+  }
+
+  return true;
+}
+
 // Exports a string with all the polygons on the board,
 // Need to refactor to shorten string length for certain items.
 function CreateExportString() {
-  let log = (0,_actions_js__WEBPACK_IMPORTED_MODULE_0__.GetInfoOfAllPolygonsOnBoard)();
+  let log = (0,_actions_js__WEBPACK_IMPORTED_MODULE_1__.GetInfoOfAllPolygonsOnBoard)();
   let exportString = "";
 
   log.forEach((element) => {
@@ -8504,9 +8558,9 @@ function ImportString() {
 
   console.log(info);
 
-  (0,_actions_js__WEBPACK_IMPORTED_MODULE_0__.RedrawBoard)(info);
+  (0,_actions_js__WEBPACK_IMPORTED_MODULE_1__.RedrawBoard)(info);
 
-  _Config__WEBPACK_IMPORTED_MODULE_1__["default"].alerts && alert(`${length} items were imported!`);
+  _Config__WEBPACK_IMPORTED_MODULE_2__["default"].alerts && alert(`${length} items were imported!`);
 
   // Couple of example strings
   // polygon-zone-#013101-svgBackground-true-false-0,0 0,600 900,600 900,0-@polygon-zone -#5630c0-87qLlC7V4o5FM583heOL8wA3-false-true-848,324 688,33 756,569-@polygon-zone -#5c685f-lD37KR8ZT9W73YWawg7JH071-false-true-570,229 449,414 367,561-@polygon-zone -#30c054-sp9sCfQgUBo1V7MD4xGk2xa0-false-true-762,513 558,468 536,107-@polygon-zone -#5c685f-ZK2lgVn560r7msKLw5d06Lw9-false-true-284,594 830,339 793,565-@polygon-zone -#c03030-2zfCE4Kn6QkL4LZ86MpSkGlX-false-true-372,129 322,229 422,229-@polygon-zone -#c03030-85x2I0mdF7HWwszm2KyH30O8-false-true-547,152 497,252 597,252-@polygon-zone -#c03030-puAIGIoP1lkc7UcGx4prv2n5-false-true-154,189 104,289 204,289-@polygon-zone -#c03030-zxa28lgTMiRGHtN62hnPgv7u-false-true-126,47 76,147 176,147-@polygon-zone -#c03030-0X7QaU3D4zZM8G4XQFR19qID-false-true-565,349 515,449 615,449-@

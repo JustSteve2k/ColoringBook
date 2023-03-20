@@ -235,9 +235,7 @@ export function SaveWork(word = "") {
 
 // Checks for any special characters or spaces as well as blanks and if its too long.
 function CheckSaveFileName(fileName) {
-  console.log("this makes sure the file being saved is legit.");
-
-  if ("CB - " + fileName.localStorage) {
+  if ("CB - " + fileName in localStorage) {
     alert("That filename already exists, pick a new name.");
     return false;
   }

@@ -237,13 +237,23 @@ export function SaveWork(word = "") {
 function CheckSaveFileName(fileName) {
   console.log("this makes sure the file being saved is legit.");
 
+  if ("CB - " + fileName.localStorage) {
+    alert("That filename already exists, pick a new name.");
+    return false;
+  }
+
   if (fileName.trim(" ").length === 0) {
     alert("Why dont you add an actual filename there? I dont see anything.");
     return false;
   }
 
-  if (fileName.length > 10) {
-    alert("That filename is too long, make it under 10 characters.");
+  if (fileName.length < 3 && fileName.length > 0) {
+    alert("That filename is too short, atleats make it between 5 and 12 characters.");
+    return false;
+  }
+
+  if (fileName.length > 12) {
+    alert("That filename is too long, make it under 12 characters.");
     return false;
   }
 
@@ -252,10 +262,10 @@ function CheckSaveFileName(fileName) {
     return false;
   }
 
-  let charsNotAllowed = ["*", "/", ",", "!", "@"];
+  let charsNotAllowed = ["*", "/", ",", "!", "@", "%", "^", "&", "(", ")"];
 
   if (charsNotAllowed.some((i) => fileName.includes(i))) {
-    alert("special characters */,!@ are not allowed.");
+    alert("special characters * / , ! @ % ^ & ( ) are not allowed in the filename.");
     return false;
   }
 

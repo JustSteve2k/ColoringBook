@@ -184,9 +184,23 @@ function RenameFileFromSidebar(e) {
   let word = GetFileName(e);
   let fullFileName = "CB - " + word;
 
-  let newName = prompt("What would you like the new filename to be?");
+  // let newName = prompt("What would you like the new filename to be?");
 
-  if (newName === null) return;
+  // if (newName === null) return;
+
+  let newName;
+  let proceed = false;
+
+  do {
+    newName = prompt("What do you want the new filename to be?");
+
+    if (newName === null) {
+      console.log("canceled action of saving.");
+      return;
+    }
+
+    proceed = CheckSaveFileName(newName);
+  } while (!proceed);
 
   let info = localStorage.getItem(fullFileName);
   localStorage.setItem("CB - " + newName, info);
@@ -260,10 +274,10 @@ function CheckSaveFileName(fileName) {
     return false;
   }
 
-  let charsNotAllowed = ["*", "/", ",", "!", "@", "%", "^", "&", "(", ")"];
+  let charsNotAllowed = ["*", "/", ",", "!", "@", "%", "^", "&", "(", ")", "$"];
 
   if (charsNotAllowed.some((i) => fileName.includes(i))) {
-    alert("special characters * / , ! @ % ^ & ( ) are not allowed in the filename.");
+    alert("special characters * / , ! @ % ^ & ( ) $ are not allowed in the filename.");
     return false;
   }
 

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="14.952623mm"
+   height="12.978299mm"
+   viewBox="0 0 14.952623 12.9783"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.2.1 (9c6d41e410, 2022-07-14)"
+   sodipodi:docname="Polygon4.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="1.4912879"
+     inkscape:cx="212.23266"
+     inkscape:cy="96.560832"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1"
+     showguides="true">
+    <sodipodi:guide
+       position="49.140114,12.486173"
+       orientation="0,-1"
+       id="guide6336"
+       inkscape:locked="false" />
+  </sodipodi:namedview>
+  <defs
+     id="defs2">
+    <rect
+       x="115.22051"
+       y="293.26703"
+       width="21.337132"
+       height="22.285448"
+       id="rect1050" />
+    <rect
+       x="115.22051"
+       y="293.26703"
+       width="21.337132"
+       height="22.285448"
+       id="rect1050-0" />
+    <rect
+       x="115.22051"
+       y="293.26703"
+       width="21.337132"
+       height="22.285448"
+       id="rect1050-0-4" />
+    <rect
+       x="115.22051"
+       y="293.26703"
+       width="21.337132"
+       height="22.285448"
+       id="rect1050-0-4-2" />
+    <rect
+       x="115.22051"
+       y="293.26703"
+       width="21.337132"
+       height="22.285448"
+       id="rect1050-0-4-8" />
+    <rect
+       x="115.22051"
+       y="293.26703"
+       width="21.337132"
+       height="22.285448"
+       id="rect1050-0-4-7" />
+    <rect
+       x="115.22051"
+       y="293.26703"
+       width="21.337132"
+       height="22.285448"
+       id="rect1050-0-4-7-8" />
+    <rect
+       x="115.22051"
+       y="293.26703"
+       width="21.337132"
+       height="22.285448"
+       id="rect1050-0-4-7-8-1" />
+    <rect
+       x="115.22051"
+       y="293.26703"
+       width="21.337132"
+       height="22.285448"
+       id="rect1050-0-4-7-8-1-1" />
+    <rect
+       x="115.22051"
+       y="293.26703"
+       width="21.337132"
+       height="22.285448"
+       id="rect1050-0-4-7-8-1-1-5" />
+    <rect
+       x="115.22051"
+       y="293.26703"
+       width="21.337132"
+       height="22.285448"
+       id="rect1050-0-4-7-8-1-1-5-1" />
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-21.916339,-75.620774)">
+    <path
+       sodipodi:type="star"
+       style="fill:#77b0d8;fill-opacity:1;stroke:#000000;stroke-width:1.0838;stroke-dasharray:none;stroke-opacity:1"
+       id="path4183-8"
+       inkscape:flatsided="true"
+       sodipodi:sides="6"
+       sodipodi:cx="26.784517"
+       sodipodi:cy="78.346291"
+       sodipodi:r1="7.4771786"
+       sodipodi:r2="6.4754267"
+       sodipodi:arg1="1.0433257"
+       sodipodi:arg2="1.5669245"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       d="m 30.54815,84.807193 -7.477122,0.02895 -3.763633,-6.460903 3.713489,-6.489853 7.477123,-0.02895 3.763633,6.460903 z"
+       transform="matrix(0.92267657,0,0,0.92267657,4.6792046,9.8216368)" />
+    <text
+       xml:space="preserve"
+       transform="matrix(0.65049388,0,0,0.65049388,-47.979656,-113.02472)"
+       id="text1048-3-8-6"
+       style="white-space:pre;shape-inside:url(#rect1050-0-4-8);display:inline;fill:#000000;stroke:none;stroke-opacity:1"><tspan
+         x="115.2207"
+         y="304.21554"
+         id="tspan13173">4</tspan></text>
+  </g>
+</svg>

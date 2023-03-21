@@ -5,7 +5,8 @@
   "scripts": {
     "test": "jest --coverage",
     "build": "webpack",
-    "working": "webpack --watch"
+    "working": "webpack --watch",
+    "deploy": "firebase deploy --only hosting"
   },
   "repository": {
     "type": "git",

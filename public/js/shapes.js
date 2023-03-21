@@ -38,12 +38,13 @@ export function AddSquare() {
 
 // Adds a generic triangle to the drawing board.
 export function AddTriangle() {
-  // Currently subtracts for the size of the triangle.  Needs to be adjusted dynamically;
-  let MaxX = 900 - 100;
-  let MaxY = 600 - 100;
+  let size = GetRandomInt(200);
 
-  let pointsX = [50, 0, 100];
-  let pointsY = [0, 100, 100];
+  let MaxX = 900 - size;
+  let MaxY = 600 - size;
+
+  let pointsX = [size / 2, 0, size];
+  let pointsY = [0, size, size];
 
   let adjustX = GetRandomInt(MaxX);
   let adjustY = GetRandomInt(MaxY);

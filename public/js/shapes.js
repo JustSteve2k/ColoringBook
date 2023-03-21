@@ -58,20 +58,22 @@ export function AddTriangle() {
 
 // Creates a circle from provided parameters.  Sets default if not provided.
 export function AddCircleFromParams(item = "") {
-  let MaxX = 540;
-  let MaxY = 500;
+  let MaxX = 900;
+  let MaxY = 600;
 
-  let adjustX = GetRandomInt(MaxX);
-  let adjustY = GetRandomInt(MaxY);
+  let radius = GetRandomInt(100);
+
+  let adjustX = GetRandomInt(MaxX - 2 * radius);
+  let adjustY = GetRandomInt(MaxY - 2 * radius);
 
   let cx = 0;
-  item.cx === undefined ? (cx = 50 + adjustX) : (cx = item.cx);
+  item.cx === undefined ? (cx = adjustX + radius) : (cx = item.cx);
 
   let cy = 0;
-  item.cy === undefined ? (cy = 50 + adjustY) : (cy = item.cy);
+  item.cy === undefined ? (cy = adjustY + radius) : (cy = item.cy);
 
   let r = 0;
-  item.r === undefined ? (r = GetRandomInt(50)) : (r = item.r);
+  item.r === undefined ? (r = radius) : (r = item.r);
 
   let fill = "";
   item.fill === undefined ? (fill = GetCurrentSelectedColor()) : (fill = item.fill);

@@ -2,6 +2,14 @@
 This is a coloring book applications that will allow the creation of svg elements and designs and color them as with a coloring book.
 The user can create and share designs through strings
 
+##v0.2.3
+###New Features
+
+- Add new functionality to save buttons on the left allowing you to load, delete, rename and overwrite an existing save file.
+- Add new save button below saves.
+- Add validation on save file names.
+- Added icons to buttons on lower bar.
+
 ##v0.2.2
 ###New Features
 

@@ -2,6 +2,12 @@
 This is a coloring book applications that will allow the creation of svg elements and designs and color them as with a coloring book.
 The user can create and share designs through strings
 
+##v0.2.4
+###Bug Fixes
+
+- Fix circle generation to utilze the whole page.
+- Adjust triangle generation.
+
 ##v0.2.3
 ###New Features
 
